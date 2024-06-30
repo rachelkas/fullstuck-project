@@ -5,7 +5,6 @@ import { CiHeart } from "react-icons/ci";
 import { BsTelephone } from "react-icons/bs";
 import { FiUser } from "react-icons/fi";
 import { IoHomeOutline } from "react-icons/io5";
-import BM from '../../assets/icons/BM.svg'; // Adjust the path as necessary
 
 const Nav: React.FC = () => {
     return (
@@ -34,11 +33,6 @@ const Nav: React.FC = () => {
                 <li>
                     <Link to="/home">
                         <IoHomeOutline />
-                    </Link>
-                </li>
-                <li>
-                    <Link to="/home">
-                        <img src={BM} alt="logo" />
                     </Link>
                 </li>
             </ul>
