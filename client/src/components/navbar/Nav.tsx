@@ -5,7 +5,8 @@ import { CiHeart } from "react-icons/ci";
 import { BsTelephone } from "react-icons/bs";
 import { FiUser } from "react-icons/fi";
 import { IoHomeOutline } from "react-icons/io5";
-
+import Logo from '../../assets/images/Logo.png'; // Adjust the path as necessary
+import './Nav.css';
 const Nav: React.FC = () => {
     return (
         <nav>
@@ -21,7 +22,7 @@ const Nav: React.FC = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/contact-us">
+                    <Link to="/contactUs">
                         <BsTelephone />
                     </Link>
                 </li>
@@ -31,8 +32,13 @@ const Nav: React.FC = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/home">
+                    <Link to="/">
                         <IoHomeOutline />
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/">
+                        <img src={Logo} alt="logo" />
                     </Link>
                 </li>
             </ul>
