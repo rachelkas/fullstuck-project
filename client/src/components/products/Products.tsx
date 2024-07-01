@@ -1,35 +1,96 @@
-import React from 'react'
-import computer from '../../assets/images/computer1.png'
-import { CiHeart } from 'react-icons/ci'
-const Products = () => {
+// import React from 'react';
+// import computer from '../../assets/images/computer1.png';
+// import { CiHeart } from 'react-icons/ci';
+// import SingleProduct from '../singleProduct/SingleProduct';
+
+// const Products: React.FC = () => {
+//     return (
+//         <div className='all-products'>
+//             <h2>Electronics devices</h2>
+//             <div className='product'>
+//                 <SingleProduct
+//                     product={{
+//                         productName: 'XPS 13 Laptop',
+//                         image: computer, // Pass the variable directly
+//                         description: 'Memory (RAM) Up to 64 GB Storage Up to 2 TB Display 34.0cm (13.4")',
+//                         price: 1299.99 // Remove the comma
+//                     }}
+//                 />
+//             </div>
+//         </div>
+//     );
+// }
+
+// export default Products;
+
+
+
+
+import React from 'react';
+import computer from '../../assets/images/computer1.png';
+import bluetooth from '../../assets/images/bluetooth.png';
+import SingleProduct from '../singleProduct/SingleProduct';
+import computerbag from '../../assets/images/computerbag.png';
+import mp3 from '../../assets/images/mp3.png';
+import Projector from '../../assets/images/projector.png';
+import tablet from '../../assets/images/tablet.png';
+
+
+const Products: React.FC = () => {
     return (
         <div className='all-products'>
             <h2>Electronics devices</h2>
-            <div className='product'>
-                <h3>XPS 13 Laptop</h3>
-                <img src={computer} alt="computer" />
+            <div className='products-list'>
+                <SingleProduct
+                    product={{
+                        productName: 'XPS 13 Laptop',
+                        image: computer,
+                        description: {
+                            memory: 'Up to 64 GB',
+                            storage: 'Up to 2 TB',
+                            display: '34.0cm (13.4")'
+                        },
+                        price: 1299.99
+                    }}
+                />
+                <SingleProduct
+                    product={{
+                        productName: 'Portable Bluetooth Speaker',
+                        image: bluetooth,
+                        description: 'Wireless Speaker with HD Sound, Rich Bass, 12H Playtime & Built-in Mic.',
+                        price: 44.99
+                    }}
+                />
 
-                <div className='product-description'>
-                    <p>
-                        <span className='bold-text'>Memory (RAM) </span>
-                        <span>Up to 64 GB</span>
-                    </p>
-                    <p>
-                        <span className='bold-text'>Storage </span>
-                        <span> Up to 2 TB</span>
-                    </p>
-                    <p>
-                        <span className='bold-text'>Display </span>
-                        <span> 34.0cm (13.4")</span>
-                    </p>
-                    <p><span className='bold-text'>price </span>
-                        <span>$1,299.99</span></p>
-                </div>
-                <div><button type="button">Add to cart</button></div>
-                <button><CiHeart /></button>
+                <SingleProduct product={{
+                    productName: 'Computer bag',
+                    image: computerbag,
+                    description: 'Laptop bag 12/13 sleeve. 3/14/15.6 inch notebook sleeve for macbook',
+                    price: 21.35
+                }} />
+
+                <SingleProduct product={{
+                    productName: 'MP3 player',
+                    image: mp3,
+                    description: 'MP3 Player 1.8 Inch Color Screen Mini BlueTooth',
+                    price: 37
+                }} />
+
+                <SingleProduct product={{
+                    productName: 'Projector',
+                    image: Projector,
+                    description: 'ED projector in HD resolution for a variety of uses such as home cinema and more.',
+                    price: 380
+                }} />
+                <SingleProduct product={{
+                    productName: 'Tablet',
+                    image: tablet,
+                    description: 'Tablet 10.1 inch Android 12 Tablet 2023 Latest Update',
+                    price: 350
+                }} />
             </div>
         </div>
-    )
+    );
 }
 
-export default Products
+export default Products;
