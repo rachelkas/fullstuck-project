@@ -10,24 +10,6 @@
     gap: 20px;
 }
 
-.single-product {
-    border: 1px solid #ddd;
-    padding: 16px;
-    margin: 16px;
-    max-width: 320px;
-}
-
-.single-product h3 {
-    font-size: 24px;
-    margin-bottom: 8px;
-}
-
-.single-product img {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 16px;
-}
-
 .product-description p {
     display: flex;
     align-items: center;

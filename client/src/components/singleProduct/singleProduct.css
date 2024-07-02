@@ -34,16 +34,18 @@
     border: 1px solid #ddd;
     padding: 16px;
     margin: 16px;
-    max-width: 320px;
+    max-width: 200px;
+    max-height: 450px;
 }
 
 .single-product h3 {
     font-size: 24px;
     margin-bottom: 8px;
+    margin-top: 0;
 }
 
 .single-product img {
-    max-width: 100%;
+    width: 200px;
     height: auto;
     margin-bottom: 16px;
 }

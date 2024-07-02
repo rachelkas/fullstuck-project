@@ -17,7 +17,7 @@ const Nav: React.FC = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link to="/like">
+                    <Link to="/favorite">
                         <CiHeart />
                     </Link>
                 </li>
