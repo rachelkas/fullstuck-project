@@ -1,18 +1,41 @@
 import express from 'express';
+import User from '../models/User.js'; // Assuming your User model is defined in this file
+
 const router = express.Router();
 
-// Example route handlers
-router.get('/', (req, res) => {
-    // Logic to fetch user's cart items
-    res.send('User cart');
+// Fetch user's cart items
+router.get('/:userId', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        res.json(user.cart);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
 });
 
-router.post('/', (req, res) => {
-    // Logic to add an item to the cart
+// Add an item to the user's cart
+router.post('/:userId', async (req, res) => {
     const { productId, quantity } = req.body;
-    res.send(`Added product ${productId} to cart with quantity ${quantity}`);
+
+    try {
+        const user = await User.findById(req.params.userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Example: Add product to cart
+        user.cart.push({ productId, quantity });
+        await user.save();
+
+        res.status(201).json(user.cart);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
 });
 
-// Add more routes as needed
+// Add more routes as needed for updating, deleting items from the cart, etc.
 
 export default router;
