@@ -1,5 +1,5 @@
 import React from 'react';
-import './Pagination.css';  // Import the CSS file
+import './pagination.css';  // Import the CSS file
 
 interface PaginationProps {
     productsPerPage: number;

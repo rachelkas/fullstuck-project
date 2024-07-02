@@ -42,6 +42,7 @@
 
 import React from 'react';
 import { CiHeart } from 'react-icons/ci';
+import './singleProduct.css';
 
 interface SingleProductProps {
     product: {
