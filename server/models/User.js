@@ -1,12 +1,34 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 
+// Define the user schema
 const userSchema = new mongoose.Schema({
-    firstname: { type: String, required: true },
-    lastname: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    role: { type: String, default: 'user' }
+    firstname: {
+        type: String,
+        required: true,
+        minlength: 2
+    },
+    lastname: {
+        type: String,
+        required: true,
+        minlength: 2
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        match: [/.+@.+\..+/, 'Please enter a valid email address']
+    },
+    password: {
+        type: String,
+        required: true,
+        minlength: 8,
+        match: [/(?=.*[0-9]{8,})(?=.*[A-Za-z]{2,}).{10,}/, 'Password must contain at least 8 numbers and 2 letters']
+    },
+    role: {
+        type: String,
+        default: 'user'
+    }
 });
 
 // Hash the password before saving
@@ -22,4 +44,5 @@ userSchema.methods.comparePassword = function (password) {
     return bcrypt.compare(password, this.password);
 };
 
+// Export the user model
 export default mongoose.model('User', userSchema);
