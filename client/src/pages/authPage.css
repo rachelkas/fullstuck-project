@@ -88,3 +88,8 @@
     margin-bottom: 10px;
     text-align: center;
 }
+
+.auth-container .eye-icon {
+    cursor: pointer;
+    margin-left: 10px;
+}

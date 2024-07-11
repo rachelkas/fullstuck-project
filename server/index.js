@@ -1,74 +1,34 @@
-// import express from 'express';
-// import mongoose from 'mongoose';
-// import authRoutes from './routes/auth.js';
-// import productRoutes from './routes/product.js';
-// import cartRoutes from './routes/cart.js';
-// import favoriteRoutes from './routes/favorite.js';
-// import dotenv from 'dotenv';
-// import cors from 'cors';
-
-// dotenv.config();
-// const app = express();
-
-// app.use(cors());
-
-// app.use(express.json());
-
-// // Routes
-// app.use('/api/auth', authRoutes);
-// app.use('/api/products', productRoutes);
-// app.use('/api/cart', cartRoutes);
-// app.use('/api/favorites', favoriteRoutes);
-
-// mongoose.connect(config.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true }, () =>
-//     console.log('Connected to DB!')
-// );
-
-// app.listen(3000, () => console.log('Server up and running'));
-
-
-
-
-
-
-
-
-
-
-
 import express from 'express';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import cors from 'cors';
 import authRoutes from './routes/auth.js';
 import productRoutes from './routes/product.js';
 import cartRoutes from './routes/cart.js';
 import favoriteRoutes from './routes/favorite.js';
-import dotenv from 'dotenv';
-import cors from 'cors';
 import { verifyToken } from './middleware/auth.js';
 
-dotenv.config();
-const app = express();
+dotenv.config(); // Load environment variables from .env file
 
+const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Define routes
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/cart', verifyToken, cartRoutes);
 app.use('/api/favorites', verifyToken, favoriteRoutes);
 
-mongoose.connect(process.env.MONGODB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true });
+// Connect to MongoDB
+mongoose.connect(process.env.MONGODB_CONNECTION)
+    .then(() => console.log('Connected to MongoDB'))
+    .catch((err) => console.error('Failed to connect to MongoDB', err));
 
-mongoose.connection.on('connected', () => {
-    console.log('Connected to MongoDB');
-});
-
-mongoose.connection.on('error', (err) => {
-    console.error('Failed to connect to MongoDB', err);
-});
-
-mongoose.connection.on('disconnected', () => {
-    console.log('Disconnected from MongoDB');
+// Middleware for handling errors
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something broke!');
 });
 
 const PORT = process.env.PORT || 3000;
