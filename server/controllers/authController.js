@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import User from '../models/user.js';
 
 export const registerController = async (req, res) => {
-    const { firstname, lastname, email, password } = req.body;
+    const { firstName, lastName, email, password } = req.body;
 
     try {
         let user = await User.findOne({ email });
@@ -13,8 +13,8 @@ export const registerController = async (req, res) => {
         }
 
         user = new User({
-            firstname,
-            lastname,
+            firstName,
+            lastName,
             email,
             password
         });
@@ -52,13 +52,13 @@ export const loginController = async (req, res) => {
         let user = await User.findOne({ email });
 
         if (!user) {
-            return res.status(400).json({ msg: 'Invalid Credentials' });
+            return res.status(400).json({ msg: 'The email or password is wrong' });
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
-            return res.status(400).json({ msg: 'Invalid Credentials' });
+            return res.status(400).json({ msg: 'The email or password is wrong' });
         }
 
         const payload = {

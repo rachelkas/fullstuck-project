@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 // import './RegisterPage.css';
 
 const RegisterPage: React.FC = () => {
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
+    const [firstName, setfirstName] = useState('');
+    const [lastName, setlastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ const RegisterPage: React.FC = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ firstname, lastname, email, password }),
+            body: JSON.stringify({ firstName, lastName, email, password }),
         });
 
         if (response.ok) {
@@ -33,18 +33,18 @@ const RegisterPage: React.FC = () => {
             <form onSubmit={handleSubmit}>
                 <input
                     type="text"
-                    name="firstname"
+                    name="firstName"
                     placeholder="First Name"
-                    value={firstname}
-                    onChange={(e) => setFirstname(e.target.value)}
+                    value={firstName}
+                    onChange={(e) => setfirstName(e.target.value)}
                     required
                 />
                 <input
                     type="text"
-                    name="lastname"
+                    name="lastName"
                     placeholder="Last Name"
-                    value={lastname}
-                    onChange={(e) => setLastname(e.target.value)}
+                    value={lastName}
+                    onChange={(e) => setlastName(e.target.value)}
                     required
                 />
                 <input

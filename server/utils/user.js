@@ -3,8 +3,8 @@ import Joi from 'joi';
 // Validation schema for user registration
 export const registerValidation = (data) => {
     const schema = Joi.object({
-        firstname: Joi.string().required(),
-        lastname: Joi.string().required(),
+        firstName: Joi.string().required(),
+        lastName: Joi.string().required(),
         email: Joi.string().email().required(),
         password: Joi.string().min(8).required(),
     });
