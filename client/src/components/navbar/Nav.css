@@ -1,3 +1,85 @@
+/* nav {
+    background-color: #333;
+    padding: 10px;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+li {
+    margin-right: 20px;
+}
+
+li:last-child {
+    margin-right: 0;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+a img {
+    height: 30px; */
+/* Adjust size as needed */
+/* margin-right: 10px;
+}
+
+a svg {
+    font-size: 24px;
+    margin-right: 5px;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 nav {
     background-color: #333;
     padding: 10px;
@@ -27,7 +109,6 @@ a {
 
 a img {
     height: 30px;
-    /* Adjust size as needed */
     margin-right: 10px;
 }
 

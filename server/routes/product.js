@@ -1,8 +1,232 @@
+// import express from 'express';
+// import Product from '../models/product.js';
+// import multer from 'multer';
+// import { verifyToken, verifyAdmin } from '../middleware/auth.js'; // Assuming these middleware functions are defined
+
+// const router = express.Router();
+
+// // Set up multer for file uploads
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, 'public/uploads/');
+//     },
+//     filename: (req, file, cb) => {
+//         cb(null, Date.now() + '-' + file.originalname);
+//     }
+// });
+// const upload = multer({ storage });
+
+// // Get all products
+// router.get('/', async (req, res) => {
+//     try {
+//         const products = await Product.find();
+//         res.json(products);
+//     } catch (err) {
+//         console.error('Error fetching products:', err);
+//         res.status(500).send('Server Error');
+//     }
+// });
+
+// // Add a new product (admin only)
+// router.post('/', verifyToken, verifyAdmin, upload.single('image'), async (req, res) => {
+//     const { productName, price, description } = req.body;
+//     const image = req.file ? `/uploads/${req.file.filename}` : '';
+
+//     try {
+//         const newProduct = new Product({
+//             productName,
+//             price,
+//             description,
+//             image
+//         });
+
+//         const product = await newProduct.save();
+//         res.json(product);
+//     } catch (err) {
+//         console.error('Error adding new product:', err);
+//         res.status(500).send('Server Error');
+//     }
+// });
+
+// // Search products by name
+// router.get('/search', async (req, res) => {
+//     try {
+//         const { name } = req.query;
+//         console.log('Search request received:', name);
+//         const products = await Product.find({ productName: { $regex: name, $options: 'i' } });
+//         console.log('Search results:', products);
+//         res.json(products);
+//     } catch (err) {
+//         console.error('Error searching products:', err);
+//         res.status(500).send('Server Error');
+//     }
+// });
+
+// export default router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// server/routes/product.js
+// import express from 'express';
+// import Product from '../models/product.js';
+// import multer from 'multer';
+// import { verifyToken, isAdmin } from '../middleware/auth.js'; // Correct import
+
+// const router = express.Router();
+
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, 'public/uploads/');
+//     },
+//     filename: (req, file, cb) => {
+//         cb(null, Date.now() + '-' + file.originalname);
+//     }
+// });
+// const upload = multer({ storage });
+
+// router.get('/', async (req, res) => {
+//     try {
+//         const products = await Product.find();
+//         res.json(products);
+//     } catch (err) {
+//         console.error('Error fetching products:', err);
+//         res.status(500).send('Server Error');
+//     }
+// });
+
+// router.post('/', verifyToken, isAdmin, upload.single('image'), async (req, res) => {
+//     const { productName, price, description } = req.body;
+//     const image = req.file ? `/uploads/${req.file.filename}` : '';
+
+//     try {
+//         const newProduct = new Product({
+//             productName,
+//             price,
+//             description,
+//             image
+//         });
+
+//         const product = await newProduct.save();
+//         res.json(product);
+//     } catch (err) {
+//         console.error('Error adding new product:', err);
+//         res.status(500).send('Server Error');
+//     }
+// });
+
+// router.get('/search', async (req, res) => {
+//     try {
+//         const { name } = req.query;
+//         const products = await Product.find({ productName: { $regex: name, $options: 'i' } });
+//         res.json(products);
+//     } catch (err) {
+//         console.error('Error searching products:', err);
+//         res.status(500).send('Server Error');
+//     }
+// });
+
+// export default router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import express from 'express';
 import Product from '../models/product.js';
+import multer from 'multer';
+import { verifyToken, isAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
+
+// Set up multer for file uploads
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/uploads/');
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+});
+
+const upload = multer({ storage });
 
 // Get all products
 router.get('/', async (req, res) => {
@@ -10,26 +234,21 @@ router.get('/', async (req, res) => {
         const products = await Product.find();
         res.json(products);
     } catch (err) {
-        console.error(err);
+        console.error('Error fetching products:', err);
         res.status(500).send('Server Error');
     }
 });
 
-// Add a new product
-router.post('/', async (req, res) => {
-    const { name, price, description } = req.body;
-
+// Add a new product (admin only)
+router.post('/', verifyToken, isAdmin, upload.single('image'), async (req, res) => {
+    const { productName, price, description } = req.body;
+    const image = req.file ? `/uploads/${req.file.filename}` : '';
     try {
-        const newProduct = new Product({
-            name,
-            price,
-            description
-        });
-
+        const newProduct = new Product({ productName, price, description, image });
         const product = await newProduct.save();
         res.json(product);
     } catch (err) {
-        console.error(err);
+        console.error('Error adding new product:', err);
         res.status(500).send('Server Error');
     }
 });
@@ -38,12 +257,10 @@ router.post('/', async (req, res) => {
 router.get('/search', async (req, res) => {
     try {
         const { name } = req.query;
-        console.log('Search request received:', name);
-        const products = await Product.find({ name: { $regex: name, $options: 'i' } });
-        console.log('Search results:', products);
+        const products = await Product.find({ productName: { $regex: name, $options: 'i' } });
         res.json(products);
     } catch (err) {
-        console.error(err);
+        console.error('Error searching products:', err);
         res.status(500).send('Server Error');
     }
 });

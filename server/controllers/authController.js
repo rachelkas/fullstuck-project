@@ -1,44 +1,441 @@
+// import bcrypt from 'bcryptjs';
+// import jwt from 'jsonwebtoken';
+// import User from '../models/user.js';
+
+// export const registerController = async (req, res) => {
+//     const { firstName, lastName, email, password } = req.body;
+
+//     try {
+//         let user = await User.findOne({ email });
+
+//         if (user) {
+//             return res.status(400).json({ msg: 'User already exists' });
+//         }
+
+//         user = new User({
+//             firstName,
+//             lastName,
+//             email,
+//             password
+//         });
+
+//         const salt = await bcrypt.genSalt(10);
+//         user.password = await bcrypt.hash(password, salt);
+
+//         await user.save();
+
+//         const payload = {
+//             user: {
+//                 id: user.id
+//             }
+//         };
+
+//         jwt.sign(
+//             payload,
+//             process.env.JWT_SECRET,
+//             { expiresIn: 3600 },
+//             (err, token) => {
+//                 if (err) throw err;
+//                 res.json({ token });
+//             }
+//         );
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error');
+//     }
+// };
+
+// export const loginController = async (req, res) => {
+//     const { email, password } = req.body;
+
+//     try {
+//         let user = await User.findOne({ email });
+
+//         if (!user) {
+//             return res.status(400).json({ msg: 'The email or password is wrong' });
+//         }
+
+//         const isMatch = await bcrypt.compare(password, user.password);
+
+//         if (!isMatch) {
+//             return res.status(400).json({ msg: 'The email or password is wrong' });
+//         }
+
+//         const payload = {
+//             user: {
+//                 id: user.id
+//             }
+//         };
+
+//         jwt.sign(
+//             payload,
+//             process.env.JWT_SECRET,
+//             { expiresIn: 3600 },
+//             (err, token) => {
+//                 if (err) throw err;
+//                 res.json({ token });
+//             }
+//         );
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error');
+//     }
+// };
+
+// export const userController = async (req, res) => {
+//     try {
+//         const user = await User.findById(req.userId).select('-password');
+//         res.json(user);
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error');
+//     }
+// };
+
+// export const adminController = (req, res) => {
+//     res.send('Admin route');
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// server/controllers/authController.js
+// import bcrypt from 'bcryptjs';
+// import jwt from 'jsonwebtoken';
+// import User from '../models/user.js';
+
+// export const registerController = async (req, res) => {
+//     const { firstName, lastName, email, password } = req.body;
+
+//     try {
+//         let user = await User.findOne({ email });
+
+//         if (user) {
+//             return res.status(400).json({ msg: 'User already exists' });
+//         }
+
+//         user = new User({
+//             firstName,
+//             lastName,
+//             email,
+//             password
+//         });
+
+//         const salt = await bcrypt.genSalt(10);
+//         user.password = await bcrypt.hash(password, salt);
+
+//         await user.save();
+
+//         const payload = {
+//             user: {
+//                 id: user.id
+//             }
+//         };
+
+//         jwt.sign(
+//             payload,
+//             process.env.JWT_SECRET,
+//             { expiresIn: 3600 },
+//             (err, token) => {
+//                 if (err) throw err;
+//                 res.json({ token, firstName: user.firstName, role: user.role }); // Include firstName and role
+//             }
+//         );
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error');
+//     }
+// };
+
+// export const loginController = async (req, res) => {
+//     const { email, password } = req.body;
+
+//     try {
+//         let user = await User.findOne({ email });
+
+//         if (!user) {
+//             return res.status(400).json({ msg: 'The email or password is wrong' });
+//         }
+
+//         const isMatch = await bcrypt.compare(password, user.password);
+
+//         if (!isMatch) {
+//             return res.status(400).json({ msg: 'The email or password is wrong' });
+//         }
+
+//         const payload = {
+//             user: {
+//                 id: user.id
+//             }
+//         };
+
+//         jwt.sign(
+//             payload,
+//             process.env.JWT_SECRET,
+//             { expiresIn: 3600 },
+//             (err, token) => {
+//                 if (err) throw err;
+//                 res.json({ token, firstName: user.firstName, role: user.role }); // Include firstName and role
+//             }
+//         );
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error');
+//     }
+// };
+
+// export const userController = async (req, res) => {
+//     try {
+//         const user = await User.findById(req.user.id).select('-password');
+//         res.json(user);
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error');
+//     }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import bcrypt from 'bcryptjs';
+// import jwt from 'jsonwebtoken';
+// // import User from '../models/user';
+// import User from '../models/user.js';
+
+// export const registerController = async (req, res) => {
+//     const { firstName, lastName, email, password } = req.body;
+
+//     try {
+//         let user = await User.findOne({ email });
+
+//         if (user) {
+//             return res.status(400).json({ msg: 'User already exists' });
+//         }
+
+//         user = new User({
+//             firstName,
+//             lastName,
+//             email,
+//             password
+//         });
+
+//         const salt = await bcrypt.genSalt(10);
+//         user.password = await bcrypt.hash(password, salt);
+
+//         await user.save();
+
+//         const payload = {
+//             user: {
+//                 id: user.id
+//             }
+//         };
+
+//         jwt.sign(
+//             payload,
+//             process.env.JWT_SECRET,
+//             { expiresIn: 3600 },
+//             (err, token) => {
+//                 if (err) throw err;
+//                 res.json({ token });
+//             }
+//         );
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error');
+//     }
+// };
+
+// export const loginController = async (req, res) => {
+//     const { email, password } = req.body;
+
+//     try {
+//         let user = await User.findOne({ email });
+
+//         if (!user) {
+//             return res.status(400).json({ msg: 'The email or password is wrong' });
+//         }
+
+//         const isMatch = await bcrypt.compare(password, user.password);
+
+//         if (!isMatch) {
+//             return res.status(400).json({ msg: 'The email or password is wrong' });
+//         }
+
+//         const payload = {
+//             user: {
+//                 id: user.id
+//             }
+//         };
+
+//         jwt.sign(
+//             payload,
+//             process.env.JWT_SECRET,
+//             { expiresIn: 3600 },
+//             (err, token) => {
+//                 if (err) throw err;
+//                 res.json({ token });
+//             }
+//         );
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error');
+//     }
+// };
+
+// export const userController = async (req, res) => {
+//     try {
+//         const user = await User.findById(req.user.id).select('-password');
+//         if (!user) {
+//             return res.status(404).json({ message: 'User not found' });
+//         }
+//         res.json({ firstName: user.firstName, role: user.role });
+//     } catch (err) {
+//         console.error(err.message);
+//         res.status(500).send('Server Error');
+//     }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import User from '../models/user.js';
 
 export const registerController = async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
-
     try {
         let user = await User.findOne({ email });
-
         if (user) {
             return res.status(400).json({ msg: 'User already exists' });
         }
-
-        user = new User({
-            firstName,
-            lastName,
-            email,
-            password
-        });
-
+        user = new User({ firstName, lastName, email, password });
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(password, salt);
-
         await user.save();
-
-        const payload = {
-            user: {
-                id: user.id
-            }
-        };
-
-        jwt.sign(
-            payload,
-            process.env.JWT_SECRET,
-            { expiresIn: 3600 },
-            (err, token) => {
-                if (err) throw err;
-                res.json({ token });
-            }
-        );
+        const payload = { user: { id: user.id } };
+        jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 3600 }, (err, token) => {
+            if (err) throw err;
+            res.json({ token });
+        });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
@@ -47,35 +444,20 @@ export const registerController = async (req, res) => {
 
 export const loginController = async (req, res) => {
     const { email, password } = req.body;
-
     try {
         let user = await User.findOne({ email });
-
         if (!user) {
             return res.status(400).json({ msg: 'The email or password is wrong' });
         }
-
         const isMatch = await bcrypt.compare(password, user.password);
-
         if (!isMatch) {
             return res.status(400).json({ msg: 'The email or password is wrong' });
         }
-
-        const payload = {
-            user: {
-                id: user.id
-            }
-        };
-
-        jwt.sign(
-            payload,
-            process.env.JWT_SECRET,
-            { expiresIn: 3600 },
-            (err, token) => {
-                if (err) throw err;
-                res.json({ token });
-            }
-        );
+        const payload = { user: { id: user.id } };
+        jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 3600 }, (err, token) => {
+            if (err) throw err;
+            res.json({ token, firstName: user.firstName });
+        });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');

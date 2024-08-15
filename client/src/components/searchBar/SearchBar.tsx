@@ -1,112 +1,88 @@
-// import React, { useState } from 'react';
-// import { FaSearch } from 'react-icons/fa';
-// import axios from '../../utils/api';
-// import './SearchBar.css';
+// // src/components/searchBar/SearchBar.tsx
 
-// const SearchBar: React.FC = () => {
-//     const [query, setQuery] = useState('');
-//     const [results, setResults] = useState([]);
-
-//     const handleSearch = async (e: React.FormEvent) => {
-//         e.preventDefault();
-//         if (query.trim() === '') return;
-//         try {
-//             console.log(`Searching for: ${query}`);
-//             const response = await axios.get(`/products/search?name=${query}`);
-//             console.log('Search results:', response.data);
-//             setResults(response.data);
-//         } catch (error) {
-//             console.error('Error fetching search results', error);
-//         }
-//     };
-
-//     return (
-//         <div className="search-bar-container">
-//             <form onSubmit={handleSearch} className="search-form">
-//                 <button type="submit"><FaSearch /></button>
-//                 <input
-//                     type="text"
-//                     placeholder="Search"
-//                     value={query}
-//                     onChange={(e) => setQuery(e.target.value)}
-//                 />
-//             </form>
-//             {results.length > 0 && (
-//                 <div className="search-results">
-//                     {results.map((product: any) => (
-//                         <div key={product._id} className="search-result-item">
-//                             {product.name}
-//                         </div>
-//                     ))}
-//                 </div>
-//             )}
-//         </div>
-//     );
-// };
-
-// export default SearchBar;
-
-
-
-
-
-
-
-// import React, { useState } from 'react';
-// import { FaSearch } from 'react-icons/fa';
+// import React, { useState, useCallback, useRef } from 'react';
 // import { useNavigate } from 'react-router-dom';
-// import axios from '../../utils/api';
+// import { FaSearch } from 'react-icons/fa';
+// import { debounce } from 'lodash';
+// import api from '../../utils/api';
 // import './SearchBar.css';
+
+// interface Product {
+//     _id: string;
+//     productName: string;
+// }
 
 // const SearchBar: React.FC = () => {
 //     const [query, setQuery] = useState('');
-//     const [suggestions, setSuggestions] = useState([]);
+//     const [results, setResults] = useState<Product[]>([]);
+//     const [showResults, setShowResults] = useState(false);
+//     const searchBarRef = useRef<HTMLDivElement>(null);
 //     const navigate = useNavigate();
 
-//     const handleSearch = async (e: React.FormEvent) => {
-//         e.preventDefault();
+//     const fetchResults = async (query: string) => {
 //         if (query.trim() === '') return;
-//         navigate(`/search?query=${query}`);
-//     };
-
-//     const fetchSuggestions = async (searchQuery: string) => {
 //         try {
-//             const response = await axios.get(`/products/search?name=${searchQuery}`);
-//             setSuggestions(response.data);
+//             const response = await api.get(`/products/search?name=${query}`);
+//             setResults(response.data);
 //         } catch (error) {
-//             console.error('Error fetching search suggestions', error);
+//             console.error('Error fetching search results:', error);
 //         }
 //     };
 
-//     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     const debouncedFetchResults = useCallback(
+//         debounce((query: string) => {
+//             fetchResults(query);
+//         }, 500),
+//         []
+//     );
+
+//     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 //         const value = e.target.value;
 //         setQuery(value);
-//         if (value.trim() !== '') {
-//             fetchSuggestions(value);
-//         } else {
-//             setSuggestions([]);
+//         debouncedFetchResults(value);
+//         setShowResults(true);
+//     };
+
+//     const handleSelectResult = (name: string) => {
+//         setQuery('');
+//         setShowResults(false);
+//         navigate(`/search?query=${name}`);
+//     };
+
+//     const handleClickOutside = (e: MouseEvent) => {
+//         if (searchBarRef.current && !searchBarRef.current.contains(e.target as Node)) {
+//             setShowResults(false);
 //         }
 //     };
 
+//     React.useEffect(() => {
+//         document.addEventListener('mousedown', handleClickOutside);
+//         return () => {
+//             document.removeEventListener('mousedown', handleClickOutside);
+//         };
+//     }, []);
+
 //     return (
-//         <div className="search-bar-container">
-//             <form onSubmit={handleSearch} className="search-form">
-//                 <button type="submit"><FaSearch /></button>
-//                 <input
-//                     type="text"
-//                     placeholder="Search"
-//                     value={query}
-//                     onChange={handleChange}
-//                 />
-//             </form>
-//             {suggestions.length > 0 && (
-//                 <div className="search-suggestions">
-//                     {suggestions.map((product: any) => (
-//                         <div key={product._id} className="suggestion-item">
-//                             {product.name}
-//                         </div>
+//         <div className="search-bar-container" ref={searchBarRef}>
+//             <input
+//                 type="text"
+//                 value={query}
+//                 onChange={handleInputChange}
+//                 placeholder="Search..."
+//                 className="search-input"
+//                 onFocus={() => setShowResults(true)}
+//             />
+//             <button type="button" onClick={() => handleSelectResult(query)}>
+//                 <FaSearch />
+//             </button>
+//             {showResults && results.length > 0 && (
+//                 <ul className="results-list">
+//                     {results.map((result) => (
+//                         <li key={result._id} onClick={() => handleSelectResult(result.productName)}>
+//                             {result.productName}
+//                         </li>
 //                     ))}
-//                 </div>
+//                 </ul>
 //             )}
 //         </div>
 //     );
@@ -141,16 +117,70 @@
 
 
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { FaSearch } from 'react-icons/fa';
-import axios from '../../utils/api';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React, { useState, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import debounce from 'lodash/debounce';
+import { FaSearch } from 'react-icons/fa';
+import { debounce } from 'lodash';
+import api from '../../utils/api';
 import './SearchBar.css';
+
+interface Product {
+    _id: string;
+    productName: string;
+}
 
 const SearchBar: React.FC = () => {
     const [query, setQuery] = useState('');
-    const [results, setResults] = useState([]);
+    const [results, setResults] = useState<Product[]>([]);
     const [showResults, setShowResults] = useState(false);
     const searchBarRef = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
@@ -158,25 +188,31 @@ const SearchBar: React.FC = () => {
     const fetchResults = async (query: string) => {
         if (query.trim() === '') return;
         try {
-            const response = await axios.get(`/products/search?name=${query}`);
+            const response = await api.get(`/products/search?name=${query}`);
             setResults(response.data);
-            setShowResults(true);
         } catch (error) {
-            console.error('Error fetching search results', error);
+            console.error('Error fetching search results:', error);
         }
     };
 
     const debouncedFetchResults = useCallback(
         debounce((query: string) => {
             fetchResults(query);
-        }, 450), // Delay of 300ms
+        }, 500),
         []
     );
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setQuery(value);
         debouncedFetchResults(value);
+        setShowResults(true);
+    };
+
+    const handleSelectResult = (name: string) => {
+        setQuery('');
+        setShowResults(false);
+        navigate(`/search?query=${name}`);
     };
 
     const handleClickOutside = (e: MouseEvent) => {
@@ -185,13 +221,7 @@ const SearchBar: React.FC = () => {
         }
     };
 
-    const handleResultClick = (productName: string) => {
-        setQuery(productName);
-        setShowResults(false);
-        navigate(`/search?query=${productName}`);
-    };
-
-    useEffect(() => {
+    React.useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
@@ -200,23 +230,25 @@ const SearchBar: React.FC = () => {
 
     return (
         <div className="search-bar-container" ref={searchBarRef}>
-            <form onSubmit={(e) => { e.preventDefault(); navigate(`/search?query=${query}`); }} className="search-form">
-                <button type="submit"><FaSearch /></button>
-                <input
-                    type="text"
-                    placeholder="Search"
-                    value={query}
-                    onChange={handleChange}
-                />
-            </form>
+            <input
+                type="text"
+                value={query}
+                onChange={handleInputChange}
+                placeholder="Search..."
+                className="search-input"
+                onFocus={() => setShowResults(true)}
+            />
+            <button type="button" onClick={() => handleSelectResult(query)}>
+                <FaSearch />
+            </button>
             {showResults && results.length > 0 && (
-                <div className="search-results">
-                    {results.map((product: any) => (
-                        <div key={product._id} className="search-result-item" onClick={() => handleResultClick(product.name)}>
-                            {product.name}
-                        </div>
+                <ul className="results-list">
+                    {results.map((result) => (
+                        <li key={result._id} onClick={() => handleSelectResult(result.productName)}>
+                            {result.productName}
+                        </li>
                     ))}
-                </div>
+                </ul>
             )}
         </div>
     );

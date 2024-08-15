@@ -118,15 +118,15 @@
 
 
 
-.search-bar-container {
+/* .search-bar-container {
     position: relative;
     width: 100%;
     max-width: 400px;
     margin: 0 auto;
-}
+} */
 
 /* Form styling */
-.search-form {
+/* .search-form {
     display: flex;
     align-items: center;
     background: #fff;
@@ -148,10 +148,10 @@
     padding: 10px;
     cursor: pointer;
     outline: none;
-}
+} */
 
 /* Search results dropdown */
-.search-results {
+/* .search-results {
     position: absolute;
     top: 100%;
     left: 0;
@@ -163,10 +163,10 @@
     max-height: 200px;
     overflow-y: auto;
     z-index: 1000;
-}
+} */
 
 /* Individual search result item */
-.search-result-item {
+/* .search-result-item {
     padding: 10px;
     border-bottom: 1px solid #eee;
     cursor: pointer;
@@ -179,12 +179,12 @@
 
 .search-result-item:hover {
     background: #f0f0f0;
-}
+} */
 
 /* Ensure that the search bar stays on top of other elements */
-.search-bar-container {
+/* .search-bar-container {
     z-index: 1000;
-}
+} */
 
 
 
@@ -210,4 +210,209 @@
 
 .results-list li:hover {
     background-color: #f0f0f0;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .search-bar-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+} */
+
+/* Form styling */
+/* .search-form {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-input {
+    border: none;
+    padding: 10px;
+    width: 100%;
+    outline: none;
+}
+
+.search-button {
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #007bff;
+}
+
+.search-button:hover {
+    color: #0056b3;
+} */
+
+/* Search results dropdown */
+/* .results-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+} */
+
+/* Individual search result item */
+/* .results-list li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.results-list li:last-child {
+    border-bottom: none;
+}
+
+.results-list li:hover {
+    background: #f0f0f0;
+} */
+
+/* Ensure that the search bar stays on top of other elements */
+/* .search-bar-container {
+    z-index: 1000;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+.search-bar-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex; */
+/* Adjusted to align the input and button */
+/* } */
+
+/* Form styling */
+/* .search-input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+    border-radius: 20px 0 0 20px;
+    outline: none;
+}
+
+.search-button {
+    background: none;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    outline: none;
+    border-radius: 0 20px 20px 0;
+    background-color: #007bff;
+    color: white;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+} */
+
+/* Search results dropdown */
+/* .results-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    margin-top: 5px;
+} */
+
+/* Individual search result item */
+/* .results-list li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.results-list li:last-child {
+    border-bottom: none;
+}
+
+.results-list li:hover {
+    background: #f0f0f0;
 } */
