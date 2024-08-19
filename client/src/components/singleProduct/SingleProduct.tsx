@@ -236,7 +236,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CiHeart } from 'react-icons/ci';
 import { addToCart, addToFavorites } from '../../slices/userSlice';
-import { SingleProductProps } from '../../types';
+import { SingleProductProps } from '../../common/interfaces';
 import { RootState } from '../../store';
 import './singleProduct.css';
 

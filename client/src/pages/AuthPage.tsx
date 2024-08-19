@@ -586,7 +586,7 @@
 // src/pages/AuthPage.tsx
 import React, { useState } from 'react';
 import { AxiosError } from 'axios'; // Import Axios and AxiosError from axios
-import { axios } from '../utils/api';
+import { customAxios } from '../utils/api';
 import { useNavigate } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { AppDispatch, useAppDispatch } from '../store';
@@ -629,7 +629,7 @@ const AuthPage: React.FC = () => {
     const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         try {
-            const res = await axios.post('/auth/register', {
+            const res = await customAxios.post('/auth/register', {
                 firstName,
                 lastName,
                 email,

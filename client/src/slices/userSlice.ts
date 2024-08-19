@@ -1214,34 +1214,29 @@
 
 
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { customAxios } from '../utils/api';
 import { toast } from 'react-toastify';
 import { RootState } from '../store';
+import { IUserDetails, UserState } from '../common/interfaces';
 
-interface UserState {
-    token: string | null;
-    cart: any[];
-    favorites: any[];
-    isAuthenticated: boolean;
-    firstName: string;
-}
 
 const initialState: UserState = {
     token: null,
     cart: [],
     favorites: [],
     isAuthenticated: false,
-    firstName: '',
+    userDetails: { firstName: '', lastName: '', email: '', role: '', _id: '' },
 };
 
 // Thunk to add item to cart
 export const addToCart = createAsyncThunk('user/addToCart', async (productId: string, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
     const token = state.user.token;
+    const userId = state.user.userDetails._id;
     try {
-        const response = await axios.post(
-            '/api/cart/add',
-            { productId },
+        const response = await customAxios.post(
+            '/cart/add',
+            { productId, userId },
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -1262,10 +1257,11 @@ export const addToFavorites = createAsyncThunk(
     async (productId: string, thunkAPI) => {
         const state = thunkAPI.getState() as RootState;
         const token = state.user.token;
+        const userId = state.user.userDetails._id;
         try {
-            const response = await axios.post(
-                '/api/favorites/add',
-                { productId },
+            const response = await customAxios.post(
+                '/favorites/add',
+                { productId, userId },
                 {
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -1286,7 +1282,7 @@ export const fetchCartItems = createAsyncThunk('user/fetchCartItems', async (_, 
     const state = thunkAPI.getState() as RootState;
     const token = state.user.token;
     try {
-        const response = await axios.get('/api/cart', {
+        const response = await customAxios.get('/cart', {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -1303,7 +1299,7 @@ export const fetchFavoriteItems = createAsyncThunk('user/fetchFavoriteItems', as
     const state = thunkAPI.getState() as RootState;
     const token = state.user.token;
     try {
-        const response = await axios.get('/api/favorites', {
+        const response = await customAxios.get('/favorites', {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
@@ -1323,8 +1319,8 @@ const userSlice = createSlice({
             state.token = action.payload;
             state.isAuthenticated = !!action.payload;
         },
-        setFirstName: (state, action: PayloadAction<string>) => {
-            state.firstName = action.payload;
+        setUserDetails: (state, action: PayloadAction<IUserDetails>) => {
+            state.userDetails = action.payload;
         },
         clearUserState: (state) => {
             state.token = null;
@@ -1350,6 +1346,6 @@ const userSlice = createSlice({
     },
 });
 
-export const { setToken, clearUserState, setFirstName } = userSlice.actions;
+export const { setToken, clearUserState, setUserDetails } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -689,7 +689,7 @@ import SearchBar from '../searchBar/SearchBar';
 import './Nav.css';
 
 const Nav: React.FC = () => {
-    const firstName = useSelector((state: RootState) => state.user.firstName);
+    const firstName = useSelector((state: RootState) => state.user.userDetails.firstName);
     const isAuthenticated = useSelector((state: RootState) => state.user.isAuthenticated);
 
     return (

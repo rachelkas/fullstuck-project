@@ -129,14 +129,14 @@
 
 
 
-import { axios } from '../utils/api';
+import { customAxios } from '../utils/api';
 import { toast } from 'react-toastify';
-import { setToken, setFirstName } from '../slices/userSlice';
+import { setToken, setUserDetails } from '../slices/userSlice';
 import { AppDispatch } from '../store';
 
 export const registerUser = async (userData: any, dispatch: AppDispatch) => {
     try {
-        const response = await axios.post('/auth/register', userData);
+        const response = await customAxios.post('/auth/register', userData);
         localStorage.setItem('token', response.data.token);
         dispatch(setToken(response.data.token));
         toast.success('Registration successful!');
@@ -147,10 +147,10 @@ export const registerUser = async (userData: any, dispatch: AppDispatch) => {
 
 export const loginUser = async (userData: any, dispatch: AppDispatch) => {
     try {
-        const response = await axios.post('/auth/login', userData);
+        const response = await customAxios.post('/auth/login', userData);
         localStorage.setItem('token', response.data.token);
         dispatch(setToken(response.data.token));
-        dispatch(setFirstName(response.data.firstName));
+        dispatch(setUserDetails(response.data.userDetails));
         toast.success('Login successful!');
     } catch (error) {
         toast.error('Login failed.');

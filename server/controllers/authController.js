@@ -456,7 +456,7 @@ export const loginController = async (req, res) => {
         const payload = { user: { id: user.id } };
         jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 3600 }, (err, token) => {
             if (err) throw err;
-            res.json({ token, firstName: user.firstName });
+            res.json({ token, userDetails: user });
         });
     } catch (err) {
         console.error(err.message);
