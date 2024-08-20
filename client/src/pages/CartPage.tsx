@@ -309,7 +309,7 @@ const CartPage: React.FC = () => {
 
     return (
         <div>
-            <h2>Cart Page</h2>
+            <h2>Cart Page2</h2>
             {cartItems.length ? (
                 cartItems.map((item) => (
 
