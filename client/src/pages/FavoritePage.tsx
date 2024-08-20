@@ -259,7 +259,7 @@ const FavoritePage: React.FC = () => {
 
     return (
         <div>
-            <h2>Favorite Page</h2>
+            <h2>Favorite Page2</h2>
             {favoriteItems.length ? (
                 favoriteItems.map((item) => (
 
