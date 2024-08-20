@@ -695,6 +695,7 @@ const Nav: React.FC = () => {
     return (
         <nav>
             <ul>
+                <li> <Link to="/add-product"> + </Link></li>
                 <li>
                     <Link to="/cart">
                         <MdOutlineShoppingCart />
@@ -705,6 +706,7 @@ const Nav: React.FC = () => {
                         <CiHeart />
                     </Link>
                 </li>
+
                 <li>
                     <Link to="/contactUs">
                         <BsTelephone />

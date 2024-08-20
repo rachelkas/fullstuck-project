@@ -171,6 +171,7 @@ const AddProductPage: React.FC = () => {
         try {
             await api.post('/products', formData, {
                 headers: {
+
                     'Content-Type': 'multipart/form-data'
                 }
             });
