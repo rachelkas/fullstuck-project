@@ -38,7 +38,8 @@ router.get('/', verifyToken, async (req, res) => {
 // Remove an item from the cart
 router.delete('/remove/:productId', verifyToken, async (req, res) => {
     const { productId } = req.params;
-    const userId = req.user.id;
+    const userId = req.query.userId;
+
     try {
         const cartItem = await Cart.findOneAndDelete({ userId, productId });
         if (!cartItem) {
@@ -51,6 +52,27 @@ router.delete('/remove/:productId', verifyToken, async (req, res) => {
     }
 });
 
+// Update quantity of an item in the cart
+router.put('/update/:productId', verifyToken, async (req, res) => {
+    const { productId } = req.params;
+    const { userId } = req.query;
+    const { quantity } = req.body;
+
+    try {
+        const cartItem = await Cart.findOneAndUpdate(
+            { userId, productId },
+            { $set: { quantity: quantity } },
+            { new: true }
+        );
+
+        if (!cartItem) {
+            return res.status(404).json({ message: 'Item not found in cart' });
+        }
+
+        res.json(cartItem);
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to update quantity', error: error.message });
+    }
+});
+
 export default router;
-
-

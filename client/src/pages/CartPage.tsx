@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../store';
-import { fetchCartItems } from '../slices/userSlice';
+import { fetchCartItems, removeFromCart, updateCartQuantity } from '../slices/userSlice';
+import './cartPage.css';
 
 const CartPage: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -11,17 +12,36 @@ const CartPage: React.FC = () => {
         dispatch(fetchCartItems());
     }, [dispatch]);
 
+    const handleRemoveFromCart = (productId: string) => {
+        dispatch(removeFromCart(productId));
+    };
+
+    const handleQuantityChange = (productId: string, quantity: number) => {
+        if (quantity < 1) {
+            alert('Quantity cannot be less than 1');
+            return;
+        }
+        dispatch(updateCartQuantity({ productId, quantity }));
+    };
+
     return (
-        <div>
+        <div className="cart-page">
             <h2>Cart Page</h2>
             {cartItems.length ? (
                 cartItems.map((item) => (
-
-                    <div key={item._id}>
+                    <div key={item._id} className="cart-item">
                         <img src={item.productId.image} alt={`${item.productId.productName} image`} />
                         <p>{item.productId.productName}</p>
-                        <p>Quantity: {item.quantity}</p>
+                        <label>
+                            Quantity:
+                            <input
+                                type="number"
+                                value={item.quantity}
+                                onChange={(e) => handleQuantityChange(item.productId._id, parseInt(e.target.value))}
+                            />
+                        </label>
                         <p>Price: ${item.productId.price}</p>
+                        <button onClick={() => handleRemoveFromCart(item.productId._id)}>Remove</button>
                     </div>
                 ))
             ) : (

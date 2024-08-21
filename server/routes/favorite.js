@@ -1,3 +1,4 @@
+// routes/favorite.js
 import express from 'express';
 import { verifyToken } from '../middleware/auth.js';
 import Favorite from '../models/favorite.js';
@@ -36,20 +37,19 @@ router.get('/', verifyToken, async (req, res) => {
 });
 
 // Remove a product from favorites
-router.delete('/remove/:id', verifyToken, async (req, res) => {
-    const userId = req.user.id;
-    const productId = req.params.id;
+router.delete('/remove/:productId', verifyToken, async (req, res) => {
+    const userId = req.query.userId;
+    const productId = req.params.productId;
+
     try {
-        const favoriteItem = await Favorite.findOne({ userId, productId });
-        if (favoriteItem) {
-            await favoriteItem.remove();
-            res.status(200).json({ message: 'Product removed from favorites' });
-        } else {
-            res.status(404).json({ message: 'Product not found in favorites' });
+        const favoriteItem = await Favorite.findOneAndDelete({ userId, productId });
+        if (!favoriteItem) {
+            return res.status(404).json({ message: 'Item not found in favorites' });
         }
+        res.status(200).json({ message: 'Item removed from favorites' });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Failed to remove product from favorites' });
+        res.status(500).json({ message: 'Server Error' });
     }
 });
 

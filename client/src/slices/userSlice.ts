@@ -35,6 +35,53 @@ export const addToCart = createAsyncThunk('user/addToCart', async (productId: st
     }
 });
 
+// Thunk to remove item from cart
+export const removeFromCart = createAsyncThunk('user/removeFromCart', async (productId: string, thunkAPI) => {
+    const state = thunkAPI.getState() as RootState;
+    const token = state.user.token;
+    const userId = state.user.userDetails._id;
+    try {
+        const response = await customAxios.delete(`/cart/remove/${productId}`, {
+            params: { userId },
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        toast.success('Removed from cart!');
+        return productId;
+    } catch (error) {
+        toast.error('Failed to remove from cart.');
+        return thunkAPI.rejectWithValue((error as any).response.data);
+    }
+});
+
+// Thunk to update cart item quantity
+export const updateCartQuantity = createAsyncThunk(
+    'user/updateCartQuantity',
+    async ({ productId, quantity }: { productId: string; quantity: number }, thunkAPI) => {
+        const state = thunkAPI.getState() as RootState;
+        const token = state.user.token;
+        const userId = state.user.userDetails._id;
+        try {
+            const response = await customAxios.put(
+                `/cart/update/${productId}`,
+                { quantity },
+                {
+                    params: { userId },
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            toast.success('Quantity updated!');
+            return { productId, quantity };
+        } catch (error) {
+            toast.error('Failed to update quantity.');
+            return thunkAPI.rejectWithValue((error as any).response.data);
+        }
+    }
+);
+
 // Thunk to add item to favorites
 export const addToFavorites = createAsyncThunk(
     'user/addToFavorites',
@@ -61,11 +108,29 @@ export const addToFavorites = createAsyncThunk(
     }
 );
 
+// Thunk to remove item from favorites
+export const removeFromFavorites = createAsyncThunk('user/removeFromFavorites', async (productId: string, thunkAPI) => {
+    const state = thunkAPI.getState() as RootState;
+    const token = state.user.token;
+    try {
+        const response = await customAxios.delete(`/favorites/remove/${productId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        toast.success('Removed from favorites!');
+        return productId;
+    } catch (error) {
+        toast.error('Failed to remove from favorites.');
+        return thunkAPI.rejectWithValue((error as any).response.data);
+    }
+});
+
 // Thunk to fetch cart items
 export const fetchCartItems = createAsyncThunk('user/fetchCartItems', async (_, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
     const token = state.user.token;
-    const userId = state.user.userDetails._id
+    const userId = state.user.userDetails._id;
     try {
         const response = await customAxios.get('/cart', {
             params: { userId },
@@ -84,7 +149,7 @@ export const fetchCartItems = createAsyncThunk('user/fetchCartItems', async (_, 
 export const fetchFavoriteItems = createAsyncThunk('user/fetchFavoriteItems', async (_, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
     const token = state.user.token;
-    const userId = state.user.userDetails._id
+    const userId = state.user.userDetails._id;
     try {
         const response = await customAxios.get('/favorites', {
             params: { userId },
@@ -122,8 +187,20 @@ const userSlice = createSlice({
             .addCase(addToCart.fulfilled, (state, action) => {
                 state.cart.push(action.payload);
             })
+            .addCase(removeFromCart.fulfilled, (state, action) => {
+                state.cart = state.cart.filter(item => item.productId._id !== action.payload);
+            })
+            .addCase(updateCartQuantity.fulfilled, (state, action) => {
+                const index = state.cart.findIndex(item => item.productId._id === action.payload.productId);
+                if (index !== -1) {
+                    state.cart[index].quantity = action.payload.quantity;
+                }
+            })
             .addCase(addToFavorites.fulfilled, (state, action) => {
                 state.favorites.push(action.payload);
+            })
+            .addCase(removeFromFavorites.fulfilled, (state, action) => {
+                state.favorites = state.favorites.filter(item => item.productId._id !== action.payload);
             })
             .addCase(fetchCartItems.fulfilled, (state, action) => {
                 state.cart = action.payload;
