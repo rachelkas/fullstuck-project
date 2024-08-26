@@ -17,10 +17,12 @@ const initialState: ProductState = {
 // add product to the database
 export const addProduct = createAsyncThunk('products/addProduct', async (product: any, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
-    // const userId = state.user.userDetails._id;
+    const userId = state.user.userDetails._id;
     const token = state.user.token;
 
-    const response = await axios.post('/products', product);
+    const response = await axios.post('/products', product, {params: {userId}, headers: {
+        Authorization: `Bearer ${token}`,
+    }});
     return response.data;
 });
 

@@ -122,6 +122,7 @@ const CartPage: React.FC = () => {
     };
 
     return (
+
         <div className="cart-page">
             <h2>Cart Page</h2>
             {cartItems.length ? (
