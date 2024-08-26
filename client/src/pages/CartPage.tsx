@@ -108,6 +108,8 @@ const CartPage: React.FC = () => {
     };
 
     const handleQuantityChange = (productId: string, quantity: number) => {
+
+
         if (quantity < 1) {
             alert('Quantity cannot be less than 1');
             return;
