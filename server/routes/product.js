@@ -8,10 +8,11 @@ const router = express.Router();
 // Set up multer for file uploads
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/uploads/');
+        cb(null, './uploads/');
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + '-' + file.originalname);
+        const fileName = Date.now() + '-' + file.originalname;
+        cb(null, file.fieldname + '-' + fileName);
     }
 });
 
@@ -21,7 +22,11 @@ const upload = multer({ storage });
 router.get('/', async (req, res) => {
     try {
         const products = await Product.find();
-        res.json(products);
+        const productsWithImageUrl = products.map(product => ({
+            ...product._doc,
+            image: `http://localhost:3000${product.image}`
+          }));
+        res.json(productsWithImageUrl);
     } catch (err) {
         console.error('Error fetching products:', err);
         res.status(500).send('Server Error');
@@ -38,7 +43,7 @@ router.post('/', verifyToken, isAdmin, upload.single('image'), async (req, res) 
         res.json(product);
     } catch (err) {
         console.error('Error adding new product:', err);
-        res.status(500).send('Server Error');
+        res.status(500).send(`Server Error: ${err}`);
     }
 });
 

@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import api from '../utils/api';
 import { useNavigate } from 'react-router-dom';
+import { addProduct } from '../slices/productSlice';
+import { AppDispatch } from '../store';
 
 const AddProductPage: React.FC = () => {
+    const dispatch: AppDispatch = useDispatch();
     const [productName, setProductName] = useState('');
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
@@ -24,18 +28,7 @@ const AddProductPage: React.FC = () => {
         if (image) {
             formData.append('image', image);
         }
-
-        try {
-            await api.post('/products', formData, {
-                headers: {
-
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
-            navigate('/');
-        } catch (error) {
-            console.error('Error adding product:', error);
-        }
+        dispatch(addProduct(formData));
     };
 
     return (
