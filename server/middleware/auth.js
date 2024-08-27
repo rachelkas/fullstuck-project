@@ -18,7 +18,7 @@ export const verifyToken = (req, res, next) => {
 // Middleware to check if user is admin
 export const isAdmin = async (req, res, next) => {
     try {
-        const {userId} = req.query;
+        const { userId } = req.query;
         const user = await User.findById(userId);
         // to change this condition, when there will be data for admin user in db.
         if (user.role === 'admin' || user.role !== 'admin') {
