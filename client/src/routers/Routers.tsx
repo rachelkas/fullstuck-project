@@ -269,6 +269,7 @@ import ProtectedRoute from '../components/ProtectedRoute';
 import OrderSummaryPage from '../pages/OrderSummaryPage';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
+import EditProductPage from '../pages/EditProductPage';
 
 const Routers = () => {
     const isAuthenticated = useSelector((state: RootState) => state.user.isAuthenticated);
@@ -289,6 +290,7 @@ const Routers = () => {
 
                 {/* Order Summary Route without Nav */}
                 <Route path="/order-summary" element={<ProtectedRoute element={<OrderSummaryPage />} />} />
+                <Route path="/edit-product/:productId" element={<ProtectedRoute element={<EditProductPage />} />} />
             </Routes>
         </BrowserRouter>
     );

@@ -39,7 +39,7 @@
     background-color: #0056b3;
 }
 
-.product-actions .add-to-favorites-btn {
+.product-actions .add-to-favorites-btn, .edit-product-btn {
     background-color: transparent;
     color: #ff6347;
     font-size: 1.5em;
