@@ -115,7 +115,7 @@ export const removeFromFavorites = createAsyncThunk('user/removeFromFavorites', 
     const userId = state.user.userDetails._id;
     try {
         const response = await customAxios.delete(`/favorites/remove`, {
-            params: {productId, userId},
+            params: { productId, userId },
             headers: {
                 Authorization: `Bearer ${token}`,
             },

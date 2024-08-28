@@ -1,48 +1,3 @@
-// // src/components/ProtectedRoute.tsx
-
-// import React from 'react';
-// import { Navigate, Route } from 'react-router-dom';
-
-// interface ProtectedRouteProps {
-//     element: React.ReactElement;
-//     isAuthenticated: boolean;
-// }
-
-// const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element, isAuthenticated }) => {
-//     return isAuthenticated ? element : <Navigate to="/log-in" />;
-// };
-
-// export default ProtectedRoute;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import React from 'react';
 // import { Navigate } from 'react-router-dom';
 // import { useSelector } from 'react-redux';
@@ -50,50 +5,14 @@
 
 // interface ProtectedRouteProps {
 //     element: React.ReactElement;
-//     isAuthenticated: boolean;
 // }
 
-// const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element, isAuthenticated }) => {
+// const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
+//     const isAuthenticated = useSelector((state: RootState) => state.user.isAuthenticated);
 //     return isAuthenticated ? element : <Navigate to="/log-in" />;
 // };
 
 // export default ProtectedRoute;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React from 'react';
-// import { Navigate } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
-// import { RootState } from '../store';
-
-// interface ProtectedRouteProps {
-//     element: React.ReactElement;
-//     isAuthenticated: boolean;
-// }
-
-// const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element, isAuthenticated }) => {
-//     return isAuthenticated ? element : <Navigate to="/log-in" />;
-// };
-
-// export default ProtectedRoute;
-
-
-
-
-
-
-
 
 
 
@@ -132,11 +51,22 @@ import { RootState } from '../store';
 
 interface ProtectedRouteProps {
     element: React.ReactElement;
+    adminOnly?: boolean;
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element, adminOnly = false }) => {
     const isAuthenticated = useSelector((state: RootState) => state.user.isAuthenticated);
-    return isAuthenticated ? element : <Navigate to="/log-in" />;
+    const userRole = useSelector((state: RootState) => state.user.userDetails.role);
+
+    if (!isAuthenticated) {
+        return <Navigate to="/log-in" />;
+    }
+
+    if (adminOnly && userRole !== 'admin') {
+        return <Navigate to="/" />;
+    }
+
+    return element;
 };
 
 export default ProtectedRoute;
