@@ -59,3 +59,5 @@ export const userController = async (req, res) => {
 export const adminController = (req, res) => {
     res.send('Admin route');
 };
+
+

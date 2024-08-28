@@ -29,6 +29,7 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
     return (
         <div className="single-product">
             <h3>{product.productName}</h3>
+            {/* <img src={} alt="" /> */}
             <img src={product.image} alt={product.productName} />
             <div className="product-description">
                 <p>{product.description}</p>
