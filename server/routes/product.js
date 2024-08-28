@@ -1,6 +1,7 @@
 import express from 'express';
 import Product from '../models/product.js';
 import multer from 'multer';
+import fs from 'fs';
 import { verifyToken, isAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
@@ -8,6 +9,10 @@ const router = express.Router();
 // Set up multer for file uploads
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
+        const dir =  './uploads/';
+        if (!fs.existsSync(dir))
+            fs.mkdirSync(dir);
+        
         cb(null, './uploads/');
     },
     filename: (req, file, cb) => {
