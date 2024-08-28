@@ -36,7 +36,7 @@ export const loginController = async (req, res) => {
             return res.status(400).json({ msg: 'The email or password is wrong' });
         }
         const payload = { user: { id: user.id } };
-        jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 88888 }, (err, token) => {
+        jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 3600 }, (err, token) => {
             if (err) throw err;
             res.json({ token, userDetails: user });
         });
@@ -59,3 +59,5 @@ export const userController = async (req, res) => {
 export const adminController = (req, res) => {
     res.send('Admin route');
 };
+
+
