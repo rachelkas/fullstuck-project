@@ -15,12 +15,14 @@ export interface UserState {
 }
 
 export interface SingleProductProps {
-    product: {
-        _id: string;
-        productName: string;
-        description: string;
-        price: number;
-        image: string;
-    };
+    product: SingleProduct
+}
+
+export interface SingleProduct {
+    _id: string;
+    productName: string;
+    description: string;
+    price: number;
+    image: string;
 }
 

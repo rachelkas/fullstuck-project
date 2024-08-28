@@ -236,10 +236,10 @@ router.post('/', verifyToken, isAdmin, upload.single('image'), async (req, res) 
 
 // Update product with image
 //url: http://localhost:3000/api/products/60f3b3b3b3b3b3b3b3b3b3b3
-router.put('/:id', verifyToken, isAdmin, upload.single('image'), async (req, res) => {
+router.put('/', verifyToken, isAdmin, upload.single('image'), async (req, res) => {
     try {
         const { productName, price, description } = req.body;
-        const product = await Product.findById(req.params.id);
+        const product = await Product.findById(req.query.productId);
         if (!product) {
             return res.status(404).send('Product not found');
         }
@@ -262,7 +262,7 @@ router.put('/:id', verifyToken, isAdmin, upload.single('image'), async (req, res
         console.error('Error updating product:', err);
 
         // Send a detailed error message to the client
-        res.status(500).json({ message: 'Server Error', error: err.message, stack: err.stack });
+        res.status(500).json({message: `Server Error: ${err}`});
     }
 });
 

@@ -1,8 +1,9 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from '../utils/api';
 import { RootState } from '../store';
+import { SingleProduct, SingleProductProps } from '../common/interfaces';
 
-interface ProductState {
+export interface ProductState {
     items: any[];
     loading: boolean;
     error: string | null;
@@ -31,6 +32,18 @@ export const fetchProducts = createAsyncThunk('products/fetchProducts', async ()
     return response.data;
 });
 
+export const updateProduct = createAsyncThunk('/products', async(product: any, thunkAPI) => {
+    const state = thunkAPI.getState() as RootState;
+    const token = state.user.token;
+    const userId = state.user.userDetails._id;
+    const response = await axios.put('/products', product.productData, 
+    {
+        params: {productId: product.productId, userId}, 
+        headers: {Authorization: `Bearer ${token}`,}
+    });
+    return response;
+})
+
 const productSlice = createSlice({
     name: 'products',
     initialState,
@@ -53,7 +66,12 @@ const productSlice = createSlice({
                 state.items = [];
             });
     },
+    selectors: {
+        getProductById: (state, productId) => state.items.find(i => i._id === productId)
+    }
 });
+
+export const {getProductById} = productSlice.selectors;
 
 
 export default productSlice.reducer;

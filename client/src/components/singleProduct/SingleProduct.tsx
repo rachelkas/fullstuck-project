@@ -1,6 +1,8 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CiHeart } from 'react-icons/ci';
+import { BiPencil } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom';
 import { addToCart, addToFavorites } from '../../slices/userSlice';
 import { SingleProductProps } from '../../common/interfaces';
 import { RootState } from '../../store';
@@ -8,6 +10,7 @@ import './singleProduct.css';
 
 const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const isAuthenticated = useSelector((state: RootState) => state.user.isAuthenticated);
 
     const handleAddToCart = () => {
@@ -26,6 +29,10 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
         }
     };
 
+    const handleEditProduct = () => {
+        navigate(`/edit-product/${product._id}`);
+    }
+
     return (
         <div className="single-product">
             <h3>{product.productName}</h3>
@@ -40,6 +47,13 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
                 <button onClick={handleAddToFavorites} className="add-to-favorites-btn">
                     <CiHeart />
                 </button>
+           
+                <button onClick={handleEditProduct}  className="edit-product-btn">
+                   
+                    <BiPencil />
+              
+                </button>
+            
             </div>
         </div>
     );
