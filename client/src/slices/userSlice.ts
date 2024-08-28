@@ -112,8 +112,10 @@ export const addToFavorites = createAsyncThunk(
 export const removeFromFavorites = createAsyncThunk('user/removeFromFavorites', async (productId: string, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;
     const token = state.user.token;
+    const userId = state.user.userDetails._id;
     try {
-        const response = await customAxios.delete(`/favorites/remove/${productId}`, {
+        const response = await customAxios.delete(`/favorites/remove`, {
+            params: {productId, userId},
             headers: {
                 Authorization: `Bearer ${token}`,
             },

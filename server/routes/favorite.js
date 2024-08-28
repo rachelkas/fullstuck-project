@@ -37,9 +37,9 @@ router.get('/', verifyToken, async (req, res) => {
 });
 
 // Remove a product from favorites
-router.delete('/remove/:productId', verifyToken, async (req, res) => {
+router.delete('/remove', verifyToken, async (req, res) => {
     const userId = req.query.userId;
-    const productId = req.params.productId;
+    const productId = req.query.productId;
 
     try {
         const favoriteItem = await Favorite.findOneAndDelete({ userId, productId });
