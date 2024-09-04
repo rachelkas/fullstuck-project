@@ -1,3 +1,129 @@
+/* Navbar styles */
+/* nav {
+    background-color: #333;
+    padding: 10px;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    margin-right: 20px;
+    position: relative; */
+/* Needed for dropdown positioning */
+/* }
+
+li:last-child {
+    margin-right: 0;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+a img {
+    height: 30px;
+    margin-right: 10px;
+}
+
+a svg {
+    font-size: 24px;
+    margin-right: 5px;
+}
+
+.icon-wrapper {
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none; */
+/* Hidden by default */
+/* position: absolute;
+    right: 0;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block; */
+/* Show on hover */
+/* }
+
+.dropdown-content li {
+    padding: 12px 16px;
+    text-align: left;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown-content li:last-child {
+    border-bottom: none;
+}
+
+.dropdown-content li a,
+.dropdown-content li button {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 8px;
+}
+
+.dropdown-content li button:hover,
+.dropdown-content li a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown-content li button {
+    cursor: pointer;
+} */
+
+/* Display the dropdown on click */
+/* .dropdown .dropdown-content {
+    display: block;
+}
+
+.nav .dropdown-content li button {
+    color: #333;
+    background-color: #fff;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 nav {
     background-color: #333;
     padding: 10px;
@@ -8,10 +134,14 @@ ul {
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    position: relative;
+    /* Make ul relative to position the dropdown correctly */
 }
 
 li {
     margin-right: 20px;
+    position: relative;
+    /* Make li relative to position the dropdown correctly */
 }
 
 li:last-child {
@@ -33,4 +163,45 @@ a img {
 a svg {
     font-size: 24px;
     margin-right: 5px;
+}
+
+/* Dropdown */
+.dropdown-content {
+    display: block;
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    min-width: 160px;
+    border-radius: 4px;
+}
+
+.dropdown-content a,
+.dropdown-content button {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    border: none;
+    background: none;
+    width: 100%;
+    cursor: pointer;
+}
+
+.dropdown-content a:hover,
+.dropdown-content button:hover {
+    background-color: #ddd;
+}
+
+.icon-wrapper {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+/* Close dropdown when clicking outside */
+.hidden {
+    display: none;
 }
