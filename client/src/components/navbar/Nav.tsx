@@ -1213,7 +1213,7 @@ import { BsTelephone } from "react-icons/bs";
 import { FiUser } from "react-icons/fi";
 import { IoHomeOutline } from "react-icons/io5";
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../store';
+import { AppDispatch, RootState } from '../../store';
 import { fetchProducts } from '../../slices/productSlice'; // Redux action to fetch products
 import SearchBar from '../searchBar/SearchBar';
 import { logoutUser } from '../../services/authService';
@@ -1224,7 +1224,7 @@ const Nav: React.FC = () => {
     const isAuthenticated = useSelector((state: RootState) => state.user.isAuthenticated);
     const userRole = useSelector((state: RootState) => state.user.userDetails.role);
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch: AppDispatch = useDispatch();
 
     const dropdownRef = useRef<HTMLLIElement>(null);
     const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -1247,7 +1247,7 @@ const Nav: React.FC = () => {
 
     const handleLogoOrHomeClick = () => {
         // Reset products by dispatching fetchProducts action without filters
-        dispatch(fetchProducts({ minPrice: '', maxPrice: '' }));
+        dispatch(fetchProducts({minPrice: '', maxPrice: ''}));
         navigate('/'); // Redirect to the home page
     };
 

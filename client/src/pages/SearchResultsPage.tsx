@@ -140,7 +140,7 @@ const SearchResultsPage: React.FC = () => {
 
     useEffect(() => {
         const params = new URLSearchParams(location.search);
-        const query = params.get('query') || '';
+        const query = params.get('name') || '';
         if (query) {
             fetchSearchResults(query);
         }
