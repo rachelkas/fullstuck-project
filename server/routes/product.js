@@ -422,6 +422,19 @@ router.get('/', async (req, res) => {
     }
 });
 
+
+// Search products by name
+router.get('/search', async (req, res) => {
+    try {
+        const { name } = req.query;
+        const products = await Product.find({ productName: { $regex: name, $options: 'i' } });
+        res.json(products);
+    } catch (err) {
+        console.error('Error searching products:', err);
+        res.status(500).send('Server Error');
+    }
+});
+
 // Fetch single product by ID
 router.get('/:id', async (req, res) => {
     try {
@@ -479,18 +492,6 @@ router.put('/', verifyToken, isAdmin, upload.single('image'), async (req, res) =
     } catch (err) {
         console.error('Error updating product:', err);
         res.status(500).json({ message: `Server Error: ${err}` });
-    }
-});
-
-// Search products by name
-router.get('/search', async (req, res) => {
-    try {
-        const { name } = req.query;
-        const products = await Product.find({ productName: { $regex: name, $options: 'i' } });
-        res.json(products);
-    } catch (err) {
-        console.error('Error searching products:', err);
-        res.status(500).send('Server Error');
     }
 });
 
