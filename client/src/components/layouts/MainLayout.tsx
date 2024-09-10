@@ -1,16 +1,15 @@
-// src/components/layouts/MainLayout.tsx
-
 import React from 'react';
 import Nav from '../navbar/Nav';
 
 interface MainLayoutProps {
     children: React.ReactNode;
+    onResetFilters: () => void;
 }
 
-const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+const MainLayout: React.FC<MainLayoutProps> = ({ children, onResetFilters }) => {
     return (
         <>
-            <Nav />
+            <Nav onResetFilters={onResetFilters} />
             <div>{children}</div>
         </>
     );

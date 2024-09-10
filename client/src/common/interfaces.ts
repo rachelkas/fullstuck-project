@@ -26,3 +26,11 @@ export interface SingleProduct {
     image: string;
 }
 
+export interface PriceFilterProps {
+    minPrice: number;
+    maxPrice: number;
+    priceRange: [number, number];
+    handleSliderChange: (value: number | number[]) => void;
+    onApplyFilter: () => void;
+    onResetFilters: () => void;
+}

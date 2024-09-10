@@ -1,35 +1,43 @@
-import React, { useState } from 'react';
+// src/components/PriceFilter/PriceFilter.tsx
 
-interface PriceFilterProps {
-    onFilter: (minPrice: number, maxPrice: number) => void;
-}
+import React from 'react';
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
+import './PriceFilter.css'; // Import your custom CSS
+import { PriceFilterProps } from '../common/interfaces'; // Import the interface here
 
-const PriceFilter: React.FC<PriceFilterProps> = ({ onFilter }) => {
-    const [minPrice, setMinPrice] = useState('');
-    const [maxPrice, setMaxPrice] = useState('');
-
-    const handleFilter = () => {
-        const min = parseFloat(minPrice);
-        const max = parseFloat(maxPrice);
-        onFilter(min, max);
-    };
-
+const PriceFilter: React.FC<PriceFilterProps> = ({
+    minPrice,
+    maxPrice,
+    priceRange,
+    handleSliderChange,
+    onApplyFilter,
+    onResetFilters,
+}) => {
     return (
-        <div className="price-filter">
-            <h3>Filter by Price</h3>
-            <input
-                type="number"
-                placeholder="Min Price"
-                value={minPrice}
-                onChange={(e) => setMinPrice(e.target.value)}
+        <div className="price-filter-container">
+            <h3>Price Range (USD)</h3>
+            <Slider
+                range
+                min={minPrice}
+                max={maxPrice}
+                defaultValue={[minPrice, maxPrice]}
+                value={priceRange}
+                onChange={handleSliderChange}
+                trackStyle={[{ backgroundColor: '#4CAF50' }]}
+                handleStyle={[
+                    { borderColor: '#4CAF50' },
+                    { borderColor: '#4CAF50' }
+                ]}
             />
-            <input
-                type="number"
-                placeholder="Max Price"
-                value={maxPrice}
-                onChange={(e) => setMaxPrice(e.target.value)}
-            />
-            <button onClick={handleFilter}>Apply Filter</button>
+            <div className="price-values">
+                <span>{priceRange[0]} USD</span>
+                <span>{priceRange[1]} USD</span>
+            </div>
+            <div className="filter-buttons">
+                <button onClick={onApplyFilter}>Apply Filter</button>
+                <button onClick={onResetFilters}>Cancel</button>
+            </div>
         </div>
     );
 };

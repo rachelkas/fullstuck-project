@@ -201,6 +201,303 @@
 
 
 // src/components/products/Products.tsx
+// import React, { useEffect, useState } from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { RootState, AppDispatch } from '../../store';
+// import { fetchProducts } from '../../slices/productSlice';
+// import SingleProduct from '../singleProduct/SingleProduct';
+// import Pagination from '../Pagination/Pagination';
+// import './products.css';
+// import { useNavigate } from 'react-router-dom';
+
+// const Products: React.FC = () => {
+//     const dispatch: AppDispatch = useDispatch();
+//     const products = useSelector((state: RootState) => state.products.items);
+//     const loading = useSelector((state: RootState) => state.products.loading);
+//     const [currentPage, setCurrentPage] = useState(1);
+//     const [minPrice, setMinPrice] = useState('');
+//     const [maxPrice, setMaxPrice] = useState('');
+//     const productsPerPage = 3;
+//     const navigate = useNavigate();
+
+//     // Fetch all products on initial load
+//     useEffect(() => {
+//         dispatch(fetchProducts({ minPrice: '', maxPrice: '' }));
+//     }, [dispatch]);
+
+//     // Handle filtering by price
+//     const handleFilter = () => {
+//         dispatch(fetchProducts({ minPrice, maxPrice }));
+//     };
+
+//     // Clear filter and fetch all products
+//     const handleCancelFilter = () => {
+//         setMinPrice('');
+//         setMaxPrice('');
+//         dispatch(fetchProducts({ minPrice: '', maxPrice: '' }));
+//     };
+
+//     // Clear filter and navigate to home
+//     const handleLogoOrHomeClick = () => {
+//         handleCancelFilter();
+//         navigate('/');
+//     };
+
+//     const indexOfLastProduct = currentPage * productsPerPage;
+//     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+//     const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
+//     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+//     return (
+//         <div className="products-container">
+//             <div className="filter-container">
+//                 <input
+//                     type="number"
+//                     placeholder="Min Price"
+//                     value={minPrice}
+//                     onChange={(e) => setMinPrice(e.target.value)}
+//                 />
+//                 <input
+//                     type="number"
+//                     placeholder="Max Price"
+//                     value={maxPrice}
+//                     onChange={(e) => setMaxPrice(e.target.value)}
+//                 />
+//                 <button onClick={handleFilter}>Filter</button>
+//                 <button onClick={handleCancelFilter} className="cancel-btn">Cancel</button>
+//             </div>
+//             {loading ? (
+//                 <p>Loading...</p>
+//             ) : (
+//                 currentProducts.map((product) => (
+//                     <SingleProduct key={product._id} product={product} />
+//                 ))
+//             )}
+//             <Pagination
+//                 productsPerPage={productsPerPage}
+//                 totalProducts={products.length}
+//                 paginate={paginate}
+//                 currentPage={currentPage}
+//             />
+//         </div>
+//     );
+// };
+
+// export default Products;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// src/components/products/Products.tsx
+// import React, { useEffect, useState } from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { RootState, AppDispatch } from '../../store';
+// import { fetchProducts } from '../../slices/productSlice';
+// import SingleProduct from '../singleProduct/SingleProduct';
+// import Pagination from '../Pagination/Pagination';
+// import './products.css';
+// import { useNavigate } from 'react-router-dom';
+// import PriceFilter from '../PriceFilter'; // Import the PriceFilter component
+
+// const Products: React.FC = () => {
+//     const dispatch: AppDispatch = useDispatch();
+//     const products = useSelector((state: RootState) => state.products.items);
+//     const loading = useSelector((state: RootState) => state.products.loading);
+//     const [currentPage, setCurrentPage] = useState(1);
+//     const productsPerPage = 3;
+//     const navigate = useNavigate();
+
+//     // Handle price filter changes
+//     const handleFilter = (minPrice: number, maxPrice: number) => {
+//         dispatch(fetchProducts({ minPrice: minPrice.toString(), maxPrice: maxPrice.toString() }));
+//     };
+
+//     // Clear the filter
+//     const handleCancelFilter = () => {
+//         dispatch(fetchProducts({ minPrice: '', maxPrice: '' }));
+//     };
+
+//     const indexOfLastProduct = currentPage * productsPerPage;
+//     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+//     const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
+//     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+//     return (
+//         <div className="products-container">
+//             <div className="products-content">
+//                 {/* Products List */}
+//                 {loading ? (
+//                     <p>Loading...</p>
+//                 ) : (
+//                     currentProducts.map((product) => (
+//                         <SingleProduct key={product._id} product={product} />
+//                     ))
+//                 )}
+
+//                 <Pagination
+//                     productsPerPage={productsPerPage}
+//                     totalProducts={products.length}
+//                     paginate={paginate}
+//                     currentPage={currentPage}
+//                 />
+//             </div>
+
+//             <div className="filter-sidebar">
+//                 {/* Price filter in the sidebar */}
+//                 <PriceFilter onFilter={handleFilter} onCancel={handleCancelFilter} />
+//             </div>
+//         </div>
+//     );
+// };
+
+// export default Products;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// src/components/products/Products.tsx
+// import React, { useEffect, useState } from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { RootState, AppDispatch } from '../../store';
+// import { fetchProducts } from '../../slices/productSlice';
+// import SingleProduct from '../singleProduct/SingleProduct';
+// import Pagination from '../Pagination/Pagination';
+// import './products.css';
+// import { useNavigate } from 'react-router-dom';
+// import PriceFilter from '../PriceFilter';
+
+// const Products: React.FC = () => {
+//     const dispatch: AppDispatch = useDispatch();
+//     const products = useSelector((state: RootState) => state.products.items);
+//     const loading = useSelector((state: RootState) => state.products.loading);
+//     const [currentPage, setCurrentPage] = useState(1);
+//     const productsPerPage = 3;
+
+//     // Fetch products on initial load
+//     useEffect(() => {
+//         dispatch(fetchProducts({ minPrice: '', maxPrice: '' })); // Fetch without filter initially
+//     }, [dispatch]);
+
+//     const handleFilter = (minPrice: number, maxPrice: number) => {
+//         dispatch(fetchProducts({ minPrice: minPrice.toString(), maxPrice: maxPrice.toString() }));
+//     };
+
+//     const handleCancelFilter = () => {
+//         dispatch(fetchProducts({ minPrice: '', maxPrice: '' }));
+//     };
+
+//     const indexOfLastProduct = currentPage * productsPerPage;
+//     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+//     const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+
+//     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+//     return (
+//         <div className="products-container">
+//             <PriceFilter onFilter={handleFilter} onResetFilters={handleCancelFilter} minPrice={0} maxPrice={0} />
+//             {loading ? (
+//                 <p>Loading...</p>
+//             ) : (
+//                 currentProducts.map((product) => (
+//                     <SingleProduct key={product._id} product={product} />
+//                 ))
+//             )}
+//             <Pagination
+//                 productsPerPage={productsPerPage}
+//                 totalProducts={products.length}
+//                 paginate={paginate}
+//                 currentPage={currentPage}
+//             />
+//         </div>
+//     );
+// };
+
+// export default Products;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// src/components/products/Products.tsx
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../store';
@@ -209,38 +506,52 @@ import SingleProduct from '../singleProduct/SingleProduct';
 import Pagination from '../Pagination/Pagination';
 import './products.css';
 import { useNavigate } from 'react-router-dom';
+import PriceFilter from '../PriceFilter'; // Import the PriceFilter
 
 const Products: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
     const products = useSelector((state: RootState) => state.products.items);
     const loading = useSelector((state: RootState) => state.products.loading);
     const [currentPage, setCurrentPage] = useState(1);
-    const [minPrice, setMinPrice] = useState('');
-    const [maxPrice, setMaxPrice] = useState('');
+    const [minPrice, setMinPrice] = useState(0);
+    const [maxPrice, setMaxPrice] = useState(1000); // Default max price, will be updated
+    const [priceRange, setPriceRange] = useState<[number, number]>([minPrice, maxPrice]); // Price range for filter
     const productsPerPage = 3;
     const navigate = useNavigate();
 
-    // Fetch all products on initial load
+    // Fetch all products on initial load and get the max price
     useEffect(() => {
-        dispatch(fetchProducts({ minPrice: '', maxPrice: '' }));
+        dispatch(fetchProducts({ minPrice: '', maxPrice: '' })).then((response: any) => {
+            const fetchedProducts = response.payload; // Assuming fetchProducts action returns products
+            if (fetchedProducts && fetchedProducts.length > 0) {
+                const fetchedMaxPrice = Math.max(...fetchedProducts.map((product: any) => product.price));
+                setMaxPrice(fetchedMaxPrice); // Set the max price as the price of the most expensive item
+                setPriceRange([0, fetchedMaxPrice]); // Set the price range with 0 as min and the max price as the max
+            }
+        });
     }, [dispatch]);
 
     // Handle filtering by price
     const handleFilter = () => {
-        dispatch(fetchProducts({ minPrice, maxPrice }));
+        dispatch(
+            fetchProducts({
+                minPrice: priceRange[0].toString(), // Convert to string
+                maxPrice: priceRange[1].toString(), // Convert to string
+            })
+        );
     };
 
-    // Clear filter and fetch all products
-    const handleCancelFilter = () => {
-        setMinPrice('');
-        setMaxPrice('');
+    // Reset filters
+    const handleResetFilters = () => {
+        setPriceRange([0, maxPrice]); // Reset to default range
         dispatch(fetchProducts({ minPrice: '', maxPrice: '' }));
     };
 
-    // Clear filter and navigate to home
-    const handleLogoOrHomeClick = () => {
-        handleCancelFilter();
-        navigate('/');
+    // Handle slider change in PriceFilter
+    const handleSliderChange = (value: number | number[]) => {
+        if (Array.isArray(value)) {
+            setPriceRange([value[0], value[1]]); // Safely assign the value
+        }
     };
 
     const indexOfLastProduct = currentPage * productsPerPage;
@@ -251,22 +562,14 @@ const Products: React.FC = () => {
 
     return (
         <div className="products-container">
-            <div className="filter-container">
-                <input
-                    type="number"
-                    placeholder="Min Price"
-                    value={minPrice}
-                    onChange={(e) => setMinPrice(e.target.value)}
-                />
-                <input
-                    type="number"
-                    placeholder="Max Price"
-                    value={maxPrice}
-                    onChange={(e) => setMaxPrice(e.target.value)}
-                />
-                <button onClick={handleFilter}>Filter</button>
-                <button onClick={handleCancelFilter} className="cancel-btn">Cancel</button>
-            </div>
+            <PriceFilter
+                onApplyFilter={handleFilter} // Apply the filter
+                onResetFilters={handleResetFilters} // Reset filters
+                maxPrice={maxPrice} // Max price for the slider
+                minPrice={minPrice} // Min price for the slider
+                priceRange={priceRange} // Current price range
+                handleSliderChange={handleSliderChange} // Handle slider movement
+            />
             {loading ? (
                 <p>Loading...</p>
             ) : (

@@ -139,6 +139,125 @@
 
 
 
+// // src/pages/EditProductPage.tsx
+// import React, { useEffect, useState } from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { useParams, useNavigate } from 'react-router-dom';
+// import { getProductById, updateProduct } from '../slices/productSlice';
+// import { RootState, AppDispatch } from '../store';
+
+// const EditProductPage: React.FC = () => {
+//     const { productId } = useParams<{ productId: string }>();
+//     const product = useSelector((state: RootState) => getProductById(state, productId!));
+//     const dispatch: AppDispatch = useDispatch();
+//     const navigate = useNavigate();
+
+//     const [formData, setFormData] = useState({
+//         productName: product?.productName || '',
+//         price: product?.price || '',
+//         description: product?.description || '',
+//     });
+
+//     useEffect(() => {
+//         if (product) {
+//             setFormData({
+//                 productName: product.productName,
+//                 price: product.price,
+//                 description: product.description,
+//             });
+//         }
+//     }, [product]);
+
+//     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+//         setFormData({ ...formData, [e.target.name]: e.target.value });
+//     };
+
+//     const handleSubmit = async (e: React.FormEvent) => {
+//         e.preventDefault();
+//         await dispatch(updateProduct({ productData: formData, productId }));
+//         navigate('/');
+//     };
+
+//     return (
+//         <div>
+//             <h1>Edit Product</h1>
+//             {product ? (
+//                 <form onSubmit={handleSubmit}>
+//                     <input
+//                         type="text"
+//                         name="productName"
+//                         value={formData.productName}
+//                         onChange={handleChange}
+//                         placeholder="Product Name"
+//                     />
+//                     <input
+//                         type="number"
+//                         name="price"
+//                         value={formData.price}
+//                         onChange={handleChange}
+//                         placeholder="Price"
+//                     />
+//                     <textarea
+//                         name="description"
+//                         value={formData.description}
+//                         onChange={handleChange}
+//                         placeholder="Description"
+//                     />
+//                     <label>Image:</label>
+//                     <input type="file"
+//                     name='image'
+//                     accept='image/*'
+//                     onChange={(e) => setFormData({ ...formData, image: e.target.files![0] })}
+//                     placeholder='Image'
+//                     />
+
+//                     <button type="submit">Update Product</button>
+//                 </form>
+//             ) : (
+//                 <p>Loading product...</p>
+//             )}
+//         </div>
+//     );
+// };
+
+// export default EditProductPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // src/pages/EditProductPage.tsx
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -156,6 +275,7 @@ const EditProductPage: React.FC = () => {
         productName: product?.productName || '',
         price: product?.price || '',
         description: product?.description || '',
+        image: null as File | null, // Handle image file
     });
 
     useEffect(() => {
@@ -164,6 +284,7 @@ const EditProductPage: React.FC = () => {
                 productName: product.productName,
                 price: product.price,
                 description: product.description,
+                image: null, // Don't set the image in the form initially
             });
         }
     }, [product]);
@@ -172,9 +293,23 @@ const EditProductPage: React.FC = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            setFormData({ ...formData, image: e.target.files[0] });
+        }
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        await dispatch(updateProduct({ productData: formData, productId }));
+        const updatedProductData = new FormData();
+        updatedProductData.append('productName', formData.productName);
+        updatedProductData.append('price', formData.price);
+        updatedProductData.append('description', formData.description);
+        if (formData.image) {
+            updatedProductData.append('image', formData.image); // Add image to the form data if it was changed
+        }
+
+        await dispatch(updateProduct({ productData: updatedProductData, productId }));
         navigate('/');
     };
 
@@ -182,7 +317,7 @@ const EditProductPage: React.FC = () => {
         <div>
             <h1>Edit Product</h1>
             {product ? (
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} encType="multipart/form-data">
                     <input
                         type="text"
                         name="productName"
@@ -202,6 +337,13 @@ const EditProductPage: React.FC = () => {
                         value={formData.description}
                         onChange={handleChange}
                         placeholder="Description"
+                    />
+                    <label>Image:</label>
+                    <input
+                        type="file"
+                        name="image"
+                        accept="image/*"
+                        onChange={handleImageChange}
                     />
                     <button type="submit">Update Product</button>
                 </form>

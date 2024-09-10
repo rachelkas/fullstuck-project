@@ -1,4 +1,4 @@
-.price-filter {
+/* .price-filter {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -23,4 +23,370 @@
 
 .price-filter button:hover {
     background-color: #0056b3;
+}
+ */
+
+
+
+
+
+
+
+/* PriceFilter.css */
+
+/* .price-filter {
+    padding: 20px;
+    text-align: center;
+}
+
+.range-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+input[type="range"] {
+    width: 40%;
+}
+
+.price-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.filter-buttons {
+    margin-top: 15px;
+}
+
+.filter-buttons button {
+    margin: 0 5px;
+    padding: 8px 12px;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* PriceFilter.css */
+
+/* .price-filter {
+    padding: 20px;
+    text-align: center;
+}
+
+.range-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+input[type="range"] {
+    width: 40%;
+}
+
+.price-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.filter-buttons {
+    margin-top: 15px;
+}
+
+.filter-buttons button {
+    margin: 0 5px;
+    padding: 8px 12px;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+
+.price-filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.price-values {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.filter-buttons button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.filter-buttons button:hover {
+    background-color: #45a049;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+.price-filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+h3 {
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.rc-slider {
+    width: 30%;
+    margin: 20px auto;
+}
+
+.rc-slider-track {
+    background-color: #4CAF50; */
+/* Make the track color match your theme */
+/* height: 6px;
+}
+
+.rc-slider-handle {
+    border: 2px solid #4CAF50; */
+/* Match your theme color for handles */
+/* height: 18px;
+    width: 18px;
+    margin-top: -6px; */
+/* To make it centered */
+/* background-color: #fff; */
+/* White background for the handle */
+/* }
+
+.rc-slider-handle:focus,
+.rc-slider-handle:hover,
+.rc-slider-handle:active {
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.price-values {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 10px auto;
+}
+
+.price-values span {
+    font-size: 1rem;
+    color: #333;
+}
+
+.filter-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.filter-buttons button {
+    margin: 0 10px;
+    padding: 8px 16px;
+    font-size: 1rem;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.filter-buttons button:hover {
+    background-color: #45a049;
+}
+
+.filter-buttons button:active {
+    background-color: #3e8e41;
+}
+
+.filter-buttons button:nth-child(2) {
+    background-color: #f44336;
+}
+
+.filter-buttons button:nth-child(2):hover {
+    background-color: #e53935;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.price-filter-container {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.price-filter-container h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.rc-slider {
+    width: 60%;
+    margin: 20px auto;
+    /* Center the slider */
+}
+
+.price-values {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1rem;
+}
+
+.filter-buttons {
+    margin-top: 15px;
+}
+
+.filter-buttons button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.filter-buttons button:first-of-type {
+    background-color: #28a745;
+    color: white;
+}
+
+.filter-buttons button:last-of-type {
+    background-color: #dc3545;
+    color: white;
+}
+
+.filter-buttons button:hover {
+    opacity: 0.9;
+}
+
+.filter-buttons button:focus {
+    outline: none;
+}
+
+.price-filter-container {
+    border: none;
+    /* Remove the box */
+    background: none;
+    /* Remove the background */
+    box-shadow: none;
+    /* Remove the shadow */
+    padding: 0;
+    /* Remove padding */
 }

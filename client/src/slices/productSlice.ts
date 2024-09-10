@@ -239,7 +239,7 @@
 
 
 
-// src/slices/productSlice.ts
+
 // src/slices/productSlice.ts
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from '../utils/api';

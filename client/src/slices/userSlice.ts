@@ -1,301 +1,4 @@
-// import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-// import { customAxios } from '../utils/api';
-// import { toast } from 'react-toastify';
-// import { RootState } from '../store';
-// import { IUserDetails, UserState } from '../common/interfaces';
-
-// const initialState: UserState = {
-//     token: null,
-//     cart: [],
-//     favorites: [],
-//     isAuthenticated: false,
-//     userDetails: { firstName: '', lastName: '', email: '', role: '', _id: '' },
-// };
-
-// // Thunk to add item to cart
-// export const addToCart = createAsyncThunk('user/addToCart', async (productId: string, thunkAPI) => {
-//     const state = thunkAPI.getState() as RootState;
-//     const token = state.user.token;
-//     const userId = state.user.userDetails._id;
-//     try {
-//         const response = await customAxios.post(
-//             '/cart/add',
-//             { productId, userId },
-//             {
-//                 headers: {
-//                     Authorization: `Bearer ${token}`,
-//                 },
-//             }
-//         );
-//         toast.success('Added to cart!');
-//         return response.data.cartItem;
-//     } catch (error) {
-//         toast.error('Failed to add to cart.');
-//         return thunkAPI.rejectWithValue((error as any).response.data);
-//     }
-// });
-
-// // Thunk to remove item from cart
-// export const removeFromCart = createAsyncThunk('user/removeFromCart', async (productId: string, thunkAPI) => {
-//     const state = thunkAPI.getState() as RootState;
-//     const token = state.user.token;
-//     const userId = state.user.userDetails._id;
-//     try {
-//         const response = await customAxios.delete(`/cart/remove/${productId}`, {
-//             params: { userId },
-//             headers: {
-//                 Authorization: `Bearer ${token}`,
-//             },
-//         });
-//         toast.success('Removed from cart!');
-//         return productId;
-//     } catch (error) {
-//         toast.error('Failed to remove from cart.');
-//         return thunkAPI.rejectWithValue((error as any).response.data);
-//     }
-// });
-
-// // Thunk to update cart item quantity
-// export const updateCartQuantity = createAsyncThunk(
-//     'user/updateCartQuantity',
-//     async ({ productId, quantity }: { productId: string; quantity: number }, thunkAPI) => {
-//         const state = thunkAPI.getState() as RootState;
-//         const token = state.user.token;
-//         const userId = state.user.userDetails._id;
-//         try {
-//             const response = await customAxios.put(
-//                 `/cart/update/${productId}`,
-//                 { quantity },
-//                 {
-//                     params: { userId },
-//                     headers: {
-//                         Authorization: `Bearer ${token}`,
-//                     },
-//                 }
-//             );
-//             toast.success('Quantity updated!');
-//             return { productId, quantity };
-//         } catch (error) {
-//             toast.error('Failed to update quantity.');
-//             return thunkAPI.rejectWithValue((error as any).response.data);
-//         }
-//     }
-// );
-
-// // Thunk to add item to favorites
-// export const addToFavorites = createAsyncThunk(
-//     'user/addToFavorites',
-//     async (productId: string, thunkAPI) => {
-//         const state = thunkAPI.getState() as RootState;
-//         const token = state.user.token;
-//         const userId = state.user.userDetails._id;
-//         try {
-//             const response = await customAxios.post(
-//                 '/favorites/add',
-//                 { productId, userId },
-//                 {
-//                     headers: {
-//                         Authorization: `Bearer ${token}`,
-//                     },
-//                 }
-//             );
-//             toast.success('Added to favorites!');
-//             return response.data.favoriteItem;
-//         } catch (error) {
-//             toast.error('Failed to add to favorites.');
-//             return thunkAPI.rejectWithValue((error as any).response.data);
-//         }
-//     }
-// );
-
-// // Thunk to remove item from favorites
-// export const removeFromFavorites = createAsyncThunk('user/removeFromFavorites', async (productId: string, thunkAPI) => {
-//     const state = thunkAPI.getState() as RootState;
-//     const token = state.user.token;
-//     const userId = state.user.userDetails._id;
-//     try {
-//         const response = await customAxios.delete(`/favorites/remove`, {
-//             params: { productId, userId },
-//             headers: {
-//                 Authorization: `Bearer ${token}`,
-//             },
-//         });
-//         toast.success('Removed from favorites!');
-//         return productId;
-//     } catch (error) {
-//         toast.error('Failed to remove from favorites.');
-//         return thunkAPI.rejectWithValue((error as any).response.data);
-//     }
-// });
-
-// // Thunk to fetch cart items
-// export const fetchCartItems = createAsyncThunk('user/fetchCartItems', async (_, thunkAPI) => {
-//     const state = thunkAPI.getState() as RootState;
-//     const token = state.user.token;
-//     const userId = state.user.userDetails._id;
-//     try {
-//         const response = await customAxios.get('/cart', {
-//             params: { userId },
-//             headers: {
-//                 Authorization: `Bearer ${token}`,
-//             },
-//         });
-//         return response.data;
-//     } catch (error) {
-//         toast.error('Failed to fetch cart items.');
-//         return thunkAPI.rejectWithValue((error as any).response.data);
-//     }
-// });
-
-// // Thunk to fetch favorite items
-// export const fetchFavoriteItems = createAsyncThunk('user/fetchFavoriteItems', async (_, thunkAPI) => {
-//     const state = thunkAPI.getState() as RootState;
-//     const token = state.user.token;
-//     const userId = state.user.userDetails._id;
-//     try {
-//         const response = await customAxios.get('/favorites', {
-//             params: { userId },
-//             headers: {
-//                 Authorization: `Bearer ${token}`,
-//             },
-//         });
-//         return response.data;
-//     } catch (error) {
-//         toast.error('Failed to fetch favorite items.');
-//         return thunkAPI.rejectWithValue((error as any).response.data);
-//     }
-// });
-
-// const userSlice = createSlice({
-//     name: 'user',
-//     initialState,
-//     reducers: {
-//         setToken: (state, action: PayloadAction<string | null>) => {
-//             state.token = action.payload;
-//             state.isAuthenticated = !!action.payload;
-//         },
-//         setUserDetails: (state, action: PayloadAction<IUserDetails>) => {
-//             state.userDetails = action.payload;
-//         },
-//         clearUserState: (state) => {
-//             state.token = null;
-//             state.cart = [];
-//             state.favorites = [];
-//             state.isAuthenticated = false;
-//         },
-//     },
-//     extraReducers: (builder) => {
-//         builder
-//             .addCase(addToCart.fulfilled, (state, action) => {
-//                 state.cart.push(action.payload);
-//             })
-//             .addCase(removeFromCart.fulfilled, (state, action) => {
-//                 state.cart = state.cart.filter(item => item.productId._id !== action.payload);
-//             })
-//             .addCase(updateCartQuantity.fulfilled, (state, action) => {
-//                 const index = state.cart.findIndex(item => item.productId._id === action.payload.productId);
-//                 if (index !== -1) {
-//                     state.cart[index].quantity = action.payload.quantity;
-//                 }
-//             })
-//             .addCase(addToFavorites.fulfilled, (state, action) => {
-//                 state.favorites.push(action.payload);
-//             })
-//             .addCase(removeFromFavorites.fulfilled, (state, action) => {
-//                 state.favorites = state.favorites.filter(item => item.productId._id !== action.payload);
-//             })
-//             .addCase(fetchCartItems.fulfilled, (state, action) => {
-//                 state.cart = action.payload;
-//             })
-//             .addCase(fetchFavoriteItems.fulfilled, (state, action) => {
-//                 state.favorites = action.payload;
-//             });
-//     },
-// });
-
-// export const { setToken, clearUserState, setUserDetails } = userSlice.actions;
-
-// export default userSlice.reducer;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// // src/slices/userSlice.ts
 
 // import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 // import { customAxios } from '../utils/api';
@@ -399,7 +102,7 @@
 //                 }
 //             );
 //             toast.success('Added to favorites!');
-//             return response.data.favoriteItem;
+//             return productId; // Now returning just the product ID for easier management
 //         } catch (error) {
 //             toast.error('Failed to add to favorites.');
 //             return thunkAPI.rejectWithValue((error as any).response.data);
@@ -420,7 +123,7 @@
 //             },
 //         });
 //         toast.success('Removed from favorites!');
-//         return productId;
+//         return productId; // Returning the product ID after removing
 //     } catch (error) {
 //         toast.error('Failed to remove from favorites.');
 //         return thunkAPI.rejectWithValue((error as any).response.data);
@@ -465,6 +168,50 @@
 //     }
 // });
 
+// // Thunk to login user and fetch cart/favorite data
+// // export const loginUser = createAsyncThunk(
+// //     'user/loginUser',
+// //     async (userData: { email: string; password: string }, thunkAPI) => {
+// //         try {
+// //             const response = await customAxios.post('/login', userData);
+// //             const { token, userDetails } = response.data;
+// //             thunkAPI.dispatch(setToken(token));
+// //             thunkAPI.dispatch(setUserDetails(userDetails));
+// //             // Fetch cart and favorites after login
+// //             thunkAPI.dispatch(fetchCartItems());
+// //             thunkAPI.dispatch(fetchFavoriteItems());
+// //             return response.data;
+// //         } catch (error: any) {
+// //             return thunkAPI.rejectWithValue(error.response.data);
+// //         }
+// //     }
+// // );
+
+// // Thunk to login user and fetch cart/favorite data
+// export const loginUser = createAsyncThunk(
+//     'user/loginUser',
+//     async (userData: { email: string; password: string }, thunkAPI) => {
+//         try {
+//             const response = await customAxios.post('/login', userData);
+//             const { token, userDetails } = response.data;
+//             thunkAPI.dispatch(setToken(token));
+//             thunkAPI.dispatch(setUserDetails(userDetails));
+//             // Fetch cart and favorites after login
+//             await thunkAPI.dispatch(fetchCartItems());
+//             await thunkAPI.dispatch(fetchFavoriteItems());
+//             return response.data;
+//         } catch (error: any) {
+//             return thunkAPI.rejectWithValue(error.response.data);
+//         }
+//     }
+// );
+
+// // Thunk to logout user
+// export const logoutUser = createAsyncThunk('user/logoutUser', async (_, thunkAPI) => {
+//     thunkAPI.dispatch(clearUserState());
+//     toast.success('Logged out successfully');
+// });
+
 // const userSlice = createSlice({
 //     name: 'user',
 //     initialState,
@@ -499,16 +246,16 @@
 //                 }
 //             })
 //             .addCase(addToFavorites.fulfilled, (state, action) => {
-//                 state.favorites.push(action.payload);
+//                 state.favorites.push(action.payload); // Adding product ID to favorites
 //             })
 //             .addCase(removeFromFavorites.fulfilled, (state, action) => {
-//                 state.favorites = state.favorites.filter(item => item.productId._id !== action.payload);
+//                 state.favorites = state.favorites.filter(favoriteId => favoriteId !== action.payload); // Removing product ID from favorites
 //             })
 //             .addCase(fetchCartItems.fulfilled, (state, action) => {
 //                 state.cart = action.payload;
 //             })
 //             .addCase(fetchFavoriteItems.fulfilled, (state, action) => {
-//                 state.favorites = action.payload;
+//                 state.favorites = action.payload.map((item: any) => item.productId._id); // Storing just product IDs in favorites
 //             });
 //     },
 // });
@@ -553,59 +300,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// src/slices/userSlice.ts
 
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { customAxios } from '../utils/api';
@@ -638,9 +333,9 @@ export const addToCart = createAsyncThunk('user/addToCart', async (productId: st
         );
         toast.success('Added to cart!');
         return response.data.cartItem;
-    } catch (error) {
+    } catch (error: any) {
         toast.error('Failed to add to cart.');
-        return thunkAPI.rejectWithValue((error as any).response.data);
+        return thunkAPI.rejectWithValue(error.response.data);
     }
 });
 
@@ -658,9 +353,9 @@ export const removeFromCart = createAsyncThunk('user/removeFromCart', async (pro
         });
         toast.success('Removed from cart!');
         return productId;
-    } catch (error) {
+    } catch (error: any) {
         toast.error('Failed to remove from cart.');
-        return thunkAPI.rejectWithValue((error as any).response.data);
+        return thunkAPI.rejectWithValue(error.response.data);
     }
 });
 
@@ -684,9 +379,9 @@ export const updateCartQuantity = createAsyncThunk(
             );
             toast.success('Quantity updated!');
             return { productId, quantity };
-        } catch (error) {
+        } catch (error: any) {
             toast.error('Failed to update quantity.');
-            return thunkAPI.rejectWithValue((error as any).response.data);
+            return thunkAPI.rejectWithValue(error.response.data);
         }
     }
 );
@@ -710,9 +405,9 @@ export const addToFavorites = createAsyncThunk(
             );
             toast.success('Added to favorites!');
             return productId; // Now returning just the product ID for easier management
-        } catch (error) {
+        } catch (error: any) {
             toast.error('Failed to add to favorites.');
-            return thunkAPI.rejectWithValue((error as any).response.data);
+            return thunkAPI.rejectWithValue(error.response.data);
         }
     }
 );
@@ -731,9 +426,9 @@ export const removeFromFavorites = createAsyncThunk('user/removeFromFavorites', 
         });
         toast.success('Removed from favorites!');
         return productId; // Returning the product ID after removing
-    } catch (error) {
+    } catch (error: any) {
         toast.error('Failed to remove from favorites.');
-        return thunkAPI.rejectWithValue((error as any).response.data);
+        return thunkAPI.rejectWithValue(error.response.data);
     }
 });
 
@@ -750,9 +445,9 @@ export const fetchCartItems = createAsyncThunk('user/fetchCartItems', async (_, 
             },
         });
         return response.data;
-    } catch (error) {
+    } catch (error: any) {
         toast.error('Failed to fetch cart items.');
-        return thunkAPI.rejectWithValue((error as any).response.data);
+        return thunkAPI.rejectWithValue(error.response.data);
     }
 });
 
@@ -769,10 +464,35 @@ export const fetchFavoriteItems = createAsyncThunk('user/fetchFavoriteItems', as
             },
         });
         return response.data;
-    } catch (error) {
+    } catch (error: any) {
         toast.error('Failed to fetch favorite items.');
-        return thunkAPI.rejectWithValue((error as any).response.data);
+        return thunkAPI.rejectWithValue(error.response.data);
     }
+});
+
+// Thunk to login user and fetch cart/favorite data
+export const loginUser = createAsyncThunk(
+    'user/loginUser',
+    async (userData: { email: string; password: string }, thunkAPI) => {
+        try {
+            const response = await customAxios.post('/login', userData);
+            const { token, userDetails } = response.data;
+            thunkAPI.dispatch(setToken(token));
+            thunkAPI.dispatch(setUserDetails(userDetails));
+            // Fetch cart and favorites after login
+            await thunkAPI.dispatch(fetchCartItems());
+            await thunkAPI.dispatch(fetchFavoriteItems());
+            return response.data;
+        } catch (error: any) {
+            return thunkAPI.rejectWithValue(error.response.data);
+        }
+    }
+);
+
+// Thunk to logout user
+export const logoutUser = createAsyncThunk('user/logoutUser', async (_, thunkAPI) => {
+    thunkAPI.dispatch(clearUserState());
+    toast.success('Logged out successfully');
 });
 
 const userSlice = createSlice({

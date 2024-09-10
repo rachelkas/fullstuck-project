@@ -400,14 +400,46 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+// // Get all products with optional price range filter
+// router.get('/', async (req, res) => {
+//     try {
+//         const { minPrice, maxPrice } = req.query;
+
+//         const query = {};
+//         if (minPrice && maxPrice) {
+//             query.price = { $gte: parseFloat(minPrice), $lte: parseFloat(maxPrice) };
+//         }
+
+//         const products = await Product.find(query);
+//         const productsWithImageUrl = products.map(product => ({
+//             ...product._doc,
+//             image: `http://localhost:3000${product.image}` // Adjust the URL accordingly
+//         }));
+//         res.json(productsWithImageUrl);
+//     } catch (err) {
+//         console.error('Error fetching products:', err);
+//         res.status(500).send('Server Error');
+//     }
+// });
+
 // Get all products with optional price range filter
 router.get('/', async (req, res) => {
     try {
         const { minPrice, maxPrice } = req.query;
 
         const query = {};
+
+        // If both minPrice and maxPrice are provided, apply both
         if (minPrice && maxPrice) {
             query.price = { $gte: parseFloat(minPrice), $lte: parseFloat(maxPrice) };
+        }
+        // If only minPrice is provided, filter by minimum price
+        else if (minPrice) {
+            query.price = { $gte: parseFloat(minPrice) };
+        }
+        // If only maxPrice is provided, filter by maximum price
+        else if (maxPrice) {
+            query.price = { $lte: parseFloat(maxPrice) };
         }
 
         const products = await Product.find(query);
@@ -415,13 +447,13 @@ router.get('/', async (req, res) => {
             ...product._doc,
             image: `http://localhost:3000${product.image}` // Adjust the URL accordingly
         }));
+
         res.json(productsWithImageUrl);
     } catch (err) {
         console.error('Error fetching products:', err);
         res.status(500).send('Server Error');
     }
 });
-
 
 // Search products by name
 router.get('/search', async (req, res) => {
