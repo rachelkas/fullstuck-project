@@ -125,6 +125,91 @@
 
 
 
+//admin work:
+
+// import jwt from 'jsonwebtoken';
+// import User from '../models/user.js';
+
+// // Middleware to verify token
+// export const verifyToken = (req, res, next) => {
+//     const token = req.header('Authorization');
+//     if (!token) return res.status(401).json({ message: 'Access Denied: No Token Provided' });
+
+//     try {
+//         // Extract the token after "Bearer "
+//         const tokenPart = token.split(" ")[1];
+//         if (!tokenPart) return res.status(400).json({ message: 'Invalid Token Format' });
+
+//         const verified = jwt.verify(tokenPart, process.env.JWT_SECRET);
+//         req.user = verified.user; // Ensure the user id is correctly assigned to req.user
+//         next();
+//     } catch (err) {
+//         console.error('Token verification failed:', err.message);
+//         res.status(400).json({ message: 'Invalid Token' });
+//     }
+// };
+
+// // Middleware to check if user is admin
+// export const isAdmin = async (req, res, next) => {
+//     try {
+//         // Ensure req.user.id is available from the verifyToken middleware
+//         if (!req.user || !req.user.id) {
+//             return res.status(403).json({ message: 'Access Denied: No User ID Found' });
+//         }
+
+//         const user = await User.findById(req.user.id);
+
+//         if (user && user.role === 'admin') {
+//             next();
+//         } else {
+//             res.status(403).json({ message: 'Access Denied: Admins only' });
+//         }
+//     } catch (err) {
+//         console.error('Error checking admin status:', err.message);
+//         res.status(500).json({ message: 'Server Error' });
+//     }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 import jwt from 'jsonwebtoken';
 import User from '../models/user.js';
@@ -140,7 +225,7 @@ export const verifyToken = (req, res, next) => {
         if (!tokenPart) return res.status(400).json({ message: 'Invalid Token Format' });
 
         const verified = jwt.verify(tokenPart, process.env.JWT_SECRET);
-        req.user = verified.user; // Ensure the user id is correctly assigned to req.user
+        req.user = verified.user;  // Make sure this is the correct user ID payload from your token
         next();
     } catch (err) {
         console.error('Token verification failed:', err.message);
@@ -168,3 +253,156 @@ export const isAdmin = async (req, res, next) => {
         res.status(500).json({ message: 'Server Error' });
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import jwt from 'jsonwebtoken';
+// import User from '../models/user.js';
+
+// // Middleware to verify token
+// export const verifyToken = (req, res, next) => {
+//     const token = req.header('Authorization');
+
+//     if (!token) {
+//         return res.status(401).json({ message: 'Access Denied: No Token Provided' });
+//     }
+
+//     try {
+//         // Extract the token after "Bearer "
+//         const tokenPart = token.split(" ")[1];
+//         if (!tokenPart) {
+//             return res.status(400).json({ message: 'Invalid Token Format' });
+//         }
+
+//         // Verify token
+//         const verified = jwt.verify(tokenPart, process.env.JWT_SECRET);
+//         req.user = verified; // Store the entire verified token payload in req.user
+//         next();
+//     } catch (err) {
+//         console.error('Token verification failed:', err.message);
+//         res.status(400).json({ message: 'Invalid Token' });
+//     }
+// };
+
+// // Middleware to check if user is admin
+// export const isAdmin = async (req, res, next) => {
+//     try {
+//         // Ensure req.user.id is available from the verifyToken middleware
+//         if (!req.user) {
+//             return res.status(403).json({ message: 'Access Denied: No User Found' });
+//         }
+
+//         const user = await User.findById(req.user.id);
+
+//         if (user && user.role === 'admin') {
+//             next();
+//         } else {
+//             res.status(403).json({ message: 'Access Denied: Admins only' });
+//         }
+//     } catch (err) {
+//         console.error('Error checking admin status:', err.message);
+//         res.status(500).json({ message: 'Server Error' });
+//     }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import jwt from 'jsonwebtoken';
+// import User from '../models/user.js';
+
+// // Middleware to verify token
+// export const verifyToken = (req, res, next) => {
+//     const token = req.header('Authorization');
+
+//     if (!token) {
+//         return res.status(401).json({ message: 'Access Denied: No Token Provided' });
+//     }
+
+//     try {
+//         // Extract the token after "Bearer "
+//         const tokenPart = token.split(" ")[1];
+//         if (!tokenPart) {
+//             return res.status(400).json({ message: 'Invalid Token Format' });
+//         }
+
+//         // Verify token
+//         const verified = jwt.verify(tokenPart, process.env.JWT_SECRET);
+//         req.user = verified.user || verified._id; // Ensure the user id is correctly assigned to req.user
+//         next();
+//     } catch (err) {
+//         console.error('Token verification failed:', err.message);
+//         res.status(400).json({ message: 'Invalid Token' });
+//     }
+// };
+
+// // Middleware to check if user is admin
+// export const isAdmin = async (req, res, next) => {
+//     try {
+//         // Ensure req.user exists and has an id
+//         if (!req.user) {
+//             return res.status(403).json({ message: 'Access Denied: No User Found' });
+//         }
+
+//         const user = await User.findById(req.user); // Lookup user by ID stored in req.user
+
+//         if (user && user.role === 'admin') {
+//             next(); // Continue if user is admin
+//         } else {
+//             res.status(403).json({ message: 'Access Denied: Admins only' });
+//         }
+//     } catch (err) {
+//         console.error('Error checking admin status:', err.message);
+//         res.status(500).json({ message: 'Server Error' });
+//     }
+// };
