@@ -816,7 +816,8 @@ export const createOrder = createAsyncThunk('user/createOrder', async (_, thunkA
         userId,
         items: cart.map(item => ({
             productId: item.productId._id,
-            quantity: item.quantity
+            quantity: item.quantity,
+            price: item.productId.price
         })),
         totalPrice: cart.reduce((acc, item) => acc + item.productId.price * item.quantity, 0),
     };
