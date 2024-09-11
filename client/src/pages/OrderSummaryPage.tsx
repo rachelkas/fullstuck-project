@@ -342,8 +342,8 @@
 
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../store';
-import { clearCart } from '../slices/userSlice'; // Assuming you have a clearCart action to empty the cart
+import { AppDispatch, RootState } from '../store';
+import { clearCart, createOrder } from '../slices/userSlice'; // Assuming you have a clearCart action to empty the cart
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './orderSummaryPage.css';
@@ -353,7 +353,7 @@ const OrderSummaryPage: React.FC = () => {
     const token = useSelector((state: RootState) => state.user.token); // Get the token from the store
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch: AppDispatch = useDispatch();
 
     const totalAmount = cartItems.reduce((acc, item) => acc + item.productId.price * item.quantity, 0);
 
@@ -361,28 +361,10 @@ const OrderSummaryPage: React.FC = () => {
         setLoading(true);
 
         try {
-            const response = await axios.post(
-                'http://localhost:3001/api/orders/create', // Adjust to your actual backend port and endpoint
-                {
-                    items: cartItems.map(item => ({
-                        productId: item.productId._id,
-                        quantity: item.quantity,
-                        price: item.productId.price
-                    })),
-                    totalPrice: totalAmount
-                },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`, // Include token in the Authorization header
-                    },
-                }
-            );
-
-            if (response.status === 201) {
-                alert('Order submitted successfully!');
-                dispatch(clearCart()); // Clear the cart after successful order
-                navigate('/order-confirmation'); // Navigate to a confirmation page
-            }
+           
+            dispatch(createOrder());
+            navigate('/order-confirmation'); // Navigate to a confirmation page
+       
         } catch (error) {
             console.error('Error submitting order:', error);
             alert('Error submitting order');
