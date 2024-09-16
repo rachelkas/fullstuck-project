@@ -333,7 +333,7 @@ dotenv.config();
 const app = express();
 
 // CORS configuration
-app.use(cors({ origin: 'http://localhost:3001' }));
+app.use(cors());
 
 
 // JSON parsing middleware

@@ -682,6 +682,8 @@ import { clearCart, createOrder } from '../slices/userSlice';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';  // Use sweetalert2 for a nice alert
 import './orderSummaryPage.css';
+import OrderDetailsTable from './OrderDetailsTable';
+import { OrderDetailsTableProps } from '../common/interfaces';
 
 const OrderSummaryPage: React.FC = () => {
     const location = useLocation();
@@ -741,18 +743,17 @@ const OrderSummaryPage: React.FC = () => {
         navigate('/cart');
     };
 
+    const orderDetailsTableProps: OrderDetailsTableProps = {
+        selectedCartItems,
+        totalAmount
+    };
+
     return (
         <div className="order-summary-page">
             <h2>Order Summary</h2>
             {selectedCartItems.length ? (
                 <div>
-                    {selectedCartItems.map((item: any) => (
-                        <div key={item._id} className="summary-item">
-                            <p>{item.productId.productName} - Quantity: {item.quantity}</p>
-                            <p>Price: ${item.productId.price}</p>
-                        </div>
-                    ))}
-                    <h3>Total: ${totalAmount.toFixed(2)}</h3>
+                    <OrderDetailsTable {...orderDetailsTableProps} />
                     <button onClick={goBackToCart} disabled={loading}>Back to Cart</button>
                     <button onClick={handleOrderSubmit} disabled={loading}>
                         {loading ? 'Processing...' : 'Confirm Order'}
