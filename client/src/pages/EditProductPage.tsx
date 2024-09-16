@@ -275,7 +275,8 @@ const EditProductPage: React.FC = () => {
         productName: product?.productName || '',
         price: product?.price || '',
         description: product?.description || '',
-        image: null as File | null, // Handle image file
+        image: product?.image || null, // Handle image file
+        imageUrl: product?.image
     });
 
     useEffect(() => {
@@ -284,7 +285,8 @@ const EditProductPage: React.FC = () => {
                 productName: product.productName,
                 price: product.price,
                 description: product.description,
-                image: null, // Don't set the image in the form initially
+                image: product.image, 
+                imageUrl: product.image
             });
         }
     }, [product]);
@@ -295,7 +297,8 @@ const EditProductPage: React.FC = () => {
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
-            setFormData({ ...formData, image: e.target.files[0] });
+            const url = URL.createObjectURL(e.target.files[0]);
+            setFormData({ ...formData, image: e.target.files[0], imageUrl: url });
         }
     };
 
@@ -339,8 +342,12 @@ const EditProductPage: React.FC = () => {
                         placeholder="Description"
                     />
                     <label>Image:</label>
+                    <img src={formData.imageUrl} alt="Product" style={{ maxWidth: '100px' }} />
+                    <label htmlFor="productImageId">שנה תמונת מוצר</label>
                     <input
+                        id="productImageId"
                         type="file"
+                        style={{visibility: "hidden"}}
                         name="image"
                         accept="image/*"
                         onChange={handleImageChange}
