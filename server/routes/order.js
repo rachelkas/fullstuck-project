@@ -46,6 +46,6 @@ router.post('/create', verifyToken, createOrder);
 router.get('/', verifyToken, getUserOrders);
 
 // Get a specific order by ID
-router.get('/:id', verifyToken, getOrderById);
+router.get('/:orderId', verifyToken, getOrderById);
 
 export default router;

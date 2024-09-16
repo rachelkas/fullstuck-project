@@ -63,6 +63,8 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchOrderById } from '../slices/orderSlice';
 import { RootState, AppDispatch } from '../store';
+import { OrderDetailsTableProps } from '../common/interfaces';
+import OrderDetailsTable from './OrderDetailsTable';
 
 
 const OrderDetailsPage: React.FC = () => {
@@ -80,21 +82,15 @@ const OrderDetailsPage: React.FC = () => {
         return <p>Loading order details...</p>;
     }
 
+    const orderDetailsTableProps: OrderDetailsTableProps = {
+        selectedCartItems: order.items,
+        totalAmount: order.totalPrice
+    }
+
     return (
         <div className="order-details-page">
             <h2>Order Details</h2>
-            <p><strong>Order ID:</strong> {order._id}</p>
-            <p><strong>Total Price:</strong> ${order.totalPrice.toFixed(2)}</p>
-            <p><strong>Date:</strong> {new Date(order.createdAt).toLocaleDateString()}</p>
-
-            <h3>Items in this Order:</h3>
-            <ul>
-                {order.items.map((item: any) => (
-                    <li key={item.productId._id}>
-                        <p>{item.productId.productName} - Quantity: {item.quantity} - Price: ${item.price}</p>
-                    </li>
-                ))}
-            </ul>
+            <OrderDetailsTable {...orderDetailsTableProps} />
         </div>
     );
 };

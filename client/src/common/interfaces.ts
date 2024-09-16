@@ -34,3 +34,8 @@ export interface PriceFilterProps {
     onApplyFilter: () => void;
     onResetFilters: () => void;
 }
+
+export interface OrderDetailsTableProps {
+    selectedCartItems: any[],
+    totalAmount: number
+};

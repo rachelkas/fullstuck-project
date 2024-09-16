@@ -291,7 +291,7 @@ const Routers = () => {
 
                 {/* New Orders Route for viewing previous orders */}
                 <Route path="/orders" element={<ProtectedRoute element={<MainLayout onResetFilters={onResetFilters}><OrdersPage /></MainLayout>} />} />
-                <Route path="/orders/:orderId" element={<ProtectedRoute element={<MainLayout onResetFilters={onResetFilters}><OrderDetailsPage /></MainLayout>} />} />
+                <Route path="/order-details/:orderId" element={<ProtectedRoute element={<MainLayout onResetFilters={onResetFilters}><OrderDetailsPage /></MainLayout>} />} />
             </Routes>
         </BrowserRouter>
     );
