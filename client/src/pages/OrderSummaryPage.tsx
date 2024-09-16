@@ -675,12 +675,635 @@
 
 
 
-import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { AppDispatch, RootState } from '../store';
+// import { clearCart, createOrder } from '../slices/userSlice';
+// import { useNavigate, useLocation } from 'react-router-dom';
+// import Swal from 'sweetalert2';  // Use sweetalert2 for a nice alert
+// import './orderSummaryPage.css';
+// import OrderDetailsTable from './OrderDetailsTable';
+// import { OrderDetailsTableProps } from '../common/interfaces';
+
+// const OrderSummaryPage: React.FC = () => {
+//     const location = useLocation();
+//     const dispatch: AppDispatch = useDispatch();
+//     const navigate = useNavigate();
+//     const [loading, setLoading] = useState(false);
+
+//     // Fetch the selected cart items and totalAmount from CartPage via location.state
+//     const { selectedCartItems, totalAmount } = location.state || { selectedCartItems: [], totalAmount: 0 };
+
+//     const handleOrderSubmit = async () => {
+//         setLoading(true);
+//         try {
+//             // Dispatch the createOrder thunk to save the order in MongoDB
+//             const orderResult = await dispatch(createOrder());
+
+//             if (orderResult.meta.requestStatus === 'fulfilled') {
+//                 // Check if the order is fulfilled successfully
+//                 console.log('Order created successfully');
+
+//                 // Clear the cart after a successful order
+//                 dispatch(clearCart());
+
+//                 // SweetAlert for a nice alert message
+//                 Swal.fire({
+//                     icon: 'success',
+//                     title: 'Order Submitted!',
+//                     text: 'Your order has been successfully placed. We will process it soon.',
+//                     confirmButtonText: 'Okay'
+//                 }).then(() => {
+//                     // Navigate to the homepage after the user clicks "Okay"
+//                     navigate('/');
+//                 });
+//             } else {
+//                 // Handle case where order was not fulfilled
+//                 console.error('Order creation failed:', orderResult);
+//                 Swal.fire({
+//                     icon: 'error',
+//                     title: 'Order Failed',
+//                     text: 'Something went wrong. Please try again later.',
+//                 });
+//             }
+
+//         } catch (error) {
+//             console.error('Error submitting order:', error);
+//             Swal.fire({
+//                 icon: 'error',
+//                 title: 'Order Failed',
+//                 text: 'Something went wrong. Please try again later.',
+//             });
+//         } finally {
+//             setLoading(false);
+//         }
+//     };
+
+//     const goBackToCart = () => {
+//         navigate('/cart');
+//     };
+
+//     const orderDetailsTableProps: OrderDetailsTableProps = {
+//         selectedCartItems,
+//         totalAmount
+//     };
+
+//     return (
+//         <div className="order-summary-page">
+//             <h2>Order Summary</h2>
+//             {selectedCartItems.length ? (
+//                 <div>
+//                     <OrderDetailsTable {...orderDetailsTableProps} />
+//                     <button onClick={goBackToCart} disabled={loading}>Back to Cart</button>
+//                     <button onClick={handleOrderSubmit} disabled={loading}>
+//                         {loading ? 'Processing...' : 'Confirm Order'}
+//                     </button>
+//                 </div>
+//             ) : (
+//                 <p>No items to summarize</p>
+//             )}
+//         </div>
+//     );
+// };
+
+// export default OrderSummaryPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState, useEffect } from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { AppDispatch, RootState } from '../store';
+// import { clearCart, createOrder } from '../slices/userSlice';
+// import { useNavigate, useLocation } from 'react-router-dom';
+// import Swal from 'sweetalert2';
+// import './orderSummaryPage.css';
+// import OrderDetailsTable from './OrderDetailsTable';
+// import { OrderDetailsTableProps } from '../common/interfaces';
+
+// const OrderSummaryPage: React.FC = () => {
+//     const location = useLocation();
+//     const dispatch: AppDispatch = useDispatch();
+//     const navigate = useNavigate();
+//     const [loading, setLoading] = useState(false);
+
+//     // Fetch the selected cart items and totalAmount from CartPage via location.state
+//     const { selectedCartItems, totalAmount } = location.state || { selectedCartItems: [], totalAmount: 0 };
+
+//     const handleOrderSubmit = async () => {
+//         setLoading(true);
+//         try {
+//             // Dispatch the createOrder thunk to save the order in MongoDB
+//             const orderResult = await dispatch(createOrder({ selectedCartItems, totalAmount }));
+
+//             if (orderResult.meta.requestStatus === 'fulfilled') {
+//                 // Clear the cart after a successful order
+//                 dispatch(clearCart());
+
+//                 // SweetAlert for a success message
+//                 Swal.fire({
+//                     icon: 'success',
+//                     title: 'Order Submitted!',
+//                     text: 'Your order has been successfully placed. We will process it soon.',
+//                     confirmButtonText: 'Okay',
+//                 }).then(() => {
+//                     navigate('/order-confirmation'); // Navigate to order confirmation page
+//                 });
+//             } else {
+//                 Swal.fire({
+//                     icon: 'error',
+//                     title: 'Order Failed',
+//                     text: 'Something went wrong. Please try again later.',
+//                 });
+//             }
+//         } catch (error) {
+//             Swal.fire({
+//                 icon: 'error',
+//                 title: 'Order Failed',
+//                 text: 'Something went wrong. Please try again later.',
+//             });
+//         } finally {
+//             setLoading(false);
+//         }
+//     };
+
+//     const goBackToCart = () => {
+//         navigate('/cart');
+//     };
+
+//     const orderDetailsTableProps: OrderDetailsTableProps = {
+//         selectedCartItems,
+//         totalAmount,
+//     };
+
+//     return (
+//         <div className="order-summary-page">
+//             <h2>Order Summary</h2>
+//             {selectedCartItems.length ? (
+//                 <div>
+//                     <OrderDetailsTable {...orderDetailsTableProps} />
+//                     <button onClick={goBackToCart} disabled={loading}>Back to Cart</button>
+//                     <button onClick={handleOrderSubmit} disabled={loading}>
+//                         {loading ? 'Processing...' : 'Confirm Order'}
+//                     </button>
+//                 </div>
+//             ) : (
+//                 <p>No items to summarize</p>
+//             )}
+//         </div>
+//     );
+// };
+
+// export default OrderSummaryPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState } from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { AppDispatch, RootState } from '../store';
+// import { clearCart, createOrder } from '../slices/userSlice';
+// import { useNavigate, useLocation } from 'react-router-dom';
+// import Swal from 'sweetalert2';  // Use sweetalert2 for a nice alert
+// import './orderSummaryPage.css';
+// import OrderDetailsTable from './OrderDetailsTable';
+// import { OrderDetailsTableProps } from '../common/interfaces';
+
+// const OrderSummaryPage: React.FC = () => {
+//     const location = useLocation();
+//     const dispatch: AppDispatch = useDispatch();
+//     const navigate = useNavigate();
+//     const [loading, setLoading] = useState(false);
+
+//     // Fetch the selected cart items and totalAmount from CartPage via location.state
+//     const { selectedCartItems, totalAmount } = location.state || { selectedCartItems: [], totalAmount: 0 };
+
+//     const handleOrderSubmit = async () => {
+//         setLoading(true);
+//         try {
+//             // Dispatch the createOrder thunk with selected items and total amount
+//             const orderResult = await dispatch(createOrder({ selectedCartItems, totalAmount }));
+
+//             if (orderResult.meta.requestStatus === 'fulfilled') {
+//                 // Check if the order is fulfilled successfully
+//                 console.log('Order created successfully');
+
+//                 // Clear the cart after a successful order
+//                 dispatch(clearCart());
+
+//                 // SweetAlert for a nice alert message
+//                 Swal.fire({
+//                     icon: 'success',
+//                     title: 'Order Submitted!',
+//                     text: 'Your order has been successfully placed. We will process it soon.',
+//                     confirmButtonText: 'Okay'
+//                 }).then(() => {
+//                     // Navigate to the homepage after the user clicks "Okay"
+//                     navigate('/');
+//                 });
+//             } else {
+//                 // Handle case where order was not fulfilled
+//                 console.error('Order creation failed:', orderResult);
+//                 Swal.fire({
+//                     icon: 'error',
+//                     title: 'Order Failed',
+//                     text: 'Something went wrong. Please try again later.',
+//                 });
+//             }
+
+//         } catch (error) {
+//             console.error('Error submitting order:', error);
+//             Swal.fire({
+//                 icon: 'error',
+//                 title: 'Order Failed',
+//                 text: 'Something went wrong. Please try again later.',
+//             });
+//         } finally {
+//             setLoading(false);
+//         }
+//     };
+
+//     const goBackToCart = () => {
+//         navigate('/cart');
+//     };
+
+//     const orderDetailsTableProps: OrderDetailsTableProps = {
+//         selectedCartItems,
+//         totalAmount
+//     };
+
+//     return (
+//         <div className="order-summary-page">
+//             <h2>Order Summary</h2>
+//             {selectedCartItems.length ? (
+//                 <div>
+//                     <OrderDetailsTable {...orderDetailsTableProps} />
+//                     <button onClick={goBackToCart} disabled={loading}>Back to Cart</button>
+//                     <button onClick={handleOrderSubmit} disabled={loading}>
+//                         {loading ? 'Processing...' : 'Confirm Order'}
+//                     </button>
+//                 </div>
+//             ) : (
+//                 <p>No items to summarize</p>
+//             )}
+//         </div>
+//     );
+// };
+
+// export default OrderSummaryPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState } from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { AppDispatch, RootState } from '../store';
+// import { clearCart, createOrder } from '../slices/userSlice';
+// import { useNavigate, useLocation } from 'react-router-dom';
+// import Swal from 'sweetalert2';  // Use sweetalert2 for a nice alert
+// import './orderSummaryPage.css';
+// import OrderDetailsTable from './OrderDetailsTable';
+// import { OrderDetailsTableProps } from '../common/interfaces';
+
+// const OrderSummaryPage: React.FC = () => {
+//     const location = useLocation();
+//     const dispatch: AppDispatch = useDispatch();
+//     const navigate = useNavigate();
+//     const [loading, setLoading] = useState(false);
+
+//     // Fetch the selected cart items and totalAmount from CartPage via location.state
+//     const { selectedCartItems, totalAmount } = location.state || { selectedCartItems: [], totalAmount: 0 };
+
+//     const handleOrderSubmit = async () => {
+//         setLoading(true);
+//         try {
+//             // Debugging: Log the selectedCartItems to ensure they have the correct structure
+//             console.log('Selected Cart Items:', selectedCartItems);
+
+//             // Ensure that selectedCartItems is in the correct format with productId, quantity, and price
+//             const orderItems = selectedCartItems.map((item: any) => ({
+//                 productId: item.productId._id,
+//                 quantity: item.quantity,
+//                 price: item.productId.price
+//             }));
+
+//             // Dispatch the createOrder thunk with orderItems and total amount
+//             const orderResult = await dispatch(createOrder({ items: orderItems, totalPrice: totalAmount }));
+
+//             if (orderResult.meta.requestStatus === 'fulfilled') {
+//                 // Check if the order is fulfilled successfully
+//                 console.log('Order created successfully');
+
+//                 // Clear the cart after a successful order
+//                 dispatch(clearCart());
+
+//                 // SweetAlert for a nice alert message
+//                 Swal.fire({
+//                     icon: 'success',
+//                     title: 'Order Submitted!',
+//                     text: 'Your order has been successfully placed. We will process it soon.',
+//                     confirmButtonText: 'Okay'
+//                 }).then(() => {
+//                     // Navigate to the homepage after the user clicks "Okay"
+//                     navigate('/');
+//                 });
+//             } else {
+//                 // Handle case where order was not fulfilled
+//                 console.error('Order creation failed:', orderResult);
+//                 Swal.fire({
+//                     icon: 'error',
+//                     title: 'Order Failed',
+//                     text: 'Something went wrong. Please try again later.',
+//                 });
+//             }
+
+//         } catch (error) {
+//             console.error('Error submitting order:', error);
+//             Swal.fire({
+//                 icon: 'error',
+//                 title: 'Order Failed',
+//                 text: 'Something went wrong. Please try again later.',
+//             });
+//         } finally {
+//             setLoading(false);
+//         }
+//     };
+
+//     const goBackToCart = () => {
+//         navigate('/cart');
+//     };
+
+//     const orderDetailsTableProps: OrderDetailsTableProps = {
+//         selectedCartItems,
+//         totalAmount
+//     };
+
+//     return (
+//         <div className="order-summary-page">
+//             <h2>Order Summary</h2>
+//             {selectedCartItems.length ? (
+//                 <div>
+//                     <OrderDetailsTable {...orderDetailsTableProps} />
+//                     <button onClick={goBackToCart} disabled={loading}>Back to Cart</button>
+//                     <button onClick={handleOrderSubmit} disabled={loading}>
+//                         {loading ? 'Processing...' : 'Confirm Order'}
+//                     </button>
+//                 </div>
+//             ) : (
+//                 <p>No items to summarize</p>
+//             )}
+//         </div>
+//     );
+// };
+
+// export default OrderSummaryPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState } from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { AppDispatch, RootState } from '../store';
+// import { clearCart, createOrder } from '../slices/userSlice';
+// import { useNavigate, useLocation } from 'react-router-dom';
+// import Swal from 'sweetalert2';  // Use sweetalert2 for a nice alert
+// import './orderSummaryPage.css';
+// import OrderDetailsTable from './OrderDetailsTable';
+// import { OrderDetailsTableProps } from '../common/interfaces';
+
+// const OrderSummaryPage: React.FC = () => {
+//     const location = useLocation();
+//     const dispatch: AppDispatch = useDispatch();
+//     const navigate = useNavigate();
+//     const [loading, setLoading] = useState(false);
+
+//     // Fetch the selected cart items and totalAmount from CartPage via location.state
+//     const { selectedCartItems, totalAmount } = location.state || { selectedCartItems: [], totalAmount: 0 };
+
+//     const handleOrderSubmit = async () => {
+//         setLoading(true);
+//         try {
+//             // Debugging: Log the selectedCartItems to ensure they have the correct structure
+//             console.log('Selected Cart Items:', selectedCartItems);
+
+//             // Ensure that selectedCartItems is in the correct format with productId, quantity, and price
+//             const orderItems = selectedCartItems.map((item: any) => {
+//                 if (!item.productId) {
+//                     console.error('Product ID missing for item:', item);
+//                     throw new Error('Invalid product data.');
+//                 }
+//                 return {
+//                     productId: item.productId._id,
+//                     quantity: item.quantity,
+//                     price: item.productId.price
+//                 };
+//             });
+
+//             // Dispatch the createOrder thunk with orderItems and total amount
+//             const orderResult = await dispatch(createOrder({ items: orderItems, totalPrice: totalAmount }));
+
+//             if (orderResult.meta.requestStatus === 'fulfilled') {
+//                 // Check if the order is fulfilled successfully
+//                 console.log('Order created successfully');
+
+//                 // Clear the cart after a successful order
+//                 dispatch(clearCart());
+
+//                 // SweetAlert for a nice alert message
+//                 Swal.fire({
+//                     icon: 'success',
+//                     title: 'Order Submitted!',
+//                     text: 'Your order has been successfully placed. We will process it soon.',
+//                     confirmButtonText: 'Okay'
+//                 }).then(() => {
+//                     // Navigate to the homepage after the user clicks "Okay"
+//                     navigate('/');
+//                 });
+//             } else {
+//                 // Handle case where order was not fulfilled
+//                 console.error('Order creation failed:', orderResult);
+//                 Swal.fire({
+//                     icon: 'error',
+//                     title: 'Order Failed',
+//                     text: 'Something went wrong. Please try again later.',
+//                 });
+//             }
+
+//         } catch (error) {
+//             console.error('Error submitting order:', error);
+//             Swal.fire({
+//                 icon: 'error',
+//                 title: 'Order Failed',
+//                 text: 'Something went wrong. Please try again later.',
+//             });
+//         } finally {
+//             setLoading(false);
+//         }
+//     };
+
+//     const goBackToCart = () => {
+//         navigate('/cart');
+//     };
+
+//     const orderDetailsTableProps: OrderDetailsTableProps = {
+//         selectedCartItems,
+//         totalAmount
+//     };
+
+//     return (
+//         <div className="order-summary-page">
+//             <h2>Order Summary</h2>
+//             {selectedCartItems.length ? (
+//                 <div>
+//                     <OrderDetailsTable {...orderDetailsTableProps} />
+//                     <button onClick={goBackToCart} disabled={loading}>Back to Cart</button>
+//                     <button onClick={handleOrderSubmit} disabled={loading}>
+//                         {loading ? 'Processing...' : 'Confirm Order'}
+//                     </button>
+//                 </div>
+//             ) : (
+//                 <p>No items to summarize</p>
+//             )}
+//         </div>
+//     );
+// };
+
+// export default OrderSummaryPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../store';
 import { clearCart, createOrder } from '../slices/userSlice';
 import { useNavigate, useLocation } from 'react-router-dom';
-import Swal from 'sweetalert2';  // Use sweetalert2 for a nice alert
+import Swal from 'sweetalert2';
 import './orderSummaryPage.css';
 import OrderDetailsTable from './OrderDetailsTable';
 import { OrderDetailsTableProps } from '../common/interfaces';
@@ -697,11 +1320,20 @@ const OrderSummaryPage: React.FC = () => {
     const handleOrderSubmit = async () => {
         setLoading(true);
         try {
-            // Dispatch the createOrder thunk to save the order in MongoDB
-            const orderResult = await dispatch(createOrder());
+            // Debugging: Log the selectedCartItems to ensure they have the correct structure
+            console.log('Selected Cart Items:', selectedCartItems);
+
+            // Ensure that selectedCartItems is in the correct format with productId, quantity, and price
+            const orderItems = selectedCartItems.map((item: any) => ({
+                productId: item.productId._id,
+                quantity: item.quantity,
+                price: item.productId.price,
+            }));
+
+            // Dispatch the createOrder thunk with orderItems and total amount
+            const orderResult = await dispatch(createOrder({ items: orderItems, totalPrice: totalAmount }));
 
             if (orderResult.meta.requestStatus === 'fulfilled') {
-                // Check if the order is fulfilled successfully
                 console.log('Order created successfully');
 
                 // Clear the cart after a successful order
@@ -712,13 +1344,11 @@ const OrderSummaryPage: React.FC = () => {
                     icon: 'success',
                     title: 'Order Submitted!',
                     text: 'Your order has been successfully placed. We will process it soon.',
-                    confirmButtonText: 'Okay'
+                    confirmButtonText: 'Okay',
                 }).then(() => {
-                    // Navigate to the homepage after the user clicks "Okay"
                     navigate('/');
                 });
             } else {
-                // Handle case where order was not fulfilled
                 console.error('Order creation failed:', orderResult);
                 Swal.fire({
                     icon: 'error',
@@ -726,7 +1356,6 @@ const OrderSummaryPage: React.FC = () => {
                     text: 'Something went wrong. Please try again later.',
                 });
             }
-
         } catch (error) {
             console.error('Error submitting order:', error);
             Swal.fire({
@@ -745,7 +1374,7 @@ const OrderSummaryPage: React.FC = () => {
 
     const orderDetailsTableProps: OrderDetailsTableProps = {
         selectedCartItems,
-        totalAmount
+        totalAmount,
     };
 
     return (

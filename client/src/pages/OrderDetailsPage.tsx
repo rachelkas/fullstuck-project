@@ -58,6 +58,76 @@
 
 
 
+// import React, { useEffect } from 'react';
+// import { useParams } from 'react-router-dom';
+// import { useSelector, useDispatch } from 'react-redux';
+// import { fetchOrderById } from '../slices/orderSlice';
+// import { RootState, AppDispatch } from '../store';
+// import { OrderDetailsTableProps } from '../common/interfaces';
+// import OrderDetailsTable from './OrderDetailsTable';
+
+
+// const OrderDetailsPage: React.FC = () => {
+//     const { orderId } = useParams<{ orderId: string }>();
+//     const dispatch: AppDispatch = useDispatch();
+//     const order = useSelector((state: RootState) => state.order.selectedOrder);
+
+//     useEffect(() => {
+//         if (orderId) {
+//             dispatch(fetchOrderById(orderId));
+//         }
+//     }, [dispatch, orderId]);
+
+//     if (!order) {
+//         return <p>Loading order details...</p>;
+//     }
+
+//     const orderDetailsTableProps: OrderDetailsTableProps = {
+//         selectedCartItems: order.items,
+//         totalAmount: order.totalPrice
+//     }
+
+//     return (
+//         <div className="order-details-page">
+//             <h2>Order Details</h2>
+//             <OrderDetailsTable {...orderDetailsTableProps} />
+//         </div>
+//     );
+// };
+
+// export default OrderDetailsPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -65,7 +135,6 @@ import { fetchOrderById } from '../slices/orderSlice';
 import { RootState, AppDispatch } from '../store';
 import { OrderDetailsTableProps } from '../common/interfaces';
 import OrderDetailsTable from './OrderDetailsTable';
-
 
 const OrderDetailsPage: React.FC = () => {
     const { orderId } = useParams<{ orderId: string }>();
@@ -84,8 +153,8 @@ const OrderDetailsPage: React.FC = () => {
 
     const orderDetailsTableProps: OrderDetailsTableProps = {
         selectedCartItems: order.items,
-        totalAmount: order.totalPrice
-    }
+        totalAmount: order.totalPrice,
+    };
 
     return (
         <div className="order-details-page">
@@ -96,4 +165,3 @@ const OrderDetailsPage: React.FC = () => {
 };
 
 export default OrderDetailsPage;
-
