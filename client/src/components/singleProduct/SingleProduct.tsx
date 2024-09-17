@@ -297,10 +297,11 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { CiHeart } from 'react-icons/ci';
-import { BiPencil } from 'react-icons/bi';
+import { BiPencil, BiTrash } from 'react-icons/bi';
 import { AiFillHeart } from 'react-icons/ai'; // Import full heart icon
 import { useNavigate } from 'react-router-dom';
 import { addToCart, addToFavorites, removeFromFavorites } from '../../slices/userSlice';
+import { deleteProduct } from '../../slices/productSlice';
 import { SingleProductProps } from '../../common/interfaces';
 import { RootState } from '../../store';
 import './singleProduct.css';
@@ -342,6 +343,11 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
         navigate(`/edit-product/${product._id}`);
     };
 
+    //handle delete product by admin
+    const handleDeleteProduct = () => {
+        dispatch(deleteProduct(product._id) as any); // Make sure product._id is passed correctly
+    };
+
     return (
         <div className="single-product">
             <h3>{product.productName}</h3>
@@ -363,6 +369,14 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
                 {userRole === 'admin' && (
                     <button onClick={handleEditProduct} className="edit-product-btn">
                         <BiPencil />
+                    </button>
+                    // Add delete button for admin
+
+
+                )}
+                {userRole === 'admin' && (
+                    <button onClick={handleDeleteProduct} className="delete-product-btn">
+                        <BiTrash />
                     </button>
                 )}
             </div>

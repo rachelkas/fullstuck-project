@@ -531,6 +531,7 @@ const Products: React.FC = () => {
         });
     }, [dispatch]);
 
+
     // Handle filtering by price
     const handleFilter = () => {
         dispatch(
@@ -559,6 +560,7 @@ const Products: React.FC = () => {
     const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
 
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
 
     return (
         <div className="products-container">

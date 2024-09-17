@@ -285,7 +285,7 @@ const EditProductPage: React.FC = () => {
                 productName: product.productName,
                 price: product.price,
                 description: product.description,
-                image: product.image, 
+                image: product.image,
                 imageUrl: product.image
             });
         }
@@ -302,6 +302,7 @@ const EditProductPage: React.FC = () => {
         }
     };
 
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const updatedProductData = new FormData();
@@ -315,6 +316,7 @@ const EditProductPage: React.FC = () => {
         await dispatch(updateProduct({ productData: updatedProductData, productId }));
         navigate('/');
     };
+
 
     return (
         <div>
@@ -347,7 +349,7 @@ const EditProductPage: React.FC = () => {
                     <input
                         id="productImageId"
                         type="file"
-                        style={{visibility: "hidden"}}
+                        style={{ visibility: "hidden" }}
                         name="image"
                         accept="image/*"
                         onChange={handleImageChange}
@@ -357,6 +359,9 @@ const EditProductPage: React.FC = () => {
             ) : (
                 <p>Loading product...</p>
             )}
+
+            <button onClick={() => navigate('/')}>Cancel</button>
+
         </div>
     );
 };

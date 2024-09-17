@@ -240,7 +240,315 @@
 
 
 
-// src/slices/productSlice.ts
+// // src/slices/productSlice.ts
+// import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+// import axios from '../utils/api';
+// import { RootState } from '../store';
+
+// export interface ProductState {
+//     items: any[];
+//     loading: boolean;
+//     error: string | null;
+// }
+
+// const initialState: ProductState = {
+//     items: [],
+//     loading: false,
+//     error: null,
+// };
+
+// // Selector to get a product by its ID
+// export const getProductById = (state: RootState, productId: string) => {
+//     return state.products.items.find((product) => product._id === productId);
+// };
+
+// // Fetch products, with optional filtering by minPrice and maxPrice
+// export const fetchProducts = createAsyncThunk(
+//     'products/fetchProducts',
+//     async ({ minPrice, maxPrice }: { minPrice?: string; maxPrice?: string } = {}) => {
+//         const params: any = {};
+//         if (minPrice) params.minPrice = minPrice;
+//         if (maxPrice) params.maxPrice = maxPrice;
+
+//         const response = await axios.get('/products', { params });
+//         return response.data;
+//     }
+// );
+
+// // Add product
+// export const addProduct = createAsyncThunk('products/addProduct', async (product: any, thunkAPI) => {
+//     const state = thunkAPI.getState() as RootState;
+//     const userId = state.user.userDetails._id;
+//     const token = state.user.token;
+
+//     const response = await axios.post('/products', product, {
+//         params: { userId },
+//         headers: {
+//             Authorization: `Bearer ${token}`,
+//         },
+//     });
+//     return response.data;
+// });
+
+// // Update product
+// export const updateProduct = createAsyncThunk('products/updateProduct', async (product: any, thunkAPI) => {
+//     const state = thunkAPI.getState() as RootState;
+//     const token = state.user.token;
+//     const userId = state.user.userDetails._id;
+//     const response = await axios.put('/products', product.productData, {
+//         params: { productId: product.productId, userId },
+//         headers: {
+//             Authorization: `Bearer ${token}`,
+//         },
+//     });
+//     return response.data;
+// });
+
+// //thunk to delete a product only by admin
+// export const deleteProduct = createAsyncThunk('products/deleteProduct', async (productId: string, thunkAPI) => {
+//     const state = thunkAPI.getState() as RootState;
+//     const token = state.user.token;
+
+//     try {
+//         // The URL should use the productId in the path, not in params
+//         await axios.delete(`/products/${productId}`, {
+//             headers: {
+//                 Authorization: `Bearer ${token}`,
+//             },
+//         });
+//         return productId; // Return the product ID so we can remove it from state
+//     } catch (error) {
+//         return thunkAPI.rejectWithValue(error.response.data);
+//     }
+// });
+
+// const productSlice = createSlice({
+//     name: 'products',
+//     initialState,
+//     reducers: {},
+//     extraReducers: (builder) => {
+//         builder
+//             .addCase(fetchProducts.pending, (state) => {
+//                 state.loading = true;
+//                 state.error = null;
+//                 state.items = [];
+//             })
+//             .addCase(fetchProducts.fulfilled, (state, action) => {
+//                 state.loading = false;
+//                 state.items = action.payload;
+//                 state.error = null;
+//             })
+//             .addCase(fetchProducts.rejected, (state, action) => {
+//                 state.loading = false;
+//                 state.error = action.error.message || 'Failed to fetch products';
+//                 state.items = [];
+//             });
+//     },
+// });
+
+// export default productSlice.reducer;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // src/slices/productSlice.ts
+// import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+// import axios from '../utils/api';
+// import { RootState } from '../store';
+
+// export interface ProductState {
+//     items: any[];
+//     loading: boolean;
+//     error: string | null;
+// }
+
+// const initialState: ProductState = {
+//     items: [],
+//     loading: false,
+//     error: null,
+// };
+
+// // Selector to get a product by its ID
+// export const getProductById = (state: RootState, productId: string) => {
+//     return state.products.items.find((product) => product._id === productId);
+// };
+
+// // Fetch products, with optional filtering by minPrice and maxPrice
+// export const fetchProducts = createAsyncThunk(
+//     'products/fetchProducts',
+//     async ({ minPrice, maxPrice }: { minPrice?: string; maxPrice?: string } = {}) => {
+//         const params: any = {};
+//         if (minPrice) params.minPrice = minPrice;
+//         if (maxPrice) params.maxPrice = maxPrice;
+
+//         const response = await axios.get('/products', { params });
+//         return response.data;
+//     }
+// );
+
+// // Add product
+// export const addProduct = createAsyncThunk('products/addProduct', async (product: any, thunkAPI) => {
+//     const state = thunkAPI.getState() as RootState;
+//     const userId = state.user.userDetails._id;
+//     const token = state.user.token;
+
+//     const response = await axios.post('/products', product, {
+//         params: { userId },
+//         headers: {
+//             Authorization: `Bearer ${token}`,
+//         },
+//     });
+//     return response.data;
+// });
+
+// // Update product
+// export const updateProduct = createAsyncThunk('products/updateProduct', async (product: any, thunkAPI) => {
+//     const state = thunkAPI.getState() as RootState;
+//     const token = state.user.token;
+//     const userId = state.user.userDetails._id;
+//     const response = await axios.put('/products', product.productData, {
+//         params: { productId: product.productId, userId },
+//         headers: {
+//             Authorization: `Bearer ${token}`,
+//         },
+//     });
+//     return response.data;
+// });
+
+// // Thunk to delete a product only by admin
+// export const deleteProduct = createAsyncThunk('products/deleteProduct', async (productId: string, thunkAPI) => {
+//     const state = thunkAPI.getState() as RootState;
+//     const token = state.user.token;
+
+//     try {
+//         // The URL should use the productId in the path, not in params
+//         await axios.delete(`/products/${productId}`, {
+//             headers: {
+//                 Authorization: `Bearer ${token}`,
+//             },
+//         });
+//         return productId; // Return the product ID so we can remove it from state
+//     } catch (error) {
+//         return thunkAPI.rejectWithValue(error.response.data);
+//     }
+// });
+
+// const productSlice = createSlice({
+//     name: 'products',
+//     initialState,
+//     reducers: {},
+//     extraReducers: (builder) => {
+//         builder
+//             .addCase(fetchProducts.pending, (state) => {
+//                 state.loading = true;
+//                 state.error = null;
+//                 state.items = [];
+//             })
+//             .addCase(fetchProducts.fulfilled, (state, action) => {
+//                 state.loading = false;
+//                 state.items = action.payload;
+//                 state.error = null;
+//             })
+//             .addCase(fetchProducts.rejected, (state, action) => {
+//                 state.loading = false;
+//                 state.error = action.error.message || 'Failed to fetch products';
+//                 state.items = [];
+//             })
+//             // Handle product deletion
+//             .addCase(deleteProduct.fulfilled, (state, action) => {
+//                 state.items = state.items.filter((product) => product._id !== action.payload);
+//                 state.error = null;
+//             })
+//             .addCase(deleteProduct.rejected, (state, action) => {
+//                 state.error = action.payload || 'Failed to delete product';
+//             });
+//     },
+// });
+
+// export default productSlice.reducer;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from '../utils/api';
 import { RootState } from '../store';
@@ -304,12 +612,33 @@ export const updateProduct = createAsyncThunk('products/updateProduct', async (p
     return response.data;
 });
 
+// Thunk to delete a product only by admin
+export const deleteProduct = createAsyncThunk('products/deleteProduct', async (productId: string, thunkAPI) => {
+    const state = thunkAPI.getState() as RootState;
+    const token = state.user.token;
+
+
+    try {
+        // The URL should use the productId in the path, not in params
+        await axios.delete(`/products/${productId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return productId; // Return the product ID so we can remove it from state
+    } catch (error: any) {
+        console.error('Error deleting product:', error); // Log the error details
+        return thunkAPI.rejectWithValue(error.response?.data || 'Failed to delete product');
+    }
+});
+
 const productSlice = createSlice({
     name: 'products',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
         builder
+            // Fetch Products
             .addCase(fetchProducts.pending, (state) => {
                 state.loading = true;
                 state.error = null;
@@ -324,6 +653,14 @@ const productSlice = createSlice({
                 state.loading = false;
                 state.error = action.error.message || 'Failed to fetch products';
                 state.items = [];
+            })
+            // Delete Product
+            .addCase(deleteProduct.fulfilled, (state, action) => {
+                state.items = state.items.filter((product) => product._id !== action.payload);
+                state.error = null;
+            })
+            .addCase(deleteProduct.rejected, (state, action) => {
+                state.error = action.payload as string || 'Failed to delete product';
             });
     },
 });

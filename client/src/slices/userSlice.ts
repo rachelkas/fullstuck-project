@@ -3260,6 +3260,8 @@ export const removeFromFavorites = createAsyncThunk('user/removeFromFavorites', 
     }
 });
 
+
+
 // Thunk to fetch cart items
 export const fetchCartItems = createAsyncThunk('user/fetchCartItems', async (_, thunkAPI) => {
     const state = thunkAPI.getState() as RootState;

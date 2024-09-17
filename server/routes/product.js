@@ -534,8 +534,11 @@ router.delete('/:id', verifyToken, isAdmin, async (req, res) => {
         if (!product) {
             return res.status(404).send('Product not found');
         }
-        await product.remove();
-        res.json({ message: 'Product removed' });
+
+        // Use deleteOne or findByIdAndDelete instead of remove
+        await Product.deleteOne({ _id: req.params.id });
+
+        res.json({ message: 'Product removed successfully' });
     } catch (err) {
         console.error('Error deleting product:', err);
         res.status(500).send('Server Error');
