@@ -754,7 +754,8 @@ const CartPage: React.FC = () => {
     };
 
     const goToOrderSummary = () => {
-        navigate('/order-summary', { state: { selectedCartItems: selectedItems, totalAmount } });
+        const selectedCartItems = cartItems.filter(item => selectedItems.includes(item.productId._id));
+        navigate('/order-summary', { state: { selectedCartItems, totalAmount } });
     };
 
     return (

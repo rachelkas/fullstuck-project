@@ -3309,7 +3309,7 @@ export const createOrder = createAsyncThunk(
         const orderData = {
             userId,
             items: items.map(item => ({
-                productId: item.productId._id,
+                productId: item.productId,
                 quantity: item.quantity,
                 price: item.price,
             })),
