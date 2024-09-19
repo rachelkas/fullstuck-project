@@ -731,7 +731,7 @@ const Nav: React.FC<NavProps> = ({ onResetFilters }) => {
     const firstName = useSelector((state: RootState) => state.user.userDetails.firstName);
     const isAuthenticated = useSelector((state: RootState) => state.user.isAuthenticated);
     const userRole = useSelector((state: RootState) => state.user.userDetails.role);
-    const cartItemsCount = useSelector((state: RootState) => state.user.cart.length);
+    const cartItemsCount = useSelector((state: RootState) => state.user.cart?.items?.length);
     const favoriteItemsCount = useSelector((state: RootState) => state.user.favorites.length);
     const navigate = useNavigate();
     const dispatch: AppDispatch = useDispatch();

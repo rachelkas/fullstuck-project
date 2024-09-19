@@ -235,15 +235,37 @@ const router = express.Router();
 router.post('/add', verifyToken, async (req, res) => {
     const { productId, userId } = req.body;
     try {
-        let cartItem = await Cart.findOne({ userId, productId });
-        if (cartItem) {
-            cartItem.quantity += 1;
+        let cartItem = await Cart.findOne({ userId, cartStatus: 'open' });
+        if (cartItem == null) {
+            cartItem = new Cart({ userId, items: [{productId}], cartStatus: 'open' });
             await cartItem.save();
         } else {
-            cartItem = new Cart({ userId, productId, quantity: 1 });
-            await cartItem.save();
+            let selectedItem = cartItem.items.find(i => i.productId == productId);
+
+            if (selectedItem != null) {
+                cartItem.items.find(i => i.productId == productId).quantity += 1;
+                await cartItem.save();
+            } else {
+                cartItem.items.addToSet({productId});
+                await cartItem.save();
+            }
         }
-        res.status(200).json({ message: 'Product added to cart', cartItem });
+
+        const cartData = await Cart.find({ userId, cartStatus: 'open' }).populate('items.productId');
+        if (cartData == null || cartData[0] == null)
+            return res.status(200).json([]);
+        const cartItemsWithImageUrl = cartData[0].items.map(cartItem => ({
+            ...cartItem._doc,
+            productId: {
+                ...cartItem.productId._doc,
+                image: `http://localhost:3000${cartItem.productId.image}`  // Adjust the URL
+            }
+        }));
+        const cart = {
+            cartId: cartData[0]._id,
+            items: [...cartItemsWithImageUrl]
+        };
+        res.status(200).json(cart);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: error.message });
@@ -258,15 +280,21 @@ router.get('/', verifyToken, async (req, res) => {
     }
 
     try {
-        const cartItems = await Cart.find({ userId }).populate('productId');
-        const cartItemsWithImageUrl = cartItems.map(cartItem => ({
+        const cartData = await Cart.find({ userId, cartStatus: 'open' }).populate('items.productId');
+        if (cartData == null || cartData[0] == null)
+            return res.status(200).json([]);
+        const cartItemsWithImageUrl = cartData[0].items.map(cartItem => ({
             ...cartItem._doc,
             productId: {
                 ...cartItem.productId._doc,
                 image: `http://localhost:3000${cartItem.productId.image}`  // Adjust the URL
             }
         }));
-        res.status(200).json(cartItemsWithImageUrl);
+        const cart = {
+            cartId: cartData[0]._id,
+            items: [...cartItemsWithImageUrl]
+        };
+        res.status(200).json(cart);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Failed to fetch cart items' });
@@ -279,7 +307,11 @@ router.delete('/remove/:productId', verifyToken, async (req, res) => {
     const userId = req.user.id;  // Use user id from the token
 
     try {
-        const cartItem = await Cart.findOneAndDelete({ userId, productId });
+            const cartItem = await Cart.findOneAndUpdate({ userId, cartStatus: 'open', 'items.productId': productId }, {$pull: 
+            {
+              "items": {"productId": productId}
+            }
+          });
         if (!cartItem) {
             return res.status(404).json({ message: 'Item not found in cart' });
         }
@@ -302,8 +334,8 @@ router.put('/update/:productId', verifyToken, async (req, res) => {
 
     try {
         const cartItem = await Cart.findOneAndUpdate(
-            { userId, productId },
-            { $set: { quantity } },
+            { userId, cartStatus: 'open', 'items.productId': productId },
+            { $set: { 'items.$.quantity': quantity  } },
             { new: true }
         );
 

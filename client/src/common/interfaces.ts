@@ -8,12 +8,17 @@ export interface IUserDetails {
 
 export interface UserState {
     token: string | null;
-    cart: Array<any>;
+    cart: CartObject;
     favorites: Array<any>;
     isAuthenticated: boolean;
     userDetails: IUserDetails;
     latestOrder: any | null;  // Add this line for latestOrder
 }
+
+export interface CartObject {
+    cartId: string,
+    items: Array<any>
+};
 
 export interface SingleProductProps {
     product: SingleProduct
