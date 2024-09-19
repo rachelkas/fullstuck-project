@@ -339,26 +339,33 @@
 
 
 
-import Order from '../models/Order.js';  // Import the Order model
+import Order from '../models/Order.js'; 
+import Cart from '../models/cart.js' // Import the Order model
 import Product from '../models/product.js';  // Import the Product model
 
 // Create an order (open order)
 export const createOrder = async (req, res) => {
     try {
-        const { items, totalPrice } = req.body;
+        const { items, totalPrice, cartId } = req.body;
         const userId = req.user.id;  // Retrieve the userId from the verified token (from middleware)
 
         // Create a new order document with 'open' status
         const newOrder = new Order({
             userId: userId,
+            cartId: cartId,
             items: items,
             totalPrice: totalPrice,
-            orderStatus: 'open',  // Set order status to 'open'
+            orderStatus: 'submitted',  // Set order status to 'open'
         });
 
         // Save the order to the database
         const savedOrder = await newOrder.save();
-
+        const cartData = await Cart.findOne({ userId, cartStatus: 'open' });
+        if (cartData != null)
+        {
+            cartData.cartStatus = 'submitted';
+            await cartData.save();
+        }
         // Respond with the saved order
         res.status(201).json(savedOrder);
     } catch (err) {

@@ -3137,7 +3137,7 @@ import { IUserDetails, UserState } from '../common/interfaces';
 
 const initialState: UserState = {
     token: null,
-    cart: [],
+    cart: {cartId: '', items: []},
     favorites: [],
     isAuthenticated: false,
     userDetails: { firstName: '', lastName: '', email: '', role: '', _id: '' },
@@ -3160,7 +3160,7 @@ export const addToCart = createAsyncThunk('user/addToCart', async (productId: st
             }
         );
         toast.success('Added to cart!');
-        return response.data.cartItem;
+        return response.data;
     } catch (error: any) {
         toast.error('Failed to add to cart.');
         return thunkAPI.rejectWithValue(error.response.data);
@@ -3307,9 +3307,11 @@ export const createOrder = createAsyncThunk(
         const state = thunkAPI.getState() as RootState;
         const token = state.user.token;
         const userId = state.user.userDetails._id;
+        const cartId = state.user.cart.cartId;
 
         const orderData = {
             userId,
+            cartId,
             items: items.map(item => ({
                 productId: item.productId,
                 quantity: item.quantity,
@@ -3371,33 +3373,34 @@ const userSlice = createSlice({
         },
         clearUserState: (state) => {
             state.token = null;
-            state.cart = [];
+            state.cart.items = [];
+            state.cart = {cartId: '', items: []};
             state.favorites = [];
             state.isAuthenticated = false;
             state.userDetails = { firstName: '', lastName: '', email: '', role: '', _id: '' };
         },
         clearCart: (state) => {
             console.log('Clearing cart...');
-            state.cart = [];
+            state.cart = {cartId: '', items: []};
         },
     },
     extraReducers: (builder) => {
         builder
             .addCase(addToCart.fulfilled, (state, action) => {
-                state.cart.push(action.payload);
+                state.cart = action.payload;
             })
             .addCase(removeFromCart.fulfilled, (state, action) => {
-                state.cart = state.cart.filter(item => item.productId._id !== action.payload);
+                state.cart.items = state.cart.items.filter(item => item.productId._id !== action.payload);
             })
             .addCase(updateCartQuantity.fulfilled, (state, action) => {
-                const index = state.cart.findIndex(item => item.productId._id === action.payload.productId);
+                const index = state.cart.items.findIndex(item => item.productId._id === action.payload.productId);
                 if (index !== -1) {
-                    state.cart[index].quantity = action.payload.quantity;
+                    state.cart.items[index].quantity = action.payload.quantity;
                 }
             })
             .addCase(createOrder.fulfilled, (state) => {
                 console.log('Order fulfilled, clearing cart...');
-                state.cart = [];
+                state.cart = {cartId: '', items: []};
             })
             .addCase(fetchCartItems.fulfilled, (state, action) => {
                 state.cart = action.payload;

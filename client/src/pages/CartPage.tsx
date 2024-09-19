@@ -713,7 +713,7 @@ import './cartPage.css';
 
 const CartPage: React.FC = () => {
     const dispatch: AppDispatch = useDispatch();
-    const cartItems = useSelector((state: RootState) => state.user.cart);
+    const cartItems = useSelector((state: RootState) => state.user.cart.items);
     const navigate = useNavigate();
     const [selectedItems, setSelectedItems] = useState<string[]>([]); // Track selected products
     const [totalAmount, setTotalAmount] = useState(0); // Track total amount
@@ -754,14 +754,14 @@ const CartPage: React.FC = () => {
     };
 
     const goToOrderSummary = () => {
-        const selectedCartItems = cartItems.filter(item => selectedItems.includes(item.productId._id));
+        const selectedCartItems = cartItems?.filter(item => selectedItems.includes(item.productId._id)) || [];
         navigate('/order-summary', { state: { selectedCartItems, totalAmount } });
     };
 
     return (
         <div className="cart-page">
             <h2>Cart Page</h2>
-            {cartItems.length ? (
+            {cartItems?.length ? (
                 cartItems.map((item) => (
                     <div key={item._id} className="cart-item">
                         <input
