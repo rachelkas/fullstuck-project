@@ -371,21 +371,131 @@
 
 
 
+// import { customAxios } from '../utils/api';
+// import { toast } from 'react-toastify';
+// import { setToken, setUserDetails, clearUserState } from '../slices/userSlice';
+// import { AppDispatch } from '../store';
+
+// // Register user
+// export const registerUser = async (userData: any, dispatch: AppDispatch) => {
+//     try {
+//         const response = await customAxios.post('/auth/register', userData);
+//         localStorage.setItem('token', response.data.token);
+//         dispatch(setToken(response.data.token));
+//         dispatch(setUserDetails(response.data.userDetails));
+//         toast.success('Registration successful!');
+//     } catch (error: any) {
+//         const errorMessage = error.response?.data?.message || 'Registration failed.';
+//         toast.error(errorMessage);
+//         console.error('Registration error:', errorMessage);
+//     }
+// };
+
+// // Login user
+// export const loginUser = async (userData: any, dispatch: AppDispatch) => {
+//     try {
+//         const response = await customAxios.post('/auth/login', userData);
+//         localStorage.setItem('token', response.data.token);  // Save token in localStorage
+//         dispatch(setToken(response.data.token));
+//         dispatch(setUserDetails(response.data.userDetails));
+//         toast.success('Login successful!');
+//     } catch (error: any) {
+//         const errorMessage = error.response?.data?.message || 'Login failed.';
+//         toast.error(errorMessage);
+//         console.error('Login error:', errorMessage);
+//     }
+// };
+
+// // Update user details
+// export const updateUser = async (userData: any, token: string, dispatch: AppDispatch) => {
+//     try {
+//         const response = await customAxios.put('/auth/update', userData, {
+//             headers: { Authorization: `Bearer ${token}` }
+//         });
+//         dispatch(setUserDetails(response.data.updatedUser));
+//         toast.success('User details updated successfully!');
+//     } catch (error: any) {
+//         const errorMessage = error.response?.data?.message || 'Update failed.';
+//         toast.error(errorMessage);
+//         console.error('Update error:', errorMessage);
+//     }
+// };
+
+// // Logout user
+// export const logoutUser = (dispatch: AppDispatch) => {
+//     localStorage.removeItem('token');
+//     dispatch(clearUserState());
+//     toast.success('Logout successful!');
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { customAxios } from '../utils/api';
 import { toast } from 'react-toastify';
 import { setToken, setUserDetails, clearUserState } from '../slices/userSlice';
 import { AppDispatch } from '../store';
 
-// Register user
+// Register a new user
 export const registerUser = async (userData: any, dispatch: AppDispatch) => {
     try {
+        // Make API call to register a new user
         const response = await customAxios.post('/auth/register', userData);
+
+        // Store the token and update user details in the Redux store
         localStorage.setItem('token', response.data.token);
         dispatch(setToken(response.data.token));
         dispatch(setUserDetails(response.data.userDetails));
+
+        // Show success notification
         toast.success('Registration successful!');
     } catch (error: any) {
         const errorMessage = error.response?.data?.message || 'Registration failed.';
+
+        // Show error notification
         toast.error(errorMessage);
         console.error('Registration error:', errorMessage);
     }
@@ -394,13 +504,20 @@ export const registerUser = async (userData: any, dispatch: AppDispatch) => {
 // Login user
 export const loginUser = async (userData: any, dispatch: AppDispatch) => {
     try {
+        // Make API call to log in the user
         const response = await customAxios.post('/auth/login', userData);
-        localStorage.setItem('token', response.data.token);  // Save token in localStorage
+
+        // Store the token and update user details in the Redux store
+        localStorage.setItem('token', response.data.token);
         dispatch(setToken(response.data.token));
         dispatch(setUserDetails(response.data.userDetails));
+
+        // Show success notification
         toast.success('Login successful!');
     } catch (error: any) {
         const errorMessage = error.response?.data?.message || 'Login failed.';
+
+        // Show error notification
         toast.error(errorMessage);
         console.error('Login error:', errorMessage);
     }
@@ -409,21 +526,31 @@ export const loginUser = async (userData: any, dispatch: AppDispatch) => {
 // Update user details
 export const updateUser = async (userData: any, token: string, dispatch: AppDispatch) => {
     try {
+        // Make API call to update user profile
         const response = await customAxios.put('/auth/update', userData, {
-            headers: { Authorization: `Bearer ${token}` }
+            headers: { Authorization: `Bearer ${token}` },
         });
+
+        // Update user details in the Redux store
         dispatch(setUserDetails(response.data.updatedUser));
+
+        // Show success notification
         toast.success('User details updated successfully!');
     } catch (error: any) {
         const errorMessage = error.response?.data?.message || 'Update failed.';
+
+        // Show error notification
         toast.error(errorMessage);
         console.error('Update error:', errorMessage);
     }
 };
 
-// Logout user
+// Log out user
 export const logoutUser = (dispatch: AppDispatch) => {
+    // Remove the token from local storage and clear user state
     localStorage.removeItem('token');
     dispatch(clearUserState());
+
+    // Show success notification
     toast.success('Logout successful!');
 };

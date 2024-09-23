@@ -268,7 +268,28 @@
 
 
 
+// Middleware to verify token
+// export const verifyToken = (req, res, next) => {
+//     const token = req.header('Authorization');
+//     if (!token) return res.status(401).json({ message: 'Access Denied: No Token Provided' });
 
+//     try {
+//         // Check if the token format is valid (i.e., "Bearer <token>")
+//         const tokenPart = token.split(" ")[1];
+//         if (!tokenPart) return res.status(400).json({ message: 'Invalid Token Format' });
+
+//         // Verify token using the secret key
+//         const verified = jwt.verify(tokenPart, process.env.JWT_SECRET);
+
+//         // Attach the verified user to the request object
+//         req.user = verified.user;
+
+//         next(); // Proceed to the next middleware
+//     } catch (err) {
+//         console.error('Token verification failed:', err.message);
+//         return res.status(401).json({ message: 'Invalid Token' });
+//     }
+// };
 
 
 
@@ -293,28 +314,7 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/user.js';
 
-// Middleware to verify token
-// export const verifyToken = (req, res, next) => {
-//     const token = req.header('Authorization');
-//     if (!token) return res.status(401).json({ message: 'Access Denied: No Token Provided' });
 
-//     try {
-//         // Check if the token format is valid (i.e., "Bearer <token>")
-//         const tokenPart = token.split(" ")[1];
-//         if (!tokenPart) return res.status(400).json({ message: 'Invalid Token Format' });
-
-//         // Verify token using the secret key
-//         const verified = jwt.verify(tokenPart, process.env.JWT_SECRET);
-
-//         // Attach the verified user to the request object
-//         req.user = verified.user;
-
-//         next(); // Proceed to the next middleware
-//     } catch (err) {
-//         console.error('Token verification failed:', err.message);
-//         return res.status(401).json({ message: 'Invalid Token' });
-//     }
-// };
 
 
 export const verifyToken = (req, res, next) => {

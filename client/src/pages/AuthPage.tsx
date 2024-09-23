@@ -1337,65 +1337,227 @@
 
 
 
+// import React, { useState } from 'react';
+// import { useDispatch } from 'react-redux';
+// import { loginUser, registerUser } from '../services/authService';
+// import { useNavigate } from 'react-router-dom';
+// import { AxiosError } from 'axios';
+// import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Import eye icons for password toggle
+// import './authPage.css';
+
+// const AuthPage: React.FC = () => {
+//     const [email, setEmail] = useState('');
+//     const [password, setPassword] = useState('');
+//     const [firstName, setFirstName] = useState('');
+//     const [lastName, setLastName] = useState('');
+//     const [error, setError] = useState('');
+//     const [isLogin, setIsLogin] = useState(true);
+//     const [showPassword, setShowPassword] = useState(false); // For toggling password visibility
+//     const dispatch = useDispatch();
+//     const navigate = useNavigate();
+
+//     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+//         e.preventDefault();
+//         try {
+//             await loginUser({ email, password }, dispatch);
+//             setError(''); // Clear error on successful login
+//             navigate('/'); // Redirect to the homepage after successful login
+//         } catch (err) {
+//             if (err instanceof AxiosError) {
+//                 setError('Login failed. Please check your credentials.');
+//             } else {
+//                 setError('An unexpected error occurred.');
+//             }
+//         }
+//     };
+
+//     const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
+//         e.preventDefault();
+//         try {
+//             await registerUser({ firstName, lastName, email, password }, dispatch);
+//             alert('Registration successful! Please log in.');
+//             setIsLogin(true); // Switch back to login after registration
+//         } catch (err) {
+//             if (err instanceof AxiosError) {
+//                 setError('Registration failed. Please check your details.');
+//             } else {
+//                 setError('An unexpected error occurred.');
+//             }
+//         }
+//     };
+
+//     const togglePasswordVisibility = () => {
+//         setShowPassword(!showPassword);
+//     };
+
+//     return (
+//         <div className="auth-container">
+//             {isLogin ? (
+//                 <form onSubmit={handleLogin}>
+//                     <h2>Login</h2>
+//                     {error && <p className="error-message">{error}</p>}
+//                     <input
+//                         type="email"
+//                         value={email}
+//                         onChange={(e) => setEmail(e.target.value)}
+//                         placeholder="Email"
+//                     />
+//                     <div className="password-container">
+//                         <input
+//                             type={showPassword ? 'text' : 'password'}
+//                             value={password}
+//                             onChange={(e) => setPassword(e.target.value)}
+//                             placeholder="Password"
+//                         />
+//                         <span onClick={togglePasswordVisibility} className="password-toggle">
+//                             {showPassword ? <FaEyeSlash /> : <FaEye />}
+//                         </span>
+//                     </div>
+//                     <button type="submit">Login</button>
+//                 </form>
+//             ) : (
+//                 <form onSubmit={handleRegister}>
+//                     <h2>Register</h2>
+//                     {error && <p className="error-message">{error}</p>}
+//                     <input
+//                         type="text"
+//                         value={firstName}
+//                         onChange={(e) => setFirstName(e.target.value)}
+//                         placeholder="First Name"
+//                     />
+//                     <input
+//                         type="text"
+//                         value={lastName}
+//                         onChange={(e) => setLastName(e.target.value)}
+//                         placeholder="Last Name"
+//                     />
+//                     <input
+//                         type="email"
+//                         value={email}
+//                         onChange={(e) => setEmail(e.target.value)}
+//                         placeholder="Email"
+//                     />
+//                     <div className="password-container">
+//                         <input
+//                             type={showPassword ? 'text' : 'password'}
+//                             value={password}
+//                             onChange={(e) => setPassword(e.target.value)}
+//                             placeholder="Password"
+//                         />
+//                         <span onClick={togglePasswordVisibility} className="password-toggle">
+//                             {showPassword ? <FaEyeSlash /> : <FaEye />}
+//                         </span>
+//                     </div>
+//                     <button type="submit">Register</button>
+//                 </form>
+//             )}
+
+//             <p>
+//                 {isLogin ? "Don't have an account?" : 'Already have an account?'}
+//                 <button onClick={() => setIsLogin(!isLogin)} className="toggle-button">
+//                     {isLogin ? 'Register' : 'Login'}
+//                 </button>
+//             </p>
+//         </div>
+//     );
+// };
+
+// export default AuthPage;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// src/pages/AuthPage.tsx
+
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { loginUser, registerUser } from '../services/authService';
-import { useNavigate } from 'react-router-dom';
-import { AxiosError } from 'axios';
-import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Import eye icons for password toggle
-import './authPage.css';
+import { loginUser, registerUser } from '../services/authService'; // Import login and registration services
+import { useNavigate } from 'react-router-dom'; // For navigating after authentication
+import { AxiosError } from 'axios'; // AxiosError for error handling in try-catch blocks
+import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Icons for showing/hiding the password
+import './authPage.css'; // Import the associated CSS for styling
 
 const AuthPage: React.FC = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [error, setError] = useState('');
-    const [isLogin, setIsLogin] = useState(true);
-    const [showPassword, setShowPassword] = useState(false); // For toggling password visibility
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const [email, setEmail] = useState(''); // State to store user email input
+    const [password, setPassword] = useState(''); // State to store user password input
+    const [firstName, setFirstName] = useState(''); // State to store user first name input (used in registration)
+    const [lastName, setLastName] = useState(''); // State to store user last name input (used in registration)
+    const [error, setError] = useState(''); // State to store error messages
+    const [isLogin, setIsLogin] = useState(true); // Toggle between login and registration views
+    const [showPassword, setShowPassword] = useState(false); // Toggle for password visibility
+    const dispatch = useDispatch(); // Use dispatch for triggering Redux actions
+    const navigate = useNavigate(); // Navigation function to redirect after login or registration
 
+    // Function to handle login submission
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent form submission from refreshing the page
         try {
-            await loginUser({ email, password }, dispatch);
-            setError(''); // Clear error on successful login
-            navigate('/'); // Redirect to the homepage after successful login
+            await loginUser({ email, password }, dispatch); // Call login service with user credentials
+            setError(''); // Clear any existing error messages on successful login
+            navigate('/'); // Redirect to the homepage upon successful login
         } catch (err) {
             if (err instanceof AxiosError) {
-                setError('Login failed. Please check your credentials.');
+                setError('Login failed. Please check your credentials.'); // Set error message for login failure
             } else {
-                setError('An unexpected error occurred.');
+                setError('An unexpected error occurred.'); // Set generic error message for unexpected errors
             }
         }
     };
 
+    // Function to handle registration submission
     const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+        e.preventDefault(); // Prevent form submission from refreshing the page
         try {
-            await registerUser({ firstName, lastName, email, password }, dispatch);
-            alert('Registration successful! Please log in.');
-            setIsLogin(true); // Switch back to login after registration
+            await registerUser({ firstName, lastName, email, password }, dispatch); // Call registration service
+            alert('Registration successful! Please log in.'); // Alert the user of successful registration
+            setIsLogin(true); // Switch to the login view after successful registration
         } catch (err) {
             if (err instanceof AxiosError) {
-                setError('Registration failed. Please check your details.');
+                setError('Registration failed. Please check your details.'); // Set error message for registration failure
             } else {
-                setError('An unexpected error occurred.');
+                setError('An unexpected error occurred.'); // Set generic error message for unexpected errors
             }
         }
     };
 
+    // Toggle password visibility
     const togglePasswordVisibility = () => {
-        setShowPassword(!showPassword);
+        setShowPassword(!showPassword); // Toggle between showing and hiding the password
     };
 
     return (
         <div className="auth-container">
+            {/* Conditional rendering based on whether the user is logging in or registering */}
             {isLogin ? (
                 <form onSubmit={handleLogin}>
                     <h2>Login</h2>
-                    {error && <p className="error-message">{error}</p>}
+                    {error && <p className="error-message">{error}</p>} {/* Display error message if any */}
                     <input
                         type="email"
                         value={email}
@@ -1404,21 +1566,21 @@ const AuthPage: React.FC = () => {
                     />
                     <div className="password-container">
                         <input
-                            type={showPassword ? 'text' : 'password'}
+                            type={showPassword ? 'text' : 'password'} // Toggle input type between text and password
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder="Password"
                         />
                         <span onClick={togglePasswordVisibility} className="password-toggle">
-                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            {showPassword ? <FaEyeSlash /> : <FaEye />} {/* Icon to toggle password visibility */}
                         </span>
                     </div>
-                    <button type="submit">Login</button>
+                    <button type="submit">Login</button> {/* Login button */}
                 </form>
             ) : (
                 <form onSubmit={handleRegister}>
                     <h2>Register</h2>
-                    {error && <p className="error-message">{error}</p>}
+                    {error && <p className="error-message">{error}</p>} {/* Display error message if any */}
                     <input
                         type="text"
                         value={firstName}
@@ -1439,19 +1601,20 @@ const AuthPage: React.FC = () => {
                     />
                     <div className="password-container">
                         <input
-                            type={showPassword ? 'text' : 'password'}
+                            type={showPassword ? 'text' : 'password'} // Toggle input type between text and password
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder="Password"
                         />
                         <span onClick={togglePasswordVisibility} className="password-toggle">
-                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            {showPassword ? <FaEyeSlash /> : <FaEye />} {/* Icon to toggle password visibility */}
                         </span>
                     </div>
-                    <button type="submit">Register</button>
+                    <button type="submit">Register</button> {/* Register button */}
                 </form>
             )}
 
+            {/* Toggle button to switch between login and register */}
             <p>
                 {isLogin ? "Don't have an account?" : 'Already have an account?'}
                 <button onClick={() => setIsLogin(!isLogin)} className="toggle-button">

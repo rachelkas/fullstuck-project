@@ -313,56 +313,156 @@
 
 
 
+// import express from 'express';
+// import cors from 'cors';
+// import mongoose from 'mongoose';
+// import dotenv from 'dotenv';
+// import path from 'path';
+// import { fileURLToPath } from 'url';
+// import authRoutes from './routes/auth.js';
+// import productRoutes from './routes/product.js';
+// import cartRoutes from './routes/cart.js';
+// import favoriteRoutes from './routes/favorite.js';
+// import orderRoutes from './routes/order.js';  // Correct import for orders
+// import contactRoutes from './routes/contact.js';
+// import { verifyToken } from './middleware/auth.js';  // Import middleware for protected routes
+// import connectDB from './utils/db.js';  // Import your MongoDB connection utility
+
+// dotenv.config();
+
+// const app = express();
+
+// // CORS configuration
+// app.use(cors());
+
+
+// // JSON parsing middleware
+// app.use(express.json());
+
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+
+// // Serve static files from the "uploads" directory
+// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// // API routes
+// app.use('/api/auth', authRoutes);
+// app.use('/api/products', productRoutes);
+// app.use('/api/cart', verifyToken, cartRoutes);  // Protect cart routes with verifyToken middleware
+// app.use('/api/favorites', verifyToken, favoriteRoutes);  // Protect favorites routes
+// app.use('/api/orders', verifyToken, orderRoutes);  // Protect order routes
+// app.use('/api/contact', contactRoutes);
+
+// // Connect to MongoDB
+// connectDB();
+
+// // Global error handling middleware
+// app.use((err, req, res, next) => {
+//     console.error(err.stack);
+//     res.status(500).send('Something broke!');
+// });
+
+// // Start the server
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => {
+//     console.log(`Server running on http://localhost:${PORT}`);
+// });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Import necessary libraries
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+
+// Import routes
 import authRoutes from './routes/auth.js';
 import productRoutes from './routes/product.js';
 import cartRoutes from './routes/cart.js';
 import favoriteRoutes from './routes/favorite.js';
 import orderRoutes from './routes/order.js';  // Correct import for orders
 import contactRoutes from './routes/contact.js';
-import { verifyToken } from './middleware/auth.js';  // Import middleware for protected routes
-import connectDB from './utils/db.js';  // Import your MongoDB connection utility
 
+// Import middleware for protected routes
+import { verifyToken } from './middleware/auth.js';
+
+// Import MongoDB connection utility
+import connectDB from './utils/db.js';
+
+// Load environment variables
 dotenv.config();
 
 const app = express();
 
-// CORS configuration
+// Configure CORS to allow requests from other origins
 app.use(cors());
 
-
-// JSON parsing middleware
+// Middleware to parse incoming JSON payloads
 app.use(express.json());
 
+// Configure __dirname for ES module compatibility
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Serve static files from the "uploads" directory
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// API routes
-app.use('/api/auth', authRoutes);
-app.use('/api/products', productRoutes);
+// Define API routes
+app.use('/api/auth', authRoutes);  // Authentication routes
+app.use('/api/products', productRoutes);  // Product routes
 app.use('/api/cart', verifyToken, cartRoutes);  // Protect cart routes with verifyToken middleware
 app.use('/api/favorites', verifyToken, favoriteRoutes);  // Protect favorites routes
 app.use('/api/orders', verifyToken, orderRoutes);  // Protect order routes
-app.use('/api/contact', contactRoutes);
+
 
 // Connect to MongoDB
 connectDB();
 
 // Global error handling middleware
 app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Something broke!');
+    console.error(err.stack);  // Log the error details for debugging
+    res.status(500).send('Something broke!');  // Send a generic error message to the client
 });
 
-// Start the server
+// Start the server and listen on the defined port
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);

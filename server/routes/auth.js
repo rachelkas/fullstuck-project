@@ -131,50 +131,136 @@
 
 
 
+// import express from 'express';
+// import { check } from 'express-validator';
+// import { registerController, loginController, updateUserController } from '../controllers/authController.js';
+// import { verifyToken } from '../middleware/auth.js'; // Assuming you have this middleware to verify JWTs
+
+// const router = express.Router();
+
+// // Register a new user
+// router.post(
+//     '/register',
+//     [
+//         check('firstName', 'Please enter a valid first name').not().isEmpty(),
+//         check('lastName', 'Please enter a valid last name').not().isEmpty(),
+//         check('email', 'Please enter a valid email').isEmail(),
+//         check('password', 'Please enter a password with 6 or more characters').isLength({ min: 6 })
+//     ],
+//     registerController
+// );
+
+// // Login user
+// router.post(
+//     '/login',
+//     [
+//         check('email', 'Please include a valid email').isEmail(),
+//         check('password', 'Password is required').exists()
+//     ],
+//     loginController
+// );
+
+// // Logout user (Not necessary for JWT, handled client-side)
+// router.get('/logout', (req, res) => {
+//     res.send('logged out');
+// });
+
+// // Update user details
+// router.put(
+//     '/update',
+//     verifyToken,
+//     [
+//         check('email', 'Please include a valid email').optional().isEmail(),
+//         check('firstName', 'First name is required').optional().not().isEmpty(),
+//         check('lastName', 'Last name is required').optional().not().isEmpty(),
+//     ],
+//     updateUserController
+// );
+
+// export default router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// src/routes/auth.js
+
+// Import necessary modules
 import express from 'express';
 import { check } from 'express-validator';
 import { registerController, loginController, updateUserController } from '../controllers/authController.js';
-import { verifyToken } from '../middleware/auth.js'; // Assuming you have this middleware to verify JWTs
+import { verifyToken } from '../middleware/auth.js'; // Middleware to verify JWT tokens
 
+// Create a router instance
 const router = express.Router();
 
-// Register a new user
+// Register a new user route
 router.post(
     '/register',
     [
-        check('firstName', 'Please enter a valid first name').not().isEmpty(),
-        check('lastName', 'Please enter a valid last name').not().isEmpty(),
-        check('email', 'Please enter a valid email').isEmail(),
-        check('password', 'Please enter a password with 6 or more characters').isLength({ min: 6 })
+        // Validation checks for registration
+        check('firstName', 'Please enter a valid first name').not().isEmpty(), // Validate first name is not empty
+        check('lastName', 'Please enter a valid last name').not().isEmpty(),   // Validate last name is not empty
+        check('email', 'Please enter a valid email').isEmail(),                // Validate email format
+        check('password', 'Please enter a password with 6 or more characters').isLength({ min: 6 }) // Password validation
     ],
-    registerController
+    registerController // Controller function to handle registration
 );
 
-// Login user
+// Login user route
 router.post(
     '/login',
     [
-        check('email', 'Please include a valid email').isEmail(),
-        check('password', 'Password is required').exists()
+        // Validation checks for login
+        check('email', 'Please include a valid email').isEmail(),  // Validate email format
+        check('password', 'Password is required').exists()         // Ensure password field exists
     ],
-    loginController
+    loginController // Controller function to handle login
 );
 
-// Logout user (Not necessary for JWT, handled client-side)
+// Logout user route (usually handled client-side for JWT authentication)
 router.get('/logout', (req, res) => {
-    res.send('logged out');
+    res.send('logged out'); // Simply send a message, as JWT doesn't require server-side logout handling
 });
 
-// Update user details
+// Update user details route
 router.put(
     '/update',
-    verifyToken,
+    verifyToken, // Middleware to ensure the user is authenticated with a valid token
     [
-        check('email', 'Please include a valid email').optional().isEmail(),
-        check('firstName', 'First name is required').optional().not().isEmpty(),
-        check('lastName', 'Last name is required').optional().not().isEmpty(),
+        // Optional validation checks for update
+        check('email', 'Please include a valid email').optional().isEmail(),  // Validate email only if provided
+        check('firstName', 'First name is required').optional().not().isEmpty(), // Validate first name if provided
+        check('lastName', 'Last name is required').optional().not().isEmpty(),   // Validate last name if provided
     ],
-    updateUserController
+    updateUserController // Controller function to handle profile update
 );
 
+// Export the router to be used in the application
 export default router;

@@ -113,26 +113,81 @@
 
 
 
+// import React from 'react';
+// import { OrderDetailsTableProps } from '../common/interfaces';
+
+// const OrderDetailsTable: React.FC<OrderDetailsTableProps> = (props) => {
+//     const { selectedCartItems = [], totalAmount } = props;
+
+//     return (
+//         <div>
+//             {selectedCartItems.length ? (
+//                 <div>
+//                     {selectedCartItems.map((item: any) => (
+//                         <div key={item._id} className="summary-item">
+//                             <p>{item.productId?.productName || 'Unknown Product'} - Quantity: {item.quantity}</p>
+//                             <p>Price: ${item.productId?.price || 'N/A'}</p>
+//                         </div>
+//                     ))}
+//                     <h3>Total: ${totalAmount.toFixed(2)}</h3>
+//                 </div>
+//             ) : (
+//                 <p>No items to summarize</p>
+//             )}
+//         </div>
+//     );
+// }
+
+// export default OrderDetailsTable;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// src/pages/OrderDetailsTable.tsx
+
 import React from 'react';
 import { OrderDetailsTableProps } from '../common/interfaces';
 
+// OrderDetailsTable component to display the list of ordered items and the total amount
 const OrderDetailsTable: React.FC<OrderDetailsTableProps> = (props) => {
-    const { selectedCartItems = [], totalAmount } = props;
+    const { selectedCartItems = [], totalAmount } = props; // Destructure props and set default value for selectedCartItems
 
     return (
         <div>
-            {selectedCartItems.length ? (
+            {selectedCartItems.length ? ( // Check if there are items to display
                 <div>
+                    {/* Map through selectedCartItems and display each item */}
                     {selectedCartItems.map((item: any) => (
                         <div key={item._id} className="summary-item">
-                            <p>{item.productId?.productName || 'Unknown Product'} - Quantity: {item.quantity}</p>
-                            <p>Price: ${item.productId?.price || 'N/A'}</p>
+                            <p>{item.productId?.productName || 'Unknown Product'} - Quantity: {item.quantity}</p> {/* Display product name and quantity */}
+                            <p>Price: ${item.productId?.price || 'N/A'}</p> {/* Display product price */}
                         </div>
                     ))}
+                    {/* Display the total amount of the order */}
                     <h3>Total: ${totalAmount.toFixed(2)}</h3>
                 </div>
             ) : (
-                <p>No items to summarize</p>
+                <p>No items to summarize</p> // Display a message if there are no items
             )}
         </div>
     );

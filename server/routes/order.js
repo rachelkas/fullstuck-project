@@ -63,22 +63,92 @@
 
 
 
-import express from 'express';
-import { createOrder, getOrderById, getUserOrders, submitOrder } from '../controllers/orderController.js';
-import { verifyToken } from '../middleware/auth.js';  // Ensure that your token middleware is correctly imported
+// import express from 'express';
+// import { createOrder, getOrderById, getUserOrders, submitOrder } from '../controllers/orderController.js';
+// import { verifyToken } from '../middleware/auth.js';  // Ensure that your token middleware is correctly imported
 
+// const router = express.Router();
+
+// // Create order
+// router.post('/create', verifyToken, createOrder);
+
+// // Submit order
+// router.put('/submit/:orderId', verifyToken, submitOrder);
+
+// // Get user orders
+// router.get('/', verifyToken, getUserOrders);
+
+// // Get a specific order by ID
+// router.get('/:orderId', verifyToken, getOrderById);
+
+// export default router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// src/routes/order.js
+
+import express from 'express';
+import { createOrder, getOrderById, getUserOrders, submitOrder } from '../controllers/orderController.js'; // Import order controller methods
+import { verifyToken } from '../middleware/auth.js';  // Import the middleware to verify JWT tokens
+
+// Create a new router instance
 const router = express.Router();
 
-// Create order
+// Create a new order
+// This route is protected, so it requires a valid token for the user to place an order
 router.post('/create', verifyToken, createOrder);
 
-// Submit order
+// Submit an existing order by order ID
+// This route is also protected, and it allows the user to submit an order they have created
 router.put('/submit/:orderId', verifyToken, submitOrder);
 
-// Get user orders
+// Get all orders for the logged-in user
+// Protected route that fetches all orders of the authenticated user
 router.get('/', verifyToken, getUserOrders);
 
-// Get a specific order by ID
+// Get details of a specific order by its ID
+// Protected route that returns the details of a particular order by its ID
 router.get('/:orderId', verifyToken, getOrderById);
 
+// Export the router for use in the application
 export default router;

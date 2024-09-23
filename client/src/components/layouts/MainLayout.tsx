@@ -1,16 +1,72 @@
+// import React from 'react';
+// import Nav from '../navbar/Nav';
+
+// interface MainLayoutProps {
+//     children: React.ReactNode;
+//     onResetFilters: () => void;
+// }
+
+// const MainLayout: React.FC<MainLayoutProps> = ({ children, onResetFilters }) => {
+//     return (
+//         <>
+//             <Nav onResetFilters={onResetFilters} />
+//             <div>{children}</div>
+//         </>
+//     );
+// };
+
+// export default MainLayout;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import React from 'react';
 import Nav from '../navbar/Nav';
 
+// Props for the MainLayout, including children components and a filter reset function
 interface MainLayoutProps {
     children: React.ReactNode;
     onResetFilters: () => void;
 }
 
+// Main layout component that renders the Nav and any children passed to it
 const MainLayout: React.FC<MainLayoutProps> = ({ children, onResetFilters }) => {
     return (
         <>
-            <Nav onResetFilters={onResetFilters} />
-            <div>{children}</div>
+            <Nav onResetFilters={onResetFilters} /> {/* Renders the navbar with a filter reset function */}
+            <div>{children}</div> {/* Renders child components */}
         </>
     );
 };
