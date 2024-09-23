@@ -419,7 +419,7 @@ import productRoutes from './routes/product.js';
 import cartRoutes from './routes/cart.js';
 import favoriteRoutes from './routes/favorite.js';
 import orderRoutes from './routes/order.js';  // Correct import for orders
-import contactRoutes from './routes/contact.js';
+
 
 // Import middleware for protected routes
 import { verifyToken } from './middleware/auth.js';
