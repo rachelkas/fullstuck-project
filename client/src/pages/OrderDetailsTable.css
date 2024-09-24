@@ -1,0 +1,22 @@
+/* src/pages/OrderDetailsTable.css */
+
+.summary-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.product-image img {
+    width: 50px;
+    /* Adjust the size as needed */
+    height: auto;
+}
+
+.small-product-image {
+    max-width: 100px;
+    /* Ensure small size */
+    max-height: 50px;
+    object-fit: contain;
+    margin-left: 10px;
+}

@@ -1,7 +1,14 @@
-/* Nav and ul styles */
+/* Sticky Nav styles */
 nav {
     background-color: #333;
     padding: 10px;
+    position: -webkit-sticky;
+    /* For Safari */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 ul {
@@ -10,6 +17,8 @@ ul {
     justify-content: flex-end;
     align-items: center;
     position: relative;
+    margin: 0;
+    padding: 0;
 }
 
 li {
@@ -38,16 +47,18 @@ a svg {
     margin-right: 5px;
 }
 
-/* Dropdown */
+/* Dropdown styles */
 .dropdown-content {
     display: block;
     position: absolute;
     right: 0;
     background-color: #fff;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 1;
+    z-index: 2000;
+    /* Make sure the dropdown appears above other elements */
     min-width: 160px;
     border-radius: 4px;
+    overflow: hidden;
 }
 
 .dropdown-content a,
@@ -72,9 +83,10 @@ a svg {
     cursor: pointer;
     display: flex;
     align-items: center;
+    z-index: 1000;
 }
 
-/* Notification circle for cart and favorites icons */
+/* Cart and favorite icon styles */
 .icon-container {
     position: relative;
 }
@@ -83,17 +95,12 @@ a svg {
 .favorite-count-badge {
     position: absolute;
     top: -3.5px;
-    /* Position the badge slightly above */
     right: 0.5px;
-    /* Position the badge slightly to the right */
     background-color: red;
     color: white;
     font-size: 8px;
-    /* Smaller font size for the number */
     width: 12px;
-    /* Adjusted size for the circle */
     height: 12px;
-    /* Adjusted size for the circle */
     border-radius: 50%;
     display: flex;
     justify-content: center;
@@ -101,12 +108,11 @@ a svg {
     z-index: 2;
 }
 
-/* Hide the notification badges when there are no items */
 .hidden {
     display: none;
 }
 
-/* Search bar */
+/* Search bar styles */
 .search-container {
     display: flex;
     justify-content: center;
@@ -131,4 +137,17 @@ a svg {
 
 .search-container button:hover {
     background-color: #45a049;
+}
+
+/* Add Product Icon Style */
+.add-product-icon {
+    color: white;
+    font-size: 28px;
+    margin-right: 5px;
+    transition: color 0.3s;
+}
+
+.add-product-icon:hover {
+    color: #4CAF50;
+    /* Highlight the icon when hovered */
 }
