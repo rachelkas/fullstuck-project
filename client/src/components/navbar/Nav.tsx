@@ -1426,11 +1426,11 @@ const Nav: React.FC<NavProps> = ({ onResetFilters }) => {
                         </div>
                     )}
                 </li>
-                {isAuthenticated && (
+                
                     <li className="user-greeting">
-                        Welcome, {firstName}!
+                    {isAuthenticated ? ( `Welcome, ${firstName}! `) : 'Hello Guest'}
                     </li>
-                )}
+               
             </ul>
         </nav>
     );

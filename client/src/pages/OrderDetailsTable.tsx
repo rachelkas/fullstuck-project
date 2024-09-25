@@ -308,7 +308,7 @@ const OrderDetailsTable: React.FC<OrderDetailsTableProps> = (props) => {
                             <p>Price: ${item.productId?.price || 'N/A'}</p> {/* Display product price */}
                             <div className="product-image">
                                 <img
-                                    src={item.productId?.image}
+                                    src={item.image}
                                     alt={item.productId?.productName}
                                     className="small-product-image"
                                 />

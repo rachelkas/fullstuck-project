@@ -4095,6 +4095,7 @@ export const loginUser = createAsyncThunk(
 // Thunk to log out the user
 export const logoutUser = createAsyncThunk('user/logoutUser', async (_, thunkAPI) => {
     thunkAPI.dispatch(clearUserState());
+    localStorage.removeItem('token');
     toast.success('Logged out successfully');
 });
 
