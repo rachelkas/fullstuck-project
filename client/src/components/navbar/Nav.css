@@ -1,28 +1,54 @@
 /* Sticky Nav styles */
 nav {
     background-color: #333;
-    padding: 10px;
+    /* padding: 10px 20px; */
     position: -webkit-sticky;
-    /* For Safari */
     position: sticky;
     top: 0;
     z-index: 1000;
     width: 100%;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
 }
 
+/* Unordered List (UL) Styling */
 ul {
     list-style-type: none;
     display: flex;
-    justify-content: flex-end;
     align-items: center;
-    position: relative;
     margin: 0;
     padding: 0;
 }
 
-li {
+/* Left Navigation (Icons for login, cart, favorite, home) */
+.nav-left {
+    justify-content: flex-start;
+    margin-left: 20px;
+}
+
+.nav-left li {
     margin-right: 20px;
+}
+
+/* Centered Logo */
+.nav-center {
+    justify-content: center;
+}
+
+.nav-center img {
+    height: 40px;
+    /* Adjust the logo height */
+    margin-right: 10px;
+}
+
+/* Right Navigation (Search & User Info) */
+.nav-right {
+    justify-content: flex-end;
+    margin-right: 20px;
+}
+
+li {
     position: relative;
 }
 
@@ -30,73 +56,65 @@ li:last-child {
     margin-right: 0;
 }
 
+/* General link and icon styles */
 a {
     color: #fff;
+    /* Make all links and icons white */
     text-decoration: none;
     display: flex;
     align-items: center;
 }
 
 a img {
-    height: 30px;
-    margin-right: 10px;
+    height: 35px;
 }
 
-a svg {
-    font-size: 24px;
-    margin-right: 5px;
+a svg,
+.icon-wrapper svg {
+    font-size: 28px;
+    /* Set all icons to the same size */
+    color: #fff;
+    /* Ensure icons are white */
+    transition: color 0.3s ease;
 }
 
-/* Dropdown styles */
-.dropdown-content {
-    display: block;
-    position: absolute;
-    right: 0;
-    background-color: #fff;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 2000;
-    /* Make sure the dropdown appears above other elements */
-    min-width: 160px;
-    border-radius: 4px;
-    overflow: hidden;
+a svg:hover,
+.icon-wrapper svg:hover {
+    color: #40e0d0;
+    /* Light turquoise hover effect */
 }
 
-.dropdown-content a,
-.dropdown-content button {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-    border: none;
-    background: none;
-    width: 100%;
-    cursor: pointer;
-}
-
-.dropdown-content a:hover,
-.dropdown-content button:hover {
-    background-color: #ddd;
-}
-
+/* For the dropdown icon */
 .icon-wrapper {
-    cursor: pointer;
     display: flex;
     align-items: center;
-    z-index: 1000;
+    cursor: pointer;
 }
 
-/* Cart and favorite icon styles */
+.icon-wrapper svg {
+    font-size: 28px;
+    /* Ensure the dropdown icon is the same size */
+    color: #fff;
+    /* Dropdown icon color */
+}
+
+.icon-wrapper:hover svg {
+    color: #40e0d0;
+    /* Dropdown icon hover effect */
+}
+
 .icon-container {
     position: relative;
 }
 
+/* Adjust cart and favorite badges */
 .cart-count-badge,
 .favorite-count-badge {
     position: absolute;
     top: -3.5px;
     right: 0.5px;
-    background-color: red;
+    background-color: #40e0d0;
+    /* Light turquoise */
     color: white;
     font-size: 8px;
     width: 12px;
@@ -112,42 +130,82 @@ a svg {
     display: none;
 }
 
-/* Search bar styles */
-.search-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* Dropdown styles */
+.dropdown-content {
+    display: block;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
+    min-width: 160px;
+    border-radius: 4px;
+    overflow: hidden;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s linear;
+    padding: 10px 0;
+    /* Added padding for better spacing */
 }
 
-.search-container input {
-    padding: 5px;
+.dropdown-active .dropdown-content {
+    visibility: visible;
+    opacity: 1;
+}
+
+.dropdown-content a,
+.dropdown-content button,
+.dropdown-content span {
+    color: #333;
+    /* Text color for links and buttons */
+    padding: 12px 16px;
+    /* Padding around each option */
+    text-decoration: none;
+    display: block;
+    /* Makes the options appear on new lines */
+    text-align: left;
+    /* Align text to the left */
     border: none;
+    background: none;
+    width: 100%;
+    cursor: pointer;
+}
+
+.dropdown-content a:hover,
+.dropdown-content button:hover,
+.dropdown-content span:hover {
+    background-color: #f1f1f1;
+    /* Hover effect for dropdown options */
+}
+
+.dropdown-content span {
+    cursor: pointer;
+}
+
+/* Search bar styling */
+.search-container input {
+    background-color: #444;
+    color: #e0e0e0;
+    padding: 5px;
+    border: 1px solid #40e0d0;
     border-radius: 5px;
 }
 
 .search-container button {
     padding: 5px 10px;
-    background-color: #4CAF50;
+    background-color: #40e0d0;
     color: white;
     border: none;
     border-radius: 5px;
-    margin-left: 5px;
     cursor: pointer;
 }
 
 .search-container button:hover {
-    background-color: #45a049;
+    background-color: #333;
 }
 
-/* Add Product Icon Style */
-.add-product-icon {
-    color: white;
-    font-size: 28px;
-    margin-right: 5px;
-    transition: color 0.3s;
-}
-
-.add-product-icon:hover {
-    color: #4CAF50;
-    /* Highlight the icon when hovered */
+/* User greeting style */
+.user-greeting {
+    margin-left: 20px;
+    color: #e0e0e0;
+    /* Light gray */
 }

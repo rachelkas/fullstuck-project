@@ -1,24 +1,51 @@
 .pagination ul {
     display: flex;
     justify-content: center;
+    /* Center the pagination */
     list-style: none;
     padding: 0;
+    margin: 10px auto;
 }
 
 .pagination li {
-    margin: 0 5px;
+    margin: 0 3px;
+    /* Space between pagination numbers */
 }
 
 .pagination a {
     text-decoration: none;
-    color: #000;
-    padding: 8px 16px;
+    color: #fff;
+    padding: 4px 8px;
+    /* Smaller padding to make the buttons smaller */
     border: 1px solid #ddd;
     border-radius: 4px;
+    background-color: #808080;
+    /* Default gray for non-active pages */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .pagination li.active a {
-    background-color: #007bff;
+    background-color: #00ced1;
+    /* Light turquoise for the active page */
     color: white;
-    border: 1px solid #007bff;
+    border: 1px solid #00ced1;
+    /* Light turquoise border for the active page */
+}
+
+.pagination a:hover {
+    background-color: #555;
+    /* Slightly darker gray when hovering */
+    color: white;
+}
+
+/* Remove the long background */
+.pagination {
+    font-size: 0.9em;
+    max-width: 100%;
+    background: none;
+    /* Remove background */
+    box-shadow: none;
+    /* Remove any shadows */
+    padding: 0;
+    /* Remove padding to avoid extra space */
 }
