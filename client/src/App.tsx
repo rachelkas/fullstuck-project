@@ -86,7 +86,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
-
+  window.addEventListener('beforeunload', function() {
+    // Clear the item from local storage
+    localStorage.removeItem('token');
+});
   useEffect(() => {
     // Get the token from localStorage when the app loads
     const token = localStorage.getItem('token');
