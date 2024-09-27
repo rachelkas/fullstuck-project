@@ -21,18 +21,18 @@
     border-top: 1px solid #ddd;
 }
 
-button {
+.order-summary-page button {
     margin-top: 15px;
     padding: 10px 20px;
     border: none;
-    background-color: #4CAF50;
+    background-color: #333;
     color: white;
     cursor: pointer;
     border-radius: 5px;
 }
 
-button:hover {
-    background-color: #45a049;
+.order-summary-page button:hover {
+    background-color: #40e0d0;
 }
 
 .confirm-order-btn {

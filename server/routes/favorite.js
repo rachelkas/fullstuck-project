@@ -326,11 +326,21 @@ router.post('/add', verifyToken, async (req, res) => {
             favoriteItem = new Favorite({ userId, productId, quantity: 1 });
             await favoriteItem.save();
         }
-        res.status(200).json({ message: 'Product added to favorite', favoriteItem });
+        const favoriteItems = await Favorite.find({ userId }).populate('productId');
+        const favoritesWithImageUrl = favoriteItems.map(favorite => ({
+            ...favorite._doc,
+            productId: {
+                ...favorite.productId._doc,
+                image: `http://localhost:3000${favorite.productId.image}`
+            }
+        }));
+        res.status(200).json(favoritesWithImageUrl);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: error.message });
     }
+
+
 });
 
 // Fetch all favorite items for a user
@@ -364,7 +374,15 @@ router.delete('/remove', verifyToken, async (req, res) => {
     try {
         const favoriteItem = await Favorite.findOneAndDelete({ userId, productId });
         if (!favoriteItem) return res.status(404).json({ message: 'Item not found in favorites' });
-        res.status(200).json({ message: 'Item removed from favorites' });
+        const favoriteItems = await Favorite.find({ userId }).populate('productId');
+        const favoritesWithImageUrl = favoriteItems.map(favorite => ({
+            ...favorite._doc,
+            productId: {
+                ...favorite.productId._doc,
+                image: `http://localhost:3000${favorite.productId.image}`
+            }
+        }));
+        res.status(200).json(favoritesWithImageUrl);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Server Error' });

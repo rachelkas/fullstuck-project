@@ -1,19 +1,20 @@
-/* Sticky Nav styles */
-nav {
-    background-color: #333;
-    /* padding: 10px 20px; */
+/* General Nav Styles */
+/* nav {
+    background-color: #000;
     position: -webkit-sticky;
     position: sticky;
     top: 0;
     z-index: 1000;
     width: 100%;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: space-between;
-}
+    align-items: center;
+    padding: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+} */
 
-/* Unordered List (UL) Styling */
-ul {
+/* ul  */
+/* .nav-icons .nav-icons.show {
     list-style-type: none;
     display: flex;
     align-items: center;
@@ -21,71 +22,82 @@ ul {
     padding: 0;
 }
 
-/* Left Navigation (Icons for login, cart, favorite, home) */
-.nav-left {
-    justify-content: flex-start;
-    margin-left: 20px;
-}
-
-.nav-left li {
-    margin-right: 20px;
-}
-
-/* Centered Logo */
-.nav-center {
-    justify-content: center;
-}
-
-.nav-center img {
-    height: 40px;
-    /* Adjust the logo height */
-    margin-right: 10px;
-}
-
-/* Right Navigation (Search & User Info) */
-.nav-right {
-    justify-content: flex-end;
-    margin-right: 20px;
-}
-
-li {
-    position: relative;
-}
-
-li:last-child {
-    margin-right: 0;
-}
-
-/* General link and icon styles */
 a {
     color: #fff;
-    /* Make all links and icons white */
     text-decoration: none;
     display: flex;
     align-items: center;
 }
 
-a img {
-    height: 35px;
-}
-
 a svg,
 .icon-wrapper svg {
     font-size: 28px;
-    /* Set all icons to the same size */
     color: #fff;
-    /* Ensure icons are white */
     transition: color 0.3s ease;
 }
 
 a svg:hover,
 .icon-wrapper svg:hover {
     color: #40e0d0;
-    /* Light turquoise hover effect */
+} */
+
+/* Centered Logo */
+/* .nav-center {
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-/* For the dropdown icon */
-.icon-wrapper {
+.nav-center img {
+    height: 40px;
+} */
+
+/* Right Navigation (Search & User Info) */
+/* .nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 8px;
+}
+
+.user-greeting {
+    margin-left: 10px;
+    color: #fff;
+} */
+
+/* Search bar */
+/* .search-container input {
+    background-color: #444;
+    color: #e0e0e0;
+    padding: 5px;
+    border: 1px solid #40e0d0;
+    border-radius: 5px;
+}
+
+.search-container button {
+    padding: 5px 10px;
+    background-color: #40e0d0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background-color: #333;
+} */
+
+/* Mobile Menu Hamburger */
+/* .hamburger {
+    display: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+} */
+
+/* Dropdown Icon Styles */
+/* .icon-wrapper {
     display: flex;
     align-items: center;
     cursor: pointer;
@@ -93,95 +105,343 @@ a svg:hover,
 
 .icon-wrapper svg {
     font-size: 28px;
-    /* Ensure the dropdown icon is the same size */
-    color: #fff;
-    /* Dropdown icon color */
+    margin-right: 15px;
 }
 
 .icon-wrapper:hover svg {
     color: #40e0d0;
-    /* Dropdown icon hover effect */
+} */
+
+/* Dropdown Menu Styles */
+/* .dropdown-content {
+    display: block;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+    z-index: 2000;
+    min-width: 180px;
+    border-radius: 8px;
+    overflow: hidden;
+    opacity: 1;
+    padding: 10px 0;
+    transition: opacity 0.3s ease-in-out;
+} */
+
+/* Individual items inside dropdown */
+/* .dropdown-content a,
+.dropdown-content span,
+.dropdown-content .update-profile-dropdown-option a {
+    color: #333;
+    padding: 12px 20px;
+    display: block;
+    text-align: left;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.icon-container {
+.dropdown-content a:hover,
+.dropdown-content span:hover {
+    background-color: #f1f1f1;
+    color: #40e0d0;
+} */
+
+/* Add a subtle border between items */
+/* .dropdown-content a:not(:last-child),
+.dropdown-content span:not(:last-child) {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.icon-wrapper:hover svg {
+    color: #40e0d0;
+}
+
+.dropdown-content a {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-content a svg {
+    margin-right: 10px;
+    color: #40e0d0;
+} */
+
+/* Cart and Favorite icon badges */
+/* .icon-container {
     position: relative;
 }
 
-/* Adjust cart and favorite badges */
 .cart-count-badge,
 .favorite-count-badge {
     position: absolute;
-    top: -3.5px;
-    right: 0.5px;
+    top: 8px;
+    right: 8px;
     background-color: #40e0d0;
-    /* Light turquoise */
     color: white;
-    font-size: 8px;
-    width: 12px;
-    height: 12px;
+    font-size: 10px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 2;
-}
+    font-weight: bold;
+} */
 
-.hidden {
+/* Mobile Menu (for screens below 820px) */
+/* .nav-icons {
     display: none;
 }
 
-/* Dropdown styles */
-.dropdown-content {
+.hamburger {
     display: block;
+}
+
+.nav-icons.show {
+    display: flex;
+    flex-direction: column;
     position: absolute;
-    background-color: #fff;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    z-index: 2000;
-    min-width: 160px;
-    border-radius: 4px;
-    overflow: hidden;
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s, opacity 0.3s linear;
-    padding: 10px 0;
-    /* Added padding for better spacing */
+    top: 60px;
+    left: 0;
+    background-color: #000;
+    padding: 20px;
+    z-index: 1000;
+    
 }
 
-.dropdown-active .dropdown-content {
-    visibility: visible;
-    opacity: 1;
+.mobile-welcome {
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
 }
 
-.dropdown-content a,
-.dropdown-content button,
-.dropdown-content span {
-    color: #333;
-    /* Text color for links and buttons */
-    padding: 12px 16px;
-    /* Padding around each option */
-    text-decoration: none;
-    display: block;
-    /* Makes the options appear on new lines */
-    text-align: left;
-    /* Align text to the left */
-    border: none;
-    background: none;
+.nav-icons a svg {
+    margin-right: 15px;
+}
+
+.nav-icons a:hover {
+    color: #40e0d0;
+} */
+
+/* Media Queries for 820px and below */
+/* @media (max-width: 890px) {
+    nav {
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .nav-right .user-greeting {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .nav-icons {
+        display: none;
+    }
+
+    .nav-icons.show {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #000;
+        padding: 20px;
+        z-index: 1000;
+        margin: 0;
+    }
+
+    .mobile-welcome,
+    .icon-wrapper-dropdown-icon,
+    .cart-icon,
+    .favorite-icon,
+    .contact-us-icon,
+    .home-icon,
+    .add-product-icon {
+        display: flex;
+        align-items: center;
+        text-align: left;
+        font-size: 28px;
+        width: 100%;
+        padding: 10px 0;
+        color: #fff;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .nav-center img {
+        height: 30px;
+    }
+} */
+
+/* New Styles for Screens Larger than 820px */
+/* @media (min-width: 890px) {
+    .hamburger {
+        display: none;
+    }
+
+    .nav-left {
+        display: flex;
+        align-items: center;
+       
+    }
+
+    .nav-left li {
+        margin-right: 10px;
+        list-style-type: none;
+    }
+
+    .user-greeting {
+        display: inline-block;
+        color: #e0e0e0;
+        font-size: 18px;
+        margin-left: 20px;
+    }
+
+    .nav-icons {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .nav-center img {
+        height: 40px;
+    }
+
+    .nav-right {
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-right .search-container {
+        margin-right: 20px;
+    }
+
+    .cart-count-badge,
+    .favorite-count-badge {
+        top: -3px;
+        right: 8px;
+    }
+} */
+
+/* Media Queries for 320px and below */
+/* @media (max-width: 320px) {
+    .nav-center img {
+        height: 25px;
+    }
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* General Nav Styles */
+nav {
+    background-color: #000;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     width: 100%;
-    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.dropdown-content a:hover,
-.dropdown-content button:hover,
-.dropdown-content span:hover {
-    background-color: #f1f1f1;
-    /* Hover effect for dropdown options */
+/* ul  */
+.nav-icons .nav-icons.show {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
-.dropdown-content span {
-    cursor: pointer;
+a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
 }
 
-/* Search bar styling */
+a svg,
+.icon-wrapper svg {
+    font-size: 28px;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+a svg:hover,
+.icon-wrapper svg:hover {
+    color: #40e0d0;
+}
+
+/* Centered Logo */
+.nav-center {
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nav-center img {
+    height: 80px;
+    margin: 10px;
+}
+
+/* Right Navigation (Search & User Info) */
+.nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 8px;
+}
+
+.user-greeting {
+    margin-left: 10px;
+    color: #fff;
+}
+
+/* Search bar */
 .search-container input {
     background-color: #444;
     color: #e0e0e0;
@@ -203,9 +463,323 @@ a svg:hover,
     background-color: #333;
 }
 
-/* User greeting style */
-.user-greeting {
-    margin-left: 20px;
-    color: #e0e0e0;
-    /* Light gray */
+/* Mobile Menu Hamburger */
+.hamburger {
+    display: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* Dropdown Icon Styles */
+.icon-wrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.icon-wrapper svg {
+    font-size: 28px;
+    margin-right: 15px;
+}
+
+.icon-wrapper:hover svg {
+    color: #40e0d0;
+}
+
+/* Dropdown Menu Styles */
+.dropdown-content {
+    display: block;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+    z-index: 2000;
+    min-width: 180px;
+    border-radius: 8px;
+    overflow: hidden;
+    opacity: 1;
+    padding: 10px 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Individual items inside dropdown */
+.dropdown-content a,
+.dropdown-content span,
+.dropdown-content .update-profile-dropdown-option a {
+    color: #333;
+    padding: 12px 20px;
+    display: block;
+    text-align: left;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dropdown-content a:hover,
+.dropdown-content span:hover {
+    background-color: #f1f1f1;
+    color: #40e0d0;
+}
+
+/* Add a subtle border between items */
+.dropdown-content a:not(:last-child),
+.dropdown-content span:not(:last-child) {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.icon-wrapper:hover svg {
+    color: #40e0d0;
+}
+
+.dropdown-content a {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-content a svg {
+    margin-right: 10px;
+    color: #40e0d0;
+}
+
+/* Cart and Favorite icon badges */
+.icon-container {
+    position: relative;
+}
+
+.cart-count-badge,
+.favorite-count-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: #40e0d0;
+    color: white;
+    font-size: 10px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    font-weight: bold;
+}
+
+/* Mobile Menu (for screens below 820px) */
+.nav-icons {
+    display: none;
+}
+
+.hamburger {
+    display: block;
+}
+
+.nav-icons.show {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: #000;
+    padding: 20px;
+    z-index: 1000;
+    /* margin: 0; */
+}
+
+.mobile-welcome {
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.nav-icons a svg {
+    margin-right: 15px;
+}
+
+.nav-icons a:hover {
+    color: #40e0d0;
+}
+
+/* Media Queries for 820px and below */
+@media (max-width: 1190px) {
+    nav {
+        justify-content: space-between;
+        align-items: center;
+        padding: 30px 0;
+        /* width: 100%; */
+    }
+
+    .nav-right .user-greeting {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+        padding-left: 15px;
+    }
+
+    .nav-icons {
+        display: none;
+    }
+
+    .nav-icons.show {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #000;
+        padding: 20px;
+        z-index: 1000;
+        margin: 0;
+    }
+
+    .mobile-welcome,
+    .icon-wrapper-dropdown-icon,
+    .cart-icon,
+    .favorite-icon,
+    .contact-us-icon,
+    .home-icon,
+    .add-product-icon {
+        display: flex;
+        align-items: center;
+        text-align: left;
+        font-size: 28px;
+        width: 100%;
+        padding: 10px 0;
+        color: #fff;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .nav-center img {
+        height: 80px;
+        margin: 10px;
+    }
+}
+
+/* New Styles for Screens Larger than 820px */
+@media (min-width: 1190px) {
+    .hamburger {
+        display: none;
+    }
+
+    .nav-left {
+        display: flex;
+        align-items: center;
+        /*list-style-type: none;*/
+        /* list-style-type: none; */
+    }
+
+    .nav-left li {
+        margin-right: 10px;
+        list-style-type: none;
+    }
+
+    .user-greeting {
+        display: inline-block;
+        color: #e0e0e0;
+        font-size: 18px;
+        margin-left: 20px;
+    }
+
+    .nav-icons {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .nav-center img {
+        height: 80px;
+        margin: 10px;
+    }
+
+    .nav-right {
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-right .search-container {
+        margin-right: 20px;
+    }
+
+    .cart-count-badge,
+    .favorite-count-badge {
+        top: -3px;
+        right: 8px;
+    }
+}
+
+/* Media Queries for 320px and below */
+/* @media (max-width: 320px) {
+    .nav-center img {
+        height: 80px;
+    }
+} */
+
+/* Additions for alignment */
+
+/* Align nav items in the center */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* This ensures everything is vertically centered */
+}
+
+/* Adjustments for the logo, search bar, and other elements */
+.nav-center {
+    display: flex;
+    align-items: center;
+    /* Ensure the logo is aligned vertically */
+}
+
+.nav-left,
+.nav-right {
+    display: flex;
+    align-items: center;
+    /* Vertically align the left and right elements */
+}
+
+/* Ensuring the search bar remains vertically aligned with other nav items */
+.search-bar-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-left: auto;
+    /* Push search bar to the right */
+}
+
+/* Ensuring icon buttons and nav elements don't push the navbar height */
+.nav-left li {
+    /* display: flex;
+    align-items: center; */
+    margin-right: 15px;
+    /* Space between items */
+}
+
+
+
+
+.nav-center img {
+    height: 80px;
+    /* Set the height of the logo, adjust as needed */
+    display: block;
+    margin: 10px;
+}
+
+/* Media Queries */
+@media (max-width: 1190px) {
+    .nav-center img {
+        height: 80px;
+        margin: 10px;
+        /* Adjust logo size for smaller screens */
+    }
+}
+
+@media (max-width: 720px) {
+    .nav-center img {
+        /* height: 80px; */
+        display: none;
+        /* Further reduce logo size for extra small screens */
+    }
 }

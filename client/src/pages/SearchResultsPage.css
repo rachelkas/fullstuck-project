@@ -6,7 +6,7 @@
      align-items: center;
  }
 
- .results-list {
+ .search-results-page .results-list {
      display: flex;
      flex-wrap: wrap;
      justify-content: center;

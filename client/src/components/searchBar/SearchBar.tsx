@@ -494,18 +494,19 @@ const SearchBar: React.FC = () => {
                 className="search-input"
                 onFocus={() => setShowResults(true)} // Show results when input is focused
             />
-            <button type="button" onClick={() => handleSelectResult(query)}>
+            <button className='search-input-button' type="button" onClick={() => handleSelectResult(query)}>
                 <FaSearch /> {/* Search icon button */}
             </button>
-            {showResults && results.length > 0 && ( // Conditionally render search results dropdown
-                <ul className="results-list">
-                    {results.map((result) => (
-                        <li key={result._id} onClick={() => handleSelectResult(result.productName)}>
-                            {result.productName} {/* Display product name in the results */}
-                        </li>
-                    ))}
-                </ul>
-            )}
+            <div className='search-bar-result-list-container'>
+                {showResults && results.length > 0 && ( // Conditionally render search results dropdown
+                    <ul className="results-list">
+                        {results.map((result) => (
+                            <li className='search-bar-results-list-dropdown' key={result._id} onClick={() => handleSelectResult(result.productName)}>
+                                {result.productName} {/* Display product name in the results */}
+                            </li>
+                        ))}
+                    </ul>
+                )}</div>
         </div>
     );
 };

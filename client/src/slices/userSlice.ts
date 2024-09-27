@@ -3973,7 +3973,7 @@ export const addToFavorites = createAsyncThunk(
                 }
             );
             toast.success('Added to favorites!', toastOptions);
-            return productId;  // Return the product ID
+            return response.data;  // Return the product ID
         } catch (error: any) {
             toast.error('Failed to add to favorites.', toastOptions);
             return thunkAPI.rejectWithValue(error.response.data);
@@ -3987,14 +3987,15 @@ export const removeFromFavorites = createAsyncThunk('user/removeFromFavorites', 
     const token = state.user.token;
     const userId = state.user.userDetails._id;
     try {
-        await customAxios.delete(`/favorites/remove`, {
-            params: { productId, userId },
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+        const response =
+            await customAxios.delete(`/favorites/remove`, {
+                params: { productId, userId },
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
         toast.success('Removed from favorites!', toastOptions);
-        return productId;
+        return response.data;
     } catch (error: any) {
         toast.error('Failed to remove from favorites.', toastOptions);
         return thunkAPI.rejectWithValue(error.response.data);
@@ -4144,6 +4145,12 @@ const userSlice = createSlice({
                 state.cart = action.payload;
             })
             .addCase(fetchFavoriteItems.fulfilled, (state, action) => {
+                state.favorites = action.payload.map((item: any) => item.productId._id);
+            })
+            .addCase(addToFavorites.fulfilled, (state, action) => {
+                state.favorites = action.payload.map((item: any) => item.productId._id);
+            })
+            .addCase(removeFromFavorites.fulfilled, (state, action) => {
                 state.favorites = action.payload.map((item: any) => item.productId._id);
             });
     },
