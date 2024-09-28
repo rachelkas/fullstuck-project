@@ -1,0 +1,128 @@
+/* Add Product Page Styles */
+.add-product-page {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Add some padding to the form so inputs don't touch the edge */
+    padding-right: 20px;
+}
+
+.add-product-page h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #000;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Form Styles */
+.add-product-page form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-right: 20px;
+    /* Add space between inputs and page container */
+}
+
+/* Label Styles */
+.add-product-page .add-product-label label {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* Input and Textarea Styles */
+.add-product-page input[type="text"],
+.add-product-page input[type="number"],
+.add-product-page textarea,
+.add-product-page input[type="file"] {
+    width: calc(100% - 20px);
+    /* Adjust width to account for right space */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+    margin-right: 20px;
+    /* Add margin to the right for space */
+}
+
+.add-product-page input[type="text"]:focus,
+.add-product-page input[type="number"]:focus,
+.add-product-page textarea:focus,
+.add-product-page input[type="file"]:focus {
+    border-color: #40e0d0;
+    outline: none;
+}
+
+/* Textarea Specific Styles */
+.add-product-page textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Submit Button */
+.add-product-page button[type="submit"] {
+    padding: 12px 20px;
+    background-color: #808080;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.add-product-page button[type="submit"]:hover {
+    background-color: #40e0d0;
+    transform: translateY(-2px);
+}
+
+.add-product-page button[type="submit"]:active {
+    background-color: #28a5a0;
+    transform: translateY(1px);
+}
+
+/* File Input Container */
+.file-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 10px;
+}
+
+/* Hide the default file input */
+.file-input-container input[type="file"] {
+    display: none;
+}
+
+/* Custom file upload button */
+.custom-file-upload {
+    padding: 10px 20px;
+    background-color: #808080;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.custom-file-upload:hover {
+    background-color: #40e0d0;
+    transform: translateY(-2px);
+    color: white;
+}
+
+.custom-file-upload:active {
+    background-color: #28a5a0;
+    transform: translateY(1px);
+}

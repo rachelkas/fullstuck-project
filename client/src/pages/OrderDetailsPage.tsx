@@ -392,7 +392,8 @@ const OrderDetailsPage: React.FC = () => {
     // Prepare the props for the OrderDetailsTable component
     const orderDetailsTableProps: OrderDetailsTableProps = {
         selectedCartItems: order.items, // Pass the order items to the table
-        totalAmount: order.totalPrice,  // Pass the total order amount
+        totalAmount: order.totalPrice,
+
     };
 
     return (

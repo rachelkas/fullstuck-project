@@ -788,7 +788,7 @@ import SingleProduct from '../singleProduct/SingleProduct';
 import Pagination from '../Pagination/Pagination';
 import './products.css';
 import { useNavigate } from 'react-router-dom';
-import PriceFilter from '../PriceFilter'; // Import the PriceFilter component for filtering products by price
+import PriceFilter from '../priceFilter/PriceFilter'; // Import the PriceFilter component for filtering products by price
 
 // Functional component to display a list of products with pagination and price filtering
 const Products: React.FC = () => {

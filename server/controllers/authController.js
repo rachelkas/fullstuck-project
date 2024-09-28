@@ -532,7 +532,7 @@ export const registerController = async (req, res) => {
 
         // Create a JWT token for the user
         const payload = { user: { id: user.id } };
-        jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 3600 }, (err, token) => {
+        jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '5h' }, (err, token) => {
             if (err) throw err;
             res.status(201).json({ token, userDetails: user });  // Send token and user details to the client
         });
@@ -565,7 +565,7 @@ export const loginController = async (req, res) => {
 
         // Create a JWT token for the authenticated user
         const payload = { user: { id: user.id } };
-        jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 3600 }, (err, token) => {
+        jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '5h' }, (err, token) => {
             if (err) throw err;
             res.status(200).json({ token, userDetails: user });  // Send token and user details to the client
         });

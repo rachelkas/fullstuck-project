@@ -605,6 +605,9 @@ const router = express.Router();
 router.post('/add', verifyToken, async (req, res) => {
     const { productId, userId } = req.body;  // Get productId and userId from the request body
     try {
+        if (!userId) {
+            return res.status(500).json({ message: 'User ID is missing' });  // Error if user ID is missing    
+        }
         let cartItem = await Cart.findOne({ userId, cartStatus: 'open' });
         if (!cartItem) {
             cartItem = new Cart({ userId, items: [{ productId }], cartStatus: 'open' });

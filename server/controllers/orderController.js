@@ -689,11 +689,14 @@ export const getOrderById = async (req, res) => {
 export const getUserOrders = async (req, res) => {
     try {
         const userId = req.user.id;  // Get the user ID from the verified token
-
+        if (!userId) {
+            return res.status(500).json({ message: 'User ID is missing' });  // Error if user ID is missing    
+        }
         // Fetch all orders for the authenticated user
         const orders = await Order.find({ userId });
 
         if (!orders.length) {
+
             return res.status(204).json({ message: 'No orders found' });  // If no orders are found
         }
 

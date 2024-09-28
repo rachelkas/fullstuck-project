@@ -1,0 +1,171 @@
+/* Container for the whole edit page */
+.edit-product-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+}
+
+/* Header styling */
+.edit-product-container h1 {
+    text-align: center;
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form layout */
+.edit-product-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Text and number input fields */
+.edit-product-container input[type="text"],
+.edit-product-container input[type="number"],
+.edit-product-container textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    background-color: #fff;
+}
+
+/* Textarea styling */
+.edit-product-container textarea {
+    resize: none;
+    height: 100px;
+}
+
+/* Label for form fields */
+.edit-product-container label {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Image preview styling */
+.edit-product-container img {
+    margin: 10px auto;
+    max-width: 100px;
+    /* Make the image smaller */
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: block;
+}
+
+/* File input label */
+label[for="productImageId"] {
+    background-color: #6c757d;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    width: 200px;
+    margin: 10px auto;
+    /* Center and adjust margin */
+}
+
+/* Hover effect for the file input label */
+label[for="productImageId"]:hover {
+    background-color: #40e0d0;
+}
+
+/* Submit and other button styling */
+/* .edit-product-container button {
+    background-color: #6c757d;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+   
+    width: 200px;
+    text-align: center;
+} */
+
+/* Hover and active effect for all buttons */
+.edit-product-container button:hover {
+    background-color: #40e0d0;
+    transform: translateY(-2px);
+}
+
+.edit-product-container button:active {
+    transform: translateY(1px);
+}
+
+/* Style the 'Update Product' button */
+button[type="submit"] {
+    margin-bottom: 10px;
+    /* Adjust margin */
+}
+
+/* Cancel button under the update product button */
+.edit-product-container .cancel-button {
+    margin-top: 0;
+    /* Remove top margin to bring it closer */
+    margin-bottom: 10px;
+}
+
+/* Image button styles matching other buttons */
+.edit-product-container .image-label {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+/* Smaller buttons styling for 'Choose Image' and 'Image Label' */
+.edit-product-container .image-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.edit-product-container .image-buttons button {
+    width: fit-content;
+    padding: 10px 18px;
+}
+
+.Update-Product-button {
+    background-color: #6c757d;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* margin-top: 10px; */
+    width: 225px;
+    text-align: center;
+    margin: auto;
+}
+
+.Update-Product-Cancel-button {
+    background-color: #6c757d;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* margin-top: 10px; */
+    width: 225px;
+    text-align: center;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}

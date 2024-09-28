@@ -173,7 +173,7 @@
 // //     'user/loginUser',
 // //     async (userData: { email: string; password: string }, thunkAPI) => {
 // //         try {
-// //             const response = await customAxios.post('/login', userData);
+// //             const response = await customAxios.post('/log-in', userData);
 // //             const { token, userDetails } = response.data;
 // //             thunkAPI.dispatch(setToken(token));
 // //             thunkAPI.dispatch(setUserDetails(userDetails));
@@ -192,7 +192,7 @@
 //     'user/loginUser',
 //     async (userData: { email: string; password: string }, thunkAPI) => {
 //         try {
-//             const response = await customAxios.post('/login', userData);
+//             const response = await customAxios.post('/log-in', userData);
 //             const { token, userDetails } = response.data;
 //             thunkAPI.dispatch(setToken(token));
 //             thunkAPI.dispatch(setUserDetails(userDetails));
@@ -475,7 +475,7 @@
 //     'user/loginUser',
 //     async (userData: { email: string; password: string }, thunkAPI) => {
 //         try {
-//             const response = await customAxios.post('/login', userData);
+//             const response = await customAxios.post('/log-in', userData);
 //             const { token, userDetails } = response.data;
 //             thunkAPI.dispatch(setToken(token));
 //             thunkAPI.dispatch(setUserDetails(userDetails));
@@ -846,7 +846,7 @@
 //     'user/loginUser',
 //     async (userData: { email: string; password: string }, thunkAPI) => {
 //         try {
-//             const response = await customAxios.post('/login', userData);
+//             const response = await customAxios.post('/log-in', userData);
 //             const { token, userDetails } = response.data;
 //             thunkAPI.dispatch(setToken(token));
 //             thunkAPI.dispatch(setUserDetails(userDetails));
@@ -1220,7 +1220,7 @@
 //     'user/loginUser',
 //     async (userData: { email: string; password: string }, thunkAPI) => {
 //         try {
-//             const response = await customAxios.post('/login', userData);
+//             const response = await customAxios.post('/log-in', userData);
 //             const { token, userDetails } = response.data;
 //             thunkAPI.dispatch(setToken(token));
 //             thunkAPI.dispatch(setUserDetails(userDetails));
@@ -1563,7 +1563,7 @@
 //     'user/loginUser',
 //     async (userData: { email: string; password: string }, thunkAPI) => {
 //         try {
-//             const response = await customAxios.post('/login', userData);
+//             const response = await customAxios.post('/log-in', userData);
 //             const { token, userDetails } = response.data;
 //             thunkAPI.dispatch(setToken(token));
 //             thunkAPI.dispatch(setUserDetails(userDetails));
@@ -1912,7 +1912,7 @@
 //     'user/loginUser',
 //     async (userData: { email: string; password: string }, thunkAPI) => {
 //         try {
-//             const response = await customAxios.post('/login', userData);
+//             const response = await customAxios.post('/log-in', userData);
 //             const { token, userDetails } = response.data;
 //             thunkAPI.dispatch(setToken(token));
 //             thunkAPI.dispatch(setUserDetails(userDetails));
@@ -2252,7 +2252,7 @@
 //     'user/loginUser',
 //     async (userData: { email: string; password: string }, thunkAPI) => {
 //         try {
-//             const response = await customAxios.post('/login', userData);
+//             const response = await customAxios.post('/log-in', userData);
 //             const { token, userDetails } = response.data;
 //             thunkAPI.dispatch(setToken(token));
 //             thunkAPI.dispatch(setUserDetails(userDetails));
@@ -2615,7 +2615,7 @@
 //     'user/loginUser',
 //     async (userData: { email: string; password: string }, thunkAPI) => {
 //         try {
-//             const response = await customAxios.post('/login', userData);
+//             const response = await customAxios.post('/log-in', userData);
 //             const { token, userDetails } = response.data;
 //             thunkAPI.dispatch(setToken(token));
 //             thunkAPI.dispatch(setUserDetails(userDetails));
@@ -2990,7 +2990,7 @@
 //     'user/loginUser',
 //     async (userData: { email: string; password: string }, thunkAPI) => {
 //         try {
-//             const response = await customAxios.post('/login', userData);
+//             const response = await customAxios.post('/log-in', userData);
 //             const { token, userDetails } = response.data;
 //             thunkAPI.dispatch(setToken(token));
 //             thunkAPI.dispatch(setUserDetails(userDetails));
@@ -3340,7 +3340,7 @@
 //     'user/loginUser',
 //     async (userData: { email: string; password: string }, thunkAPI) => {
 //         try {
-//             const response = await customAxios.post('/login', userData);
+//             const response = await customAxios.post('/log-in', userData);
 //             const { token, userDetails } = response.data;
 //             thunkAPI.dispatch(setToken(token));
 //             thunkAPI.dispatch(setUserDetails(userDetails));
@@ -3715,7 +3715,7 @@
 //     async (userData: { email: string; password: string }, thunkAPI) => {
 //         try {
 //             // Send a login request
-//             const response = await customAxios.post('/login', userData);
+//             const response = await customAxios.post('/log-in', userData);
 //             const { token, userDetails } = response.data;
 //             thunkAPI.dispatch(setToken(token));  // Save the token in state
 //             thunkAPI.dispatch(setUserDetails(userDetails));  // Save user details in state
@@ -3903,7 +3903,13 @@ export const addToCart = createAsyncThunk('user/addToCart', async (productId: st
         toast.success('Added to cart!', toastOptions);
         return response.data;  // Return the cart data
     } catch (error: any) {
-        toast.error('Failed to add to cart.', toastOptions);
+        if (error.response?.status === 401) {
+
+            thunkAPI.dispatch(logoutUser(true)); //hideToast
+            window.location.pathname = '/log-in';
+        } else {
+            toast.error('Failed to add to cart.', toastOptions);
+        }
         return thunkAPI.rejectWithValue(error.response.data);  // Handle failure case
     }
 });
@@ -3923,7 +3929,13 @@ export const removeFromCart = createAsyncThunk('user/removeFromCart', async (pro
         toast.success('Removed from cart!', toastOptions);
         return productId;  // Return the removed product ID
     } catch (error: any) {
-        toast.error('Failed to remove from cart.', toastOptions);
+        if (error.response?.status === 401) {
+
+            thunkAPI.dispatch(logoutUser(true));
+            window.location.pathname = '/log-in';
+        } else {
+            toast.error('Failed to remove from cart.', toastOptions);
+        }
         return thunkAPI.rejectWithValue(error.response.data);
     }
 });
@@ -3949,7 +3961,13 @@ export const updateCartQuantity = createAsyncThunk(
             toast.success('Quantity updated!', toastOptions);
             return { productId, quantity };  // Return updated product quantity
         } catch (error: any) {
-            toast.error('Failed to update quantity.', toastOptions);
+            if (error.response?.status === 401) {
+
+                thunkAPI.dispatch(logoutUser(true));
+                window.location.pathname = '/log-in';
+            } else {
+                toast.error('Failed to update quantity.', toastOptions);
+            }
             return thunkAPI.rejectWithValue(error.response.data);
         }
     }
@@ -3975,7 +3993,13 @@ export const addToFavorites = createAsyncThunk(
             toast.success('Added to favorites!', toastOptions);
             return response.data;  // Return the product ID
         } catch (error: any) {
-            toast.error('Failed to add to favorites.', toastOptions);
+            if (error.response?.status === 401) {
+
+                thunkAPI.dispatch(logoutUser(true));
+                window.location.pathname = '/log-in';
+            } else {
+                toast.error('Failed to add to favorites.', toastOptions);
+            }
             return thunkAPI.rejectWithValue(error.response.data);
         }
     }
@@ -3997,7 +4021,13 @@ export const removeFromFavorites = createAsyncThunk('user/removeFromFavorites', 
         toast.success('Removed from favorites!', toastOptions);
         return response.data;
     } catch (error: any) {
-        toast.error('Failed to remove from favorites.', toastOptions);
+        if (error.response?.status === 401) {
+
+            thunkAPI.dispatch(logoutUser(true));
+            window.location.pathname = '/log-in';
+        } else {
+            toast.error('Failed to remove from favorites.', toastOptions);
+        }
         return thunkAPI.rejectWithValue(error.response.data);
     }
 });
@@ -4016,7 +4046,14 @@ export const fetchCartItems = createAsyncThunk('user/fetchCartItems', async (_, 
         });
         return response.data;
     } catch (error: any) {
-        toast.error('Failed to fetch cart items.', toastOptions);
+
+        if (error.response?.status === 401) {
+
+            thunkAPI.dispatch(logoutUser(true));
+            window.location.pathname = '/log-in';
+        } else {
+            toast.error('Failed to fetch cart items.', toastOptions);
+        }
         return thunkAPI.rejectWithValue(error.response.data);
     }
 });
@@ -4035,7 +4072,13 @@ export const fetchFavoriteItems = createAsyncThunk('user/fetchFavoriteItems', as
         });
         return response.data;
     } catch (error: any) {
-        toast.error('Failed to fetch favorite items.', toastOptions);
+        if (error.response?.status === 401) {
+
+            thunkAPI.dispatch(logoutUser(true));
+            window.location.pathname = '/log-in';
+        } else {
+            toast.error('Failed to fetch favorite items.', toastOptions);
+        }
         return thunkAPI.rejectWithValue(error.response.data);
     }
 });
@@ -4068,6 +4111,11 @@ export const createOrder = createAsyncThunk(
             });
             return response.data;
         } catch (error: any) {
+            if (error.response?.status === 401) {
+
+                thunkAPI.dispatch(logoutUser(true));
+                window.location.pathname = '/log-in';
+            }
             return thunkAPI.rejectWithValue(error.response.data);
         }
     }
@@ -4078,7 +4126,7 @@ export const loginUser = createAsyncThunk(
     'user/loginUser',
     async (userData: { email: string; password: string }, thunkAPI) => {
         try {
-            const response = await customAxios.post('/login', userData);
+            const response = await customAxios.post('/log-in', userData);
             const { token, userDetails } = response.data;
             thunkAPI.dispatch(setToken(token));  // Save the token in state
             thunkAPI.dispatch(setUserDetails(userDetails));  // Save user details in state
@@ -4094,10 +4142,12 @@ export const loginUser = createAsyncThunk(
 );
 
 // Thunk to log out the user
-export const logoutUser = createAsyncThunk('user/logoutUser', async (_, thunkAPI) => {
+export const logoutUser = createAsyncThunk('user/logoutUser', async (shouldHideToast: boolean = false, thunkAPI) => {
     thunkAPI.dispatch(clearUserState());
     localStorage.removeItem('token');
-    toast.success('Logged out successfully');
+    if (!shouldHideToast) {
+        toast.success('Logged out successfully');
+    }
 });
 
 // User slice to manage state related to the user, cart, and favorites

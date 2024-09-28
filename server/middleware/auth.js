@@ -322,18 +322,26 @@ export const verifyToken = (req, res, next) => {
     if (!token) return res.status(401).json({ message: 'Access Denied: No Token Provided' });
 
     try {
-        const tokenPart = token.split(" ")[1];
+        const tokenPart = token.split(" ")[1];  // Extract the actual token from 'Bearer <token>'
         if (!tokenPart) return res.status(400).json({ message: 'Invalid Token Format' });
 
+        // Verify the token
         const verified = jwt.verify(tokenPart, process.env.JWT_SECRET);
-        req.user = verified.user;  // Ensure the `user` object has `id`
+        req.user = verified.user;  // Attach the user object to req for future middleware/routes
 
-        console.log('User verified:', req.user); // Log this to ensure you're getting the correct user
+        console.log('User verified:', req.user); // Optional log to debug the verified user
 
-        next();
+        next();  // Call the next middleware or route handler
     } catch (err) {
+        if (err.name === 'TokenExpiredError') {
+            // Token expired case
+            console.error('Token expired:', err.message);
+            return res.status(401).json({ message: 'Token expired. Please log in again.' });
+        }
+
+        // Other errors (invalid token, etc.)
         console.error('Token verification failed:', err.message);
-        res.status(400).json({ message: 'Invalid Token' });
+        return res.status(400).json({ message: 'Invalid Token' });
     }
 };
 

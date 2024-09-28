@@ -144,4 +144,6 @@ export interface PriceFilterProps {
 export interface OrderDetailsTableProps {
     selectedCartItems: any[];
     totalAmount: number;
+
+
 }

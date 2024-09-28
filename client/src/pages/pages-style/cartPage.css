@@ -1,0 +1,217 @@
+/* Cart Page Styles */
+.cart-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Title Styles */
+.cart-page h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Cart Item Styles */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Cart Item Checkbox */
+.cart-item input[type="checkbox"] {
+    margin-right: 15px;
+}
+
+/* Cart Item Image */
+.cart-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+/* Cart Item Name */
+.cart-item p {
+    flex-grow: 1;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Quantity Label */
+.cart-item label {
+    margin-right: 15px;
+}
+
+/* Quantity Input */
+.cart-item input[type="number"] {
+    width: 60px;
+    padding: 8px;
+    border: none;
+    /* Remove border */
+    font-size: 14px;
+    text-align: center;
+    background-color: transparent;
+    /* Make background transparent */
+    -moz-appearance: textfield;
+    /* Remove default spinner styling on Firefox */
+}
+
+/* Show arrows/spinners always */
+.cart-item input[type="number"]::-webkit-inner-spin-button,
+.cart-item input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: auto;
+    /* Show the up/down arrows */
+    margin: 0;
+}
+
+/* Cart Item Price */
+.cart-item p:last-of-type {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Remove Button */
+.cart-item button {
+    padding: 10px 20px;
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.cart-item button:hover {
+    background-color: #d23c1f;
+}
+
+/* Total Amount Section */
+.cart-page .total-amount {
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Proceed Button */
+.cart-page button {
+    /* margin-top: 30px; */
+    padding: 15px 30px;
+    background-color: #40e0d0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.cart-page button:hover {
+    background-color: #28a5a0;
+    transform: translateY(-2px);
+}
+
+.cart-page button:active {
+    transform: translateY(1px);
+}
+
+/* Media Query for screens 890px and below */
+@media (max-width: 890px) {
+    .cart-page {
+        max-width: 100%;
+        padding: 5px;
+        /* Reduce padding */
+    }
+
+    .cart-item {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+        align-items: center;
+        text-align: center;
+        padding: 10px;
+        margin: 0 auto;
+        /* Center the cart items */
+        width: 50%;
+        /* Make the cart item container take full width */
+    }
+
+    /* Cart Item Image */
+    .cart-item img {
+        grid-column: 1 / 2;
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        margin: 0 auto;
+    }
+
+    /* Cart Item Name and Quantity */
+    .cart-item p {
+        grid-column: 1 / 2;
+        margin: 5px 0;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .cart-item label {
+        grid-column: 1 / 2;
+        margin: 5px 0;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    /* Cart Item Quantity Input */
+    .cart-item input[type="number"] {
+        width: 50px;
+        margin: 0 auto;
+        padding: 5px;
+    }
+
+    /* Price and Remove Button */
+    .cart-item p:last-of-type,
+    .cart-item button {
+        grid-column: 1 / 2;
+        justify-self: center;
+    }
+
+    .cart-item p:last-of-type {
+        margin-bottom: 10px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .cart-item button {
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+
+    /* Total Amount */
+    .cart-page .total-amount {
+        text-align: center;
+        font-size: 22px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .cart-page button {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

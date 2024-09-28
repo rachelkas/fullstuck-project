@@ -1,0 +1,97 @@
+.price-filter-container {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.price-filter-container h4 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #000;
+    /* Black text color */
+}
+
+.rc-slider {
+    width: 60%;
+    margin: 20px auto;
+    /* Center the slider */
+}
+
+.rc-slider-track {
+    background-color: #40e0d0 !important;
+    /* Light turquoise for the track */
+}
+
+.rc-slider-handle {
+    border: 2px solid #40e0d0 !important;
+    /* Light turquoise for the handles */
+    background-color: #fff !important;
+    /* White handle for contrast */
+    box-shadow: none !important;
+    /* Remove default shadow */
+}
+
+.price-values {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1rem;
+    color: #333;
+    /* Dark gray for the price text */
+}
+
+.filter-buttons {
+    margin-top: 15px;
+}
+
+.Apply-Filter-button {
+    background-color: #40e0d0;
+    /* Light turquoise for Apply Filter */
+    color: #000;
+    /* Black text */
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.Cancel-Apply-Filter-button {
+    background-color: #808080;
+    /* Light gray for Cancel */
+    color: #000;
+    /* Black text */
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.filter-buttons button:hover {
+    transform: translateY(-2px);
+    /* Lift effect on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Add shadow on hover */
+}
+
+.filter-buttons button:focus {
+    outline: none;
+}
+
+.price-filter-container {
+    border: none;
+    /* Remove the box */
+    background: none;
+    /* Remove the background */
+    box-shadow: none;
+    /* Remove the shadow */
+    padding: 0;
+    /* Remove padding */
+}

@@ -501,10 +501,10 @@
 }
 
 .search-bar-results-list-dropdown {
-    border: 1px solid #7b7979;
+    border: none;
     padding: 5px 8px;
     font-weight: 600;
-
+    font-size: 20px;
 }
 
 .search-bar-results-list-dropdown:hover {

@@ -412,7 +412,7 @@ const Nav: React.FC<NavProps> = ({ onResetFilters }) => {
     const handleLogout = () => {
         const confirmed = window.confirm('Are you sure you want to logout?');
         if (confirmed) {
-            dispatch(logoutUser());
+            dispatch(logoutUser(false));
             navigate('/log-in');
         }
     };

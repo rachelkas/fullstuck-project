@@ -550,8 +550,8 @@ a svg:hover,
 .cart-count-badge,
 .favorite-count-badge {
     position: absolute;
-    top: 8px;
-    right: 8px;
+    top: 5px;
+    right: 95px;
     background-color: #40e0d0;
     color: white;
     font-size: 10px;

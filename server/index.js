@@ -32,7 +32,7 @@
 
 // app.use((err, req, res, next) => {
 //     console.error(err.stack);
-//     res.status(500).send('Something broke!');
+//    c
 // });
 
 // const PORT = process.env.PORT || 3000;
@@ -404,7 +404,7 @@
 
 
 
-
+// // index.js
 // Import necessary libraries
 import express from 'express';
 import cors from 'cors';
@@ -451,6 +451,7 @@ app.use('/api/products', productRoutes);  // Product routes
 app.use('/api/cart', verifyToken, cartRoutes);  // Protect cart routes with verifyToken middleware
 app.use('/api/favorites', verifyToken, favoriteRoutes);  // Protect favorites routes
 app.use('/api/orders', verifyToken, orderRoutes);  // Protect order routes
+
 
 
 // Connect to MongoDB

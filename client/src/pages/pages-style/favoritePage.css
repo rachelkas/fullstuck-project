@@ -1,0 +1,135 @@
+/* Container for the entire favorite page */
+.favorite-page {
+    max-width: 1200px;
+    margin: 10px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+/* Heading */
+.favorite-page h2 {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+/* Individual favorite item container */
+.favorite-item {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 250px;
+    margin: 20px auto;
+    position: relative;
+}
+
+/* Product image */
+.favorite-item img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Product name and price */
+.favorite-item p {
+    font-size: 16px;
+    color: #333;
+    margin: 5px 0;
+}
+
+/* Product description or extra details */
+.favorite-item .description {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* Price styling */
+.favorite-item p.price {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Buttons for adding to cart and removing from favorites */
+.favorite-item .favorite-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Add to Cart and Remove buttons */
+.favorite-item button {
+    background-color: #6c757d;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover effect on buttons */
+.favorite-item button:hover {
+    background-color: #40e0d0;
+    transform: translateY(-2px);
+}
+
+/* Active state on button click */
+.favorite-item button:active {
+    transform: translateY(1px);
+}
+
+/* Favorite icons */
+.favorite-item .favorite-icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Icons style */
+.favorite-item .favorite-icons i {
+    font-size: 24px;
+    color: #6c757d;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+/* Hover effect on icons */
+.favorite-item .favorite-icons i:hover {
+    color: #40e0d0;
+}
+
+/* Responsive layout for smaller screens */
+@media (max-width: 768px) {
+    .favorite-item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .favorite-item img {
+        margin-bottom: 15px;
+    }
+
+    .favorite-item p {
+        margin-left: 0;
+        margin-bottom: 15px;
+    }
+
+    .favorite-item button {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
