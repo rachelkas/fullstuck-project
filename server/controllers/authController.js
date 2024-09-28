@@ -503,7 +503,7 @@
 // Import necessary libraries and models
 import bcrypt from 'bcryptjs';  // For password hashing
 import jwt from 'jsonwebtoken';  // For generating JWT tokens
-import User from '../models/user.js';  // Importing the User model
+import User from '../models/userModel.js';  // Importing the User model
 // import { registerValidation } from '../validations/registerValidation.js';  // Validation for registration
 import { registerValidation } from '../utils/validations/registerValidation.js';  // Validation for registration
 import { loginValidation } from '../utils/validations/loginValidation.js';  // Validation for login
