@@ -70,7 +70,6 @@ const AddProductPage: React.FC = () => {
 
     return (
         <div className="add-product-page">
-            <ToastContainer />
             <h2>Add Product</h2>
             <form onSubmit={handleSubmit}>
                 <div className='add-product-label'>
