@@ -121,7 +121,7 @@
 //             ...favorite._doc,
 //             productId: {
 //                 ...favorite.productId._doc,
-//                 image: `process.env.BASE_URL${favorite.productId.image}` // Adjust the URL
+//                 image: `${process.env.BASE_URL}${favorite.productId.image}` // Adjust the URL
 //             }
 //         }));
 //         res.status(200).json(favoritesWithImageUrl);
@@ -219,7 +219,7 @@
 //             ...favorite._doc,
 //             productId: {
 //                 ...favorite.productId._doc,
-//                 image: `process.env.BASE_URL${favorite.productId.image}`  // Adjust the URL
+//                 image: `${process.env.BASE_URL}${favorite.productId.image}`  // Adjust the URL
 //             }
 //         }));
 //         res.status(200).json(favoritesWithImageUrl);
@@ -331,7 +331,7 @@ router.post('/add', verifyToken, async (req, res) => {
             ...favorite._doc,
             productId: {
                 ...favorite.productId._doc,
-                image: `process.env.BASE_URL${favorite.productId.image}`
+                image: `${process.env.BASE_URL}${favorite.productId.image}`
             }
         }));
         res.status(200).json(favoritesWithImageUrl);
@@ -354,7 +354,7 @@ router.get('/', verifyToken, async (req, res) => {
             ...favorite._doc,
             productId: {
                 ...favorite.productId._doc,
-                image: `process.env.BASE_URL${favorite.productId.image}`
+                image: `${process.env.BASE_URL}${favorite.productId.image}`
             }
         }));
         res.status(200).json(favoritesWithImageUrl);
@@ -379,7 +379,7 @@ router.delete('/remove', verifyToken, async (req, res) => {
             ...favorite._doc,
             productId: {
                 ...favorite.productId._doc,
-                image: `process.env.BASE_URL${favorite.productId.image}`
+                image: `${process.env.BASE_URL}${favorite.productId.image}`
             }
         }));
         res.status(200).json(favoritesWithImageUrl);

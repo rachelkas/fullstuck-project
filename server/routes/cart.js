@@ -155,7 +155,7 @@
 //             ...cartItem._doc,
 //             productId: {
 //                 ...cartItem.productId._doc,
-//                 image: `process.env.BASE_URL${cartItem.productId.image}` // Adjust the URL
+//                 image: `${process.env.BASE_URL}${cartItem.productId.image}` // Adjust the URL
 //             }
 //         }));
 //         res.status(200).json(cartItemsWithImageUrl);
@@ -258,7 +258,7 @@
 //             ...cartItem._doc,
 //             productId: {
 //                 ...cartItem.productId._doc,
-//                 image: `process.env.BASE_URL${cartItem.productId.image}`  // Adjust the URL
+//                 image: `${process.env.BASE_URL}${cartItem.productId.image}`  // Adjust the URL
 //             }
 //         }));
 //         const cart = {
@@ -287,7 +287,7 @@
 //             ...cartItem._doc,
 //             productId: {
 //                 ...cartItem.productId._doc,
-//                 image: `process.env.BASE_URL${cartItem.productId.image}`  // Adjust the URL
+//                 image: `${process.env.BASE_URL}${cartItem.productId.image}`  // Adjust the URL
 //             }
 //         }));
 //         const cart = {
@@ -444,7 +444,7 @@
 //             ...cartItem._doc,
 //             productId: {
 //                 ...cartItem.productId._doc,
-//                 image: `process.env.BASE_URL${cartItem.productId.image}`  // Adjust image URL
+//                 image: `${process.env.BASE_URL}${cartItem.productId.image}`  // Adjust image URL
 //             }
 //         }));
 
@@ -478,7 +478,7 @@
 //             ...cartItem._doc,
 //             productId: {
 //                 ...cartItem.productId._doc,
-//                 image: `process.env.BASE_URL${cartItem.productId.image}`  // Adjust image URL
+//                 image: `${process.env.BASE_URL}${cartItem.productId.image}`  // Adjust image URL
 //             }
 //         }));
 
@@ -629,7 +629,7 @@ router.post('/add', verifyToken, async (req, res) => {
             ...cartItem._doc,
             productId: {
                 ...cartItem.productId._doc,
-                image: `process.env.BASE_URL${cartItem.productId.image}`  // Adjust image URL
+                image: `${process.env.BASE_URL}${cartItem.productId.image}`  // Adjust image URL
             }
         }));
 
@@ -658,7 +658,7 @@ router.get('/', verifyToken, async (req, res) => {
             ...cartItem._doc,
             productId: {
                 ...cartItem.productId._doc,
-                image: `process.env.BASE_URL${cartItem.productId.image}`
+                image: `${process.env.BASE_URL}${cartItem.productId.image}`
             }
         }));
 
