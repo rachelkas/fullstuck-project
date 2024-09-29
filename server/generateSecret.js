@@ -1,24 +1,3 @@
-// import crypto from 'crypto';
-
-// const secret = crypto.randomBytes(32).toString('hex');
-// console.log(secret);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Generate a random 32-byte secret key using crypto
 import crypto from 'crypto';  // Import Node.js crypto module
 

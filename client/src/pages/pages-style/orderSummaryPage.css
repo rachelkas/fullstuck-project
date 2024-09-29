@@ -1,0 +1,121 @@
+/* OrderSummaryPage CSS */
+
+/* Container for the order summary page */
+.order-summary-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    /* Light gray background */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    color: #000;
+    /* Black text */
+}
+
+/* Headline for order summary */
+.order-summary-page h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #40e0d0;
+    /* Light turquoise for headline */
+    margin-bottom: 20px;
+}
+
+/* Order Details Item */
+.order-summary-page .summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+    /* Subtle light gray border */
+    font-size: 1rem;
+    position: relative;
+}
+
+/* Align product name and quantity to the left */
+.order-summary-page .summary-item p {
+    flex: 1;
+}
+
+/* Align price and image to the right */
+.order-summary-page .summary-item .price {
+    width: 100px;
+    /* Set a fixed width for price section */
+    text-align: right;
+}
+
+.order-summary-page .summary-item .product-image {
+    margin-left: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Product image in the summary */
+.order-summary-page .small-product-image {
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
+}
+
+/* Total price display */
+.order-summary-page h3 {
+    text-align: right;
+    font-size: 1.5rem;
+    color: #000;
+    /* Black for emphasis */
+    margin-top: 20px;
+}
+
+/* Buttons inside the order summary page */
+.order-summary-page button {
+    background-color: #40e0d0;
+    /* Light turquoise background */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+.order-summary-page button:hover {
+    background-color: #333;
+    /* Darker gray for hover */
+}
+
+/* Disabled button style */
+.order-summary-page button[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+    .order-summary-page {
+        padding: 15px;
+    }
+
+    .order-summary-page .summary-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .order-summary-page .small-product-image {
+        margin-top: 10px;
+    }
+
+    .order-summary-page button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .order-summary-page h3 {
+        text-align: left;
+    }
+}

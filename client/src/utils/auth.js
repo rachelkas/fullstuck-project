@@ -1,34 +1,3 @@
-// export const isAuthenticated = () => {
-//     const token = localStorage.getItem('token');
-//     return token != null;
-// };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // src/utils/auth.js
 
 // Function to check if the user is authenticated

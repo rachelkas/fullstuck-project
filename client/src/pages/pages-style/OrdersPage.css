@@ -1,0 +1,70 @@
+/* OrdersPage CSS */
+
+/* Main container for the orders page */
+.orders-page-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading for the orders page */
+.orders-page-container h2 {
+    color: #333;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Table styles for the orders list */
+.orders-page-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+/* Table header styling */
+.orders-page-container table th {
+    background-color: #40e0d0;
+    color: white;
+    padding: 15px;
+    text-align: left;
+    font-size: 1.2rem;
+}
+
+/* Table row styling */
+.orders-page-container table td {
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 1rem;
+}
+
+/* Hover effect for table rows */
+.orders-page-container table tr:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+
+    .orders-page-container table,
+    .orders-page-container table tr,
+    .orders-page-container table th,
+    .orders-page-container table td {
+        display: block;
+        width: 100%;
+    }
+
+    .orders-page-container table th,
+    .orders-page-container table td {
+        text-align: left;
+        padding: 10px;
+    }
+
+    .orders-page-container table th {
+        background-color: #333;
+        color: white;
+        text-align: center;
+    }
+}

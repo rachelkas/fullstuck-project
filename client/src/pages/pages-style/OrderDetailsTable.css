@@ -1,0 +1,97 @@
+/* Padding for the entire page */
+.order-details-page {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Center the heading */
+.order-details-page h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    /* Keep your custom color */
+    margin-bottom: 20px;
+}
+
+/* Styling for each summary item row */
+.summary-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px 0;
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Product details text */
+.summary-item p {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+    flex: 1;
+}
+
+/* Image container styling */
+.product-image {
+    width: 100px;
+    height: 100px;
+    margin-left: 15px;
+}
+
+.small-product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Total price styling */
+h3 {
+    text-align: right;
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Back to Orders button */
+.order-details-page button {
+    background-color: #40e0d0;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+.order-details-page button:hover {
+    background-color: #333;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+
+    /* Stack items vertically on smaller screens */
+    .summary-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* Adjust the image size for smaller screens */
+    .product-image {
+        width: 80px;
+        height: 80px;
+        margin-top: 10px;
+    }
+
+    /* Center the button on small screens */
+    .order-details-page button {
+        width: 100%;
+        text-align: center;
+        padding: 15px;
+    }
+}
