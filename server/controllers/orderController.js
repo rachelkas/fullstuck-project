@@ -628,7 +628,7 @@ export const createOrder = async (req, res) => {
                     productName: product.productName,
                     price: product.price,
                     quantity: item.quantity,
-                    image: `http://localhost:3000${product.image}`  // Include image URL
+                    image: `process.env.BASE_URL${product.image}`  // Include image URL
                 };
             })
         );
@@ -674,7 +674,7 @@ export const getOrderById = async (req, res) => {
             ...order._doc,
             items: order.items.map(item => ({
                 ...item._doc,
-                image: `http://localhost:3000${item.productId.image}`  // Include image URL
+                image: `process.env.BASE_URL${item.productId.image}`  // Include image URL
             }))
         };
 

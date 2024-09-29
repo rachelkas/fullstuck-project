@@ -29,7 +29,7 @@
 //         const products = await Product.find();
 //         const productsWithImageUrl = products.map(product => ({
 //             ...product._doc,
-//             image: `http://localhost:3000${product.image}` // Adjust the URL accordingly
+//             image: `process.env.BASE_URL${product.image}` // Adjust the URL accordingly
 //         }));
 //         res.json(productsWithImageUrl);
 //     } catch (err) {
@@ -47,7 +47,7 @@
 //         }
 //         const productWithImageUrl = {
 //             ...product._doc,
-//             image: `http://localhost:3000${product.image}`
+//             image: `process.env.BASE_URL${product.image}`
 //         };
 //         res.json(productWithImageUrl);
 //     } catch (err) {
@@ -89,7 +89,7 @@
 //         // Ensure the image field returns the full URL
 //         const updatedProduct = {
 //             ...product._doc,
-//             image: `http://localhost:3000${product.image}`,
+//             image: `process.env.BASE_URL${product.image}`,
 //         };
 
 //         res.json(updatedProduct);
@@ -225,7 +225,7 @@
 //         const products = await Product.find();
 //         const productsWithImageUrl = products.map(product => ({
 //             ...product._doc,
-//             image: `http://localhost:3000${product.image}` // Adjust the URL accordingly
+//             image: `process.env.BASE_URL${product.image}` // Adjust the URL accordingly
 //         }));
 //         res.json(productsWithImageUrl);
 //     } catch (err) {
@@ -243,7 +243,7 @@
 //         }
 //         const productWithImageUrl = {
 //             ...product._doc,
-//             image: `http://localhost:3000${product.image}`
+//             image: `process.env.BASE_URL${product.image}`
 //         };
 //         res.json(productWithImageUrl);
 //     } catch (err) {
@@ -287,7 +287,7 @@
 //         // Ensure the image field returns the full URL
 //         const updatedProduct = {
 //             ...product._doc,
-//             image: `http://localhost:3000${product.image}`,
+//             image: `process.env.BASE_URL${product.image}`,
 //         };
 
 //         res.json(updatedProduct);
@@ -413,7 +413,7 @@
 // //         const products = await Product.find(query);
 // //         const productsWithImageUrl = products.map(product => ({
 // //             ...product._doc,
-// //             image: `http://localhost:3000${product.image}` // Adjust the URL accordingly
+// //             image: `process.env.BASE_URL${product.image}` // Adjust the URL accordingly
 // //         }));
 // //         res.json(productsWithImageUrl);
 // //     } catch (err) {
@@ -445,7 +445,7 @@
 //         const products = await Product.find(query);
 //         const productsWithImageUrl = products.map(product => ({
 //             ...product._doc,
-//             image: `http://localhost:3000${product.image}` // Adjust the URL accordingly
+//             image: `process.env.BASE_URL${product.image}` // Adjust the URL accordingly
 //         }));
 
 //         res.json(productsWithImageUrl);
@@ -476,7 +476,7 @@
 //         }
 //         const productWithImageUrl = {
 //             ...product._doc,
-//             image: `http://localhost:3000${product.image}`
+//             image: `process.env.BASE_URL${product.image}`
 //         };
 //         res.json(productWithImageUrl);
 //     } catch (err) {
@@ -517,7 +517,7 @@
 
 //         const updatedProduct = {
 //             ...product._doc,
-//             image: `http://localhost:3000${product.image}`,
+//             image: `process.env.BASE_URL${product.image}`,
 //         };
 
 //         res.json(updatedProduct);
@@ -648,7 +648,7 @@
 //         // Return products with adjusted image URLs
 //         const productsWithImageUrl = products.map(product => ({
 //             ...product._doc,
-//             image: `http://localhost:3000${product.image}`
+//             image: `process.env.BASE_URL${product.image}`
 //         }));
 //         res.json(productsWithImageUrl);
 //     } catch (err) {
@@ -679,7 +679,7 @@
 //         // Return the product with the adjusted image URL
 //         const productWithImageUrl = {
 //             ...product._doc,
-//             image: `http://localhost:3000${product.image}`
+//             image: `process.env.BASE_URL${product.image}`
 //         };
 //         res.json(productWithImageUrl);
 //     } catch (err) {
@@ -721,7 +721,7 @@
 //         // Respond with the updated product and adjusted image URL
 //         const updatedProduct = {
 //             ...product._doc,
-//             image: `http://localhost:3000${product.image}`,
+//             image: `process.env.BASE_URL${product.image}`,
 //         };
 //         res.json(updatedProduct);
 //     } catch (err) {
@@ -842,7 +842,7 @@
 //         // Return products with adjusted image URLs
 //         const productsWithImageUrl = products.map(product => ({
 //             ...product._doc,
-//             image: `http://localhost:3000${product.image}`
+//             image: `process.env.BASE_URL${product.image}`
 //         }));
 //         res.json(productsWithImageUrl);
 //     } catch (err) {
@@ -873,7 +873,7 @@
 //         // Return the product with the adjusted image URL
 //         const productWithImageUrl = {
 //             ...product._doc,
-//             image: `http://localhost:3000${product.image}`
+//             image: `process.env.BASE_URL${product.image}`
 //         };
 //         res.json(productWithImageUrl);
 //     } catch (err) {
@@ -915,7 +915,7 @@
 //         // Respond with the updated product and adjusted image URL
 //         const updatedProduct = {
 //             ...product._doc,
-//             image: `http://localhost:3000${product.image}`,
+//             image: `process.env.BASE_URL${product.image}`,
 //         };
 //         res.json(updatedProduct);
 //     } catch (err) {
@@ -1021,7 +1021,7 @@ router.get('/', async (req, res) => {
         const products = await Product.find(query);
         const productsWithImageUrl = products.map(product => ({
             ...product._doc,
-            image: `http://localhost:3000${product.image}`
+            image: `process.env.BASE_URL${product.image}`
         }));
         res.json(productsWithImageUrl);
     } catch (err) {
@@ -1049,7 +1049,7 @@ router.get('/:id', async (req, res) => {
         if (!product) return res.status(404).send('Product not found');
         const productWithImageUrl = {
             ...product._doc,
-            image: `http://localhost:3000${product.image}`
+            image: `process.env.BASE_URL${product.image}`
         };
         res.json(productWithImageUrl);
     } catch (err) {
@@ -1087,7 +1087,7 @@ router.put('/', verifyToken, isAdmin, upload.single('image'), async (req, res) =
         await product.save();
         const updatedProduct = {
             ...product._doc,
-            image: `http://localhost:3000${product.image}`
+            image: `process.env.BASE_URL${product.image}`
         };
         res.json(updatedProduct);
     } catch (err) {
