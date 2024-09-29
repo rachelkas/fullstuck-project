@@ -54,3 +54,9 @@ export interface OrderDetailsTableProps {
 
 
 }
+
+// Define the Product interface for search results
+export interface Product {
+    _id: string;
+    productName: string;
+}

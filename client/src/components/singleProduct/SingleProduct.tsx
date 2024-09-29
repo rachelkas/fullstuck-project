@@ -37,7 +37,7 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
         if (isAuthenticated) {
             // Dispatch the action to add the product to the cart
             dispatch(addToCart(product._id) as any);
-            toast.success("Product added to cart!", { autoClose: 2000 });
+            // toast.success("Product added to cart!", { autoClose: 2000 });
         } else {
             // Show a toast if the user is not authenticated
             toast.error('Please login to add products to the cart', { autoClose: 2000 });
@@ -51,12 +51,12 @@ const SingleProduct: React.FC<SingleProductProps> = ({ product }) => {
                 // Remove from favorites if it's already favorited
                 dispatch(removeFromFavorites(product._id) as any);
                 setFavoriteClicked(false); // Reset heart click
-                toast.info("Product removed from favorites", { autoClose: 2000 });
+                // toast.info("Product removed from favorites", { autoClose: 2000 });
             } else {
                 // Add to favorites if it's not already favorited
                 dispatch(addToFavorites(product._id) as any);
                 setFavoriteClicked(true); // Heart is clicked
-                toast.success("Product added to favorites", { autoClose: 2000 });
+                // toast.success("Product added to favorites", { autoClose: 2000 });
             }
         } else {
             // Show a toast if the user is not authenticated

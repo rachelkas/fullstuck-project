@@ -5,12 +5,7 @@ import { debounce } from 'lodash';
 import { toast } from 'react-toastify'; // Import toast for notifications
 import api from '../../utils/api';
 import './SearchBar.css';
-
-// Define the Product interface for search results
-interface Product {
-    _id: string;
-    productName: string;
-}
+import { Product } from '../../common/interfaces';
 
 // Functional component for the SearchBar
 const SearchBar: React.FC = () => {
@@ -46,8 +41,22 @@ const SearchBar: React.FC = () => {
 
         // Detect Hebrew characters and show a toast notification if found
         const hebrewRegex = /[\u0590-\u05FF]/;
+        const toastId = "hebrew-toast";  // Use a fixed toastId to prevent duplicates
+
         if (hebrewRegex.test(value)) {
-            toast.error('You can search only in English!');
+            // Check if the toast is already displayed using toast.isActive
+            if (!toast.isActive(toastId)) {
+                toast.error('You can search only in English!', {
+                    toastId,  // Specify the toastId to control uniqueness
+                    position: "top-right",
+                    autoClose: 3000,  // Set the timeout to automatically close the toast
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }
             return;
         }
 
@@ -100,7 +109,8 @@ const SearchBar: React.FC = () => {
                             </li>
                         ))}
                     </ul>
-                )}</div>
+                )}
+            </div>
         </div>
     );
 };
