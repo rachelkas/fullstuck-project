@@ -287,7 +287,7 @@ import { AxiosError } from 'axios';
 const UpdateProfilePage: React.FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const userDetails = useSelector((state: RootState) => state.user.userDetails);  // Access user details from Redux store
+    const userDetails = useSelector((state: RootState) => state.user.userDetails) || {};  // Access user details from Redux store
     const token = useSelector((state: RootState) => state.user.token);  // Get the token from Redux
 
     // Pre-fill the form with the user's details from Redux
@@ -311,7 +311,7 @@ const UpdateProfilePage: React.FC = () => {
 
         try {
             // Call the updateUser service to update the profile with the provided token
-            await updateUser({ firstName, lastName, email, password }, token, dispatch);
+            await updateUser({ firstName, lastName, email }, token, dispatch);
             alert('Profile updated successfully!');
             navigate('/');  // Redirect to homepage after successful update
         } catch (err) {
@@ -360,18 +360,7 @@ const UpdateProfilePage: React.FC = () => {
                     onChange={(e) => setEmail(e.target.value)}  // Update email in state
                 />
 
-                {/* Password field with visibility toggle */}
-                <div className="password-container">
-                    <input
-                        type={showPassword ? 'text' : 'password'}  // Toggle between password and text type
-                        placeholder="Password (optional)"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}  // Update password in state
-                    />
-                    <span onClick={togglePasswordVisibility} className="password-toggle">
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}  {/* Toggle password visibility icon */}
-                    </span>
-                </div>
+
 
                 {/* Buttons for updating profile or canceling */}
                 <div className="button-group">

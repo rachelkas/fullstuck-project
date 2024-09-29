@@ -532,7 +532,7 @@ export const updateUser = async (userData: any, token: string, dispatch: AppDisp
         });
 
         // Update user details in the Redux store
-        dispatch(setUserDetails(response.data.updatedUser));
+        dispatch(setUserDetails(response.data?.user));
 
         // Show success notification
         toast.success('User details updated successfully!');

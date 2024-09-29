@@ -592,10 +592,10 @@ export const updateUserController = async (req, res) => {
         if (email) user.email = email;
 
         // Hash the new password if it is provided
-        if (password) {
-            const salt = await bcrypt.genSalt(10);
-            user.password = await bcrypt.hash(password, salt);
-        }
+        // if (password) {
+        //     const salt = await bcrypt.genSalt(10);
+        //     user.password = await bcrypt.hash(password, salt);
+        // }
 
         await user.save();  // Save the updated user details
         res.status(200).json({ msg: 'User updated successfully', user });

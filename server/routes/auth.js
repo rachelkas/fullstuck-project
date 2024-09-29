@@ -423,7 +423,7 @@ router.get('/logout', (req, res) => {
 // Update user details route
 router.put('/update', verifyToken, async (req, res) => {
     // Optional validation for updating the user profile
-    const { error } = registerValidation(req.body); // Reusing the register validation for optional fields
+    const { error } = registerValidation(req.body, false); // Reusing the register validation for optional fields
     if (error) return res.status(400).json({ message: error.details[0].message });
 
     // If validation passes, proceed to the updateUserController
