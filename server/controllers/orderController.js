@@ -656,7 +656,7 @@ export const createOrder = async (req, res) => {
         res.status(201).json(savedOrder);
     } catch (err) {
         console.error('Error creating order:', err.message);
-        res.status(500).json({ message: 'Server Error' });
+        res.status(500).json({ message: `Server Error ${err?.message}` });
     }
 };
 
@@ -681,7 +681,7 @@ export const getOrderById = async (req, res) => {
         res.json(orderWithImages);  // Return the order details with image URLs
     } catch (err) {
         console.error('Error fetching order:', err.message);
-        res.status(500).json({ message: 'Server Error' });
+        res.status(500).json({ message: `Server Error ${err?.message}` });
     }
 };
 
@@ -703,7 +703,7 @@ export const getUserOrders = async (req, res) => {
         res.status(200).json(orders);  // Return the list of orders
     } catch (err) {
         console.error('Error fetching user orders:', err.message);
-        res.status(500).json({ message: 'Server Error' });
+        res.status(500).json({ message: `Server Error ${err?.message}` });
     }
 };
 
